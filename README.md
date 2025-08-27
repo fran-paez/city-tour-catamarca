@@ -1,16 +1,16 @@
 # city-tour-catamarca
 
-Integrantes:
-Aibar Paez Franciso MU: 01689
-Camila Micaela Lindon  MU: 01907
-Giovanni Leandro Rodriguez MU: 01886
+Integrantes: <br>
+Aibar Paez Franciso MU: 01689 <br>
+Camila Micaela Lindon  MU: 01907 <br>
+Giovanni Leandro Rodriguez MU: 01886 <br><br>
 
-Docentes: 
-Mgtr. Cecilia E. Gallardo
-Esp. Marta del V. Miranda
+Docentes: <br>
+Mgtr. Cecilia E. Gallardo <br>
+Esp. Marta del V. Miranda <br>
 
-Carrera: Ingeniería en Informática
+Carrera: Ingeniería en Informática <br>
 
-Asignatura: Programación III
+Asignatura: Programación III <br>
 
 AÑO : 2025
