@@ -1,0 +1,31 @@
+body {
+    background-color: rgba(185, 241, 223, 0.205);
+}
+
+#contenedor_global {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Fondo personalizado de la navbar */
+.navbar-custom {
+    background-color: #e63946; /* rojo */
+}
+
+/* Color de los enlaces */
+.navbar-custom .nav-link {
+    color: #ffffff; /* blanco */
+}
+
+/* Color al pasar el mouse */
+.navbar-custom .nav-link:hover {
+    color: #ffcc00; /* amarillo */
+}
+
+/* Color de la marca (Navbar Brand) */
+.navbar-custom .navbar-brand {
+    color: #b13131;
+}
