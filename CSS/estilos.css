@@ -1,0 +1,19 @@
+/* Fondo personalizado de la navbar */
+.navbar-custom {
+    background-color: #e63946; /* rojo */
+}
+
+/* Color de los enlaces */
+.navbar-custom .nav-link {
+    color: #ffffff; /* blanco */
+}
+
+/* Color al pasar el mouse */
+.navbar-custom .nav-link:hover {
+    color: #ffcc00; /* amarillo */
+}
+
+/* Color de la marca (Navbar Brand) */
+.navbar-custom .navbar-brand {
+    color: #b13131;
+}
