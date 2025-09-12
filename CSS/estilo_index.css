@@ -1,5 +1,22 @@
 body {
-    background-color: rgba(185, 241, 223, 0.205);
+    /* 1. background-image: Especifica la ruta a tu imagen de fondo. */
+    background-image: url('../imagenes/dique.jpeg'); /* Reemplaza con el nombre de tu imagen */
+
+    /* 2. background-size: Asegura que la imagen cubra todo el elemento sin estirarse demasiado */
+    background-size: cover;
+
+    /* 3. background-repeat: Evita que la imagen se repita si es más pequeña que la pantalla */
+    background-repeat: no-repeat;
+
+    /* 4. background-position: Centra la imagen en la pantalla */
+    background-position: center center;
+
+    /* 5. background-attachment: Mantiene la imagen fija al hacer scroll */
+    background-attachment: fixed;
+
+    /* Opcional: Para asegurar que el fondo ocupe toda la altura de la ventana */
+    min-height: 100vh;
+    margin: 0; /* Elimina el margen por defecto del body */
 }
 
 #contenedor_global {
@@ -8,24 +25,32 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     padding: 20px;
     margin-top: 20px;
+    max-width: 90%;
 }
 
 /* Fondo personalizado de la navbar */
-.navbar-custom {
-    background-color: #e63946; /* rojo */
+.navbar {
+    position: sticky;
+    top: 0; /* O el valor deseado para el borde superior */
+    z-index: 1000;
+}
+h1 {
+    border-bottom: solid 2px rgba(0, 0, 0, 0.103);
+    margin-bottom: 25px;
+    padding-bottom: 15px;
 }
 
-/* Color de los enlaces */
-.navbar-custom .nav-link {
-    color: #ffffff; /* blanco */
+img {
+    max-width: 70%;
+    max-height: 70%;
 }
 
-/* Color al pasar el mouse */
-.navbar-custom .nav-link:hover {
-    color: #ffcc00; /* amarillo */
+footer {
+    font-weight: 500;
+    background-color: white;
+    padding: 10px;
 }
 
-/* Color de la marca (Navbar Brand) */
-.navbar-custom .navbar-brand {
-    color: #b13131;
+#panel_novedades {
+    margin-top: 0 !important;
 }

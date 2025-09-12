@@ -1,74 +1,101 @@
 <!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>CITYTOUR Catamarca</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/estilo_index.css">
+    </head>
 
-<html>
+    <body>
+       <!--nav indica el menú de navegación-->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">CITYTOUR</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="recorridos.html">Recorridos</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="reservas.html">Reservas</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#footer">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-<head>
-    <meta charset="UTF-8">
-    <!--Define la codificación de caracteres UTF-8 que es estándar universal que incluye acentos y ñ).
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-    <title>CITYTOUR Catamarca</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/estilos.css">
-</head>
-
-<body>
-    <h1>CITYTOUR Catamarca - Bienvenidos a nuestra web</h1>
-    
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="recorridos.html">Recorridos</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="reservas.html">Reservas</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="contacto.html">Contacto</a>
-            </li>
-            <!--<li class="nav-item">           Es para poner un boton en disabled(no borrar 0_o)
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-            </li>-->
-        </ul>
-        </div>
-    </div>
-    </nav>
-
-
-
-    <h2>Acerca de nosotros y nuestro servicio</h2>
-    <p>CITYTUOR Catamarca te ofrece recorridos únicos para descubrir los principales puntos turísticos
-        de la ciudad y alrededores. 
-        Nuestro objetivo es mejorar tu experiencia turística como visitante, y con esta nueva plataforma moderna y práctica podés
-        reservar tus viajes de forma anticipada, consultar recorridos y horarios actualizados,
-        hacer un seguimiento en tiempo real de los transportes, y nunca te perderás de las novedades gracias a nuestras notificiaciones
-        que te mantienen al dia con nuestro servicio. Además, nuestra web te permite visualizar
-        fácilmente las paradas intermedias del recorrido, brindándote mayor control y comodidad durante tu visita.</p>
-
-    <!--nav indica el menú de navegación-->
-    <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="recorridos.html">Recorridos</a></li>
-                <li><a href="reservas.html">Reservas</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
+        <div id="panel_novedades" class="alert alert-light mt-4">
+            <h4 class="alert-heading">Novedades</h4>
+            <ul class="mb-0">
+                <li>Nuevo recorrido disponible: Dique El Jumeal</li>
+                <li>Promoción: 20% de descuento en reservas online</li>
+                <li>Actualización de horarios de recorridos urbanos</li>
             </ul>
-    </nav>
+        </div>
 
+        <div id="contenedor_global" class="container my-5">
+            <h1 class="text-center">CITYTOUR Catamarca</h1>
+    
+            <h2>Acerca de nosotros y nuestro servicio</h2>
+            <p>CITYTUOR Catamarca te ofrece recorridos únicos para descubrir los principales puntos turísticos
+            de la ciudad y alrededores. 
+            Nuestro objetivo es mejorar tu experiencia turística como visitante, y con esta nueva plataforma moderna y práctica podés
+            reservar tus viajes de forma anticipada, consultar recorridos y horarios actualizados,
+            hacer un seguimiento en tiempo real de los transportes, y nunca te perderás de las novedades gracias a nuestras notificiaciones
+            que te mantienen al dia con nuestro servicio. Además, nuestra web te permite visualizar
+            fácilmente las paradas intermedias del recorrido, brindándote mayor control y comodidad durante tu visita.</p>
+    
 
+        <div class="container contenedor_imagenes mt-4 text-center">
+            <div class="row">
+                <div class="col-md-6">
+                <img src="../imagenes/dique.jpeg" alt="gruta">
+                </div>
 
+            <!-- imagen prueba 2 -->
+                <div class="col-md-6">
+                    <img src="../imagenes/gruta.jpg" alt="dique">
+                </div>
+            </div>
 
-    <footer>
-        <p>2025 CITYTOUR Catamarca - Todos los derechos reservados</p>
-    </footer>
-</body>
+            <div class="row">
+            <!-- imagen prueba 1 -->
+                <div class="col-md-6">
+                    <img src="../imagenes/dique.jpeg" alt="gruta">
+                </div>
 
+            <!-- imagen prueba 2 -->
+                <div class="col-md-6">
+                    <img src="../imagenes/gruta.jpg" alt="dique">
+                </div>
+            </div>
+
+            <div class="row">
+            <!-- imagen prueba 1 -->
+                <div class="col-md-6">
+                    <img src="../imagenes/dique.jpeg" alt="gruta">
+                </div>
+
+            <!-- imagen prueba 2 -->
+                <div class="col-md-6">
+                    <img src="../imagenes/gruta.jpg" alt="dique">
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <footer id="footer" class="text-center">
+            <p class="text-center">2025 CITYTOUR Catamarca - Todos los derechos reservados</p>
+        </footer>
+    </body>
 </html>
