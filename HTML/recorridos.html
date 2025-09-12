@@ -8,49 +8,84 @@
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
-    <header>
-        <h1>Gestión de Recorridos</h1>
-        <p>Aquí podrás agregar, editar o eliminar recorridos turísticos.</p>
-    </header>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="recorridos.html">Recorridos</a></li>
-            <li><a href="reservas.html">Reservas</a></li>
-        </ul>
-    </nav>
+    <div id="contenedor_global" class="container my-5">
+        <header>
+            <h1>Gestión de Recorridos</h1>
+            <p>Aquí podrás agregar, editar o eliminar recorridos turísticos.</p>
+        </header>
+        
+        <h2>Formulario de Recorridos</h2>
 
-    <main>
-        <section>
-            <h2>Formulario de Recorridos</h2>
-            <form action="#" method="post">
-                <label for="nombre">Nombre del Recorrido:</label><br>
-                <input type="text" id="nombre" name="nombre" required><br><br>
+        <form action="#" method="post">
+            
 
-                <label for="descripcion">Descripción:</label><br>
-                <textarea id="descripcion" name="descripcion" rows="4" cols="40" required></textarea><br><br>
+            <div id="contenedor_recorrido" class="container mt-4">
+            <div class="row">
+                <form action="#" method="post"></form>
 
-                <label for="fecha">Fecha:</label><br>
-                <input type="date" id="fecha" name="fecha" required><br><br>
+                    <!-- Campo de nombre -->
+                    <div class="col-md-6">
+                        <label for="nombre">Nombre del Recorrido:</label><br>
+                        <input type="text" id="nombre" name="nombre" required><br><br>
+                    </div>
 
-                <label for="hora">Hora:</label><br>
-                <input type="time" id="hora" name="hora" required><br><br>
+                    <!-- Descripcion -->
+                    <div class="col-md-6">
+                        <label for="descripcion">Descripción:</label><br>
+                        <textarea id="descripcion" name="descripcion" rows="4" cols="40" required></textarea>
+                    </div>
+                    <br><br>
+            </div>
+            <div class="row">
+                    <!-- Campo de fecha -->
+                    <div class="col-md-6">
+                        <label for="fecha">Fecha:</label><br>
+                        <input type="date" id="fecha" name="fecha" required>
+                    </div>
 
-                <label for="partida">Punto de Partida:</label><br>
-                <input type="text" id="partida" name="partida" required><br><br>
+                    <!-- Campo de hora -->
+                    <div class="col-md-6">
+                        <label for="hora">Hora:</label><br>
+                        <input type="time" id="hora" name="hora" required>
+                    </div>
+                    <br><br>
+            </div>
 
-                <label for="duracion">Duración (en horas):</label><br>
-                <input type="number" id="duracion" name="duracion" min="1" required><br><br>
+            <div class="row">
+                    <!-- Campo de partida -->
+                    <div class="col-md-6">
+                        <label for="partida">Punto de Partida:</label><br>
+                        <input type="text" id="partida" name="partida" required>
+                    </div>
 
-                <label for="capacidad">Capacidad Máxima:</label><br>
-                <input type="number" id="capacidad" name="capacidad" min="1" required><br><br>
+                    <!-- Campo de duracion -->
+                    <div class="col-md-6">
+                        <label for="duracion">Duración (en horas):</label><br>
+                        <input type="number" id="duracion" name="duracion" min="1" required>
+                    </div>
+                    <br><br>
+            </div>
 
-                <button type="submit">Agregar Recorrido</button>
-                <button type="reset">Limpiar</button>
-            </form>
-        </section>
-    </main>
+            <div class="row">
+                    <!-- Campo de  -->
+                    <div class="col-md-6">
+                        <label for="capacidad">Capacidad Máxima:</label><br>
+                        <input type="number" id="capacidad" name="capacidad" min="1" required>
+                    </div>
+            </div>
+
+
+            <br><br>
+
+            <div class="contenedor_botones">
+            <button type="submit" class="boton_submit">Buscar</button>
+            <button type="reset" class="boton_reset">Cancelar</button>
+            </div>
+
+        </div>
+    </div>
+
 
     <footer>
         <p>&copy; 2025 CITYTOUR Catamarca - Todos los derechos reservados</p>

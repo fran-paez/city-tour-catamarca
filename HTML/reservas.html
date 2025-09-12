@@ -7,48 +7,76 @@
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
+    <div id="contenedor_global" class="container my-5">
         <header>
-        <h1>Reservas</h1>
-        <p>Aquí podrás reservar tu asiento</p>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="recorridos.html">Recorridos</a></li>
-            <li><a href="reservas.html">Reservas</a></li>
-        </ul>
-    </nav>
-    
-    <h2>Complete el siguiente formulario</h2>
-    <form action="#" method="post">
+            <h1>Reservas</h1>
+            <p>Aquí podrás reservar tu asiento</p>
+        </header>
 
-        <!-- Campo de fecha -->
-        <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" name="fecha" required>
-        <br><br>
+        <h2>Complete el siguiente formulario</h2>
 
-        <!-- Campo de hora -->
-        <label for="hora">Hora:</label>
-        <input type="time" id="hora" name="hora" required>
-        <br><br>
+        <form action="#" method="post">
+        <div id="contenedor_recorrido" class="container mt-4">
+            <div class="row">
+                <form action="#" method="post"></form>
 
-        <label for="recorrido">Elige tu recorrido:</label> <select id="opcion" name="opcion" required>
-        <option value=""> <disabled selected>Selecciona un rumbo a</option>
-        <option value="recorrido1">Recorrido 1</option>
-        <option value="recorrido2">Recorrido 2</option>
-        <option value="recorrido3">Recorrido 3</option>
-        </select><br><br>
-        
-        <label for="origen">Origen:</label>
-        <input type="text" id="origen" name="nombre" required>
-        <br><br>
-        
+                    <!-- Campo de nombre -->
+                    <div class="col-md-6">
+                        <label for="recorrido">Elige tu recorrido:</label>
+                        <select id="opcion" name="opcion" required>
+                            <option value=""> <disabled selected>Selecciona un rumbo a</option>
+                            <option value="recorrido1">Recorrido 1</option>
+                            <option value="recorrido2">Recorrido 2</option>
+                            <option value="recorrido3">Recorrido 3</option>
+                        </select>
+                    </div>
 
-        <label for="cantidad">Cantidad de asientos reservados:</label>
-        <input type="number" id="cantidad" name="cantidad" min="1" max="50">
-        <br><br>
-        <button type="submit">Enviar</button>
-    </form>
+                    <!-- Campo de origen -->
+                    <div class="col-md-6">
+                        <label for="origen">Origen:</label>
+                        <select type="option" id="origen" name="option" required>
+                            <option value="">Parada original del recorrido</option>
+                            <option value="parada1">Parada 1</option>
+                            <option value="parada2">Parada 2</option>
+                        </select>
+                    </div>
+                    <br><br>
+            </div>
+            <div class="row">
+                    <!-- Campo de fecha -->
+                    <div class="col-md-6">
+                        <label for="fecha">Fecha:</label>
+                        <select id="opcion" name="opcion" required>
+                            <option value=""> <disabled selected>Selecciona una fecha</option>
+                            <option value="fecha1">Fecha 1</option>
+                            <option value="fecha2">Fecha 2</option>
+                            <option value="fecha3">Fecha 3</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo de fecha -->
+                    <div class="col-md-6">
+                        <label for="fecha">Fecha:</label>
+                        <select id="opcion" name="opcion" required>
+                            <option value=""> <disabled selected>Selecciona el horario</option>
+                            <option value="hora1">Hora 1</option>
+                            <option value="hora2">Hora 2</option>
+                            <option value="horaa3">Hora 3</option>
+                        </select>
+                    </div>
+                    <br><br>
+            </div>
+                    <label for="cantidad">Cantidad de asientos reservados:</label>
+                <input type="number" id="cantidad" name="cantidad" min="1" max="50">
+                <br><br>
+
+            <div class="contenedor_botones">
+            <button type="submit" class="boton_submit">Buscar</button>
+            <button type="reset" class="boton_reset">Cancelar</button>
+            </div>
+
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2025 CITYTUR Catamarca - Todos los derechos reservados</p>
