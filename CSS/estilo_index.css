@@ -1,3 +1,4 @@
+/*GENERAL*/
 body {
     /* 1. background-image: Especifica la ruta a tu imagen de fondo. */
     background-image: url('../imagenes/dique.jpeg'); /* Reemplaza con el nombre de tu imagen */
@@ -19,6 +20,26 @@ body {
     margin: 0; /* Elimina el margen por defecto del body */
 }
 
+/*BARRA DE NAVEGACION*/
+/* Fondo personalizado de la navbar */
+.navbar {
+    position: sticky;
+    top: 0; /* O el valor deseado para el borde superior */
+    z-index: 1000;
+}
+
+h1 {
+    border-bottom: solid 2px rgba(0, 0, 0, 0.103);
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+}
+
+/*PANEL DE NOVEDADES*/
+#panel_novedades {
+    margin-top: 0 !important;
+}
+
+/*CUADRADO CONTENEDOR*/
 #contenedor_global {
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
@@ -28,29 +49,53 @@ body {
     max-width: 90%;
 }
 
-/* Fondo personalizado de la navbar */
-.navbar {
-    position: sticky;
-    top: 0; /* O el valor deseado para el borde superior */
-    z-index: 1000;
+/*BOTONES*/
+form .contenedor_botones{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
-h1 {
-    border-bottom: solid 2px rgba(0, 0, 0, 0.103);
-    margin-bottom: 25px;
-    padding-bottom: 15px;
+form .boton_submit {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(2, 190, 2);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+form .boton_submit:hover {
+    background-color: rgb(0, 255, 0);
+    transform: scale(1.1);
+}
+form .boton_reset {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(209, 19, 19);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+form .boton_reset:hover {
+    background-color: rgb(255, 3, 3);
+    transform: scale(1.1);
 }
 
+/*IMAGENES*/
 img {
     max-width: 70%;
     max-height: 70%;
 }
 
+/*FOOTER*/
 footer {
+    /*flex: 1;   No borrar de momento*/
     font-weight: 500;
-    background-color: white;
+    text-align: center;
+    color:blanchedalmond;
+    background-color: rgb(0, 0, 0);
     padding: 10px;
-}
-
-#panel_novedades {
-    margin-top: 0 !important;
 }
