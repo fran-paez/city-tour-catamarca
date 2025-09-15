@@ -65,12 +65,29 @@
             <br>
 
             <div class="row">
-                    <!-- Campo de fecha -->
-                    <div class="col-md-6">
-                        <label for="fecha">Fecha:</label><br>
-                        <input type="date" id="fecha" name="fecha" required>
+                    <!-- Campo dias -->
+                    <p style="margin-bottom: 1%;">Dias previstos para recorrido:</p>
+                    <div id="dias_recorrido">
+                        <input class="form-check-input" type="checkbox" id="check_lunes" value="option1">
+                        <label class="form-check-label" for="check_lunes">L</label>
+                        <input class="form-check-input" type="checkbox" id="check_martes" value="option2">
+                        <label class="form-check-label" for="check_martes">Ma</label>
+                        <input class="form-check-input" type="checkbox" id="check_miercoles" value="option1">
+                        <label class="form-check-label" for="check_miercoles">Mi</label>
+                        <input class="form-check-input" type="checkbox" id="check_jueves" value="option2">
+                        <label class="form-check-label" for="check_jueves">J</label>
+                        <input class="form-check-input" type="checkbox" id="check_viernes" value="option1">
+                        <label class="form-check-label" for="check_viernes">V</label>
+                        <input class="form-check-input" type="checkbox" id="check_sabado" value="option2">
+                        <label class="form-check-label" for="check_sabado">S</label>
+                        <input class="form-check-input" type="checkbox" id="check_domingo" value="option2">
+                        <label class="form-check-label" for="check_domingo">D</label>
                     </div>
-
+                    <div> 
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                        <label class="form-check-label" for="inlineCheckbox2">Diariamente</label>
+                    </div>
+                    <br><br>
                     <!-- Campo de hora -->
                     <div class="col-md-6">
                         <label for="hora">Hora:</label><br>
@@ -119,5 +136,6 @@
     <footer>
         <p>&copy; 2025 CITYTOUR Catamarca - Todos los derechos reservados</p>
     </footer>
+    <script src="../js/script_recorridos.js"></script>
 </body>
 </html>
