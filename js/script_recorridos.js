@@ -11,7 +11,9 @@ check_diario.addEventListener('change', function() {
 // Añadir un escuchador de eventos a cada checkbox
 checks_dias.forEach(checkbox => {
     checkbox.addEventListener('change', actualizarCheckDiario);
+    checkbox.addEventListener('change', ocultarAlert);
 });
+check_diario.addEventListener('change', ocultarAlert);
 
 // Función para manejar el evento, actualizar el estado del checkbox 'diariamente'
 function actualizarCheckDiario() {
@@ -25,3 +27,24 @@ function actualizarCheckDiario() {
         check_diario.checked = false; // si no, desmarcar
     }
 }
+
+// ocultar la alerta de advertencia de dias necesarios
+function ocultarAlert() {
+    const dias_alert = document.getElementById("dias_alert");
+    dias_alert.style.visibility = "hidden";
+}
+
+// Al apretar submit verifica primero que al menos se haya marcado un dia para el recorrido
+document.querySelector("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const dias_alert = document.getElementById("dias_alert");
+
+    const opcionesMarcadas = document.querySelectorAll('.dias:checked').length;
+        
+    if (opcionesMarcadas == 0) {
+        dias_alert.style.visibility = "visible";
+    } else {
+        dias_alert.style.visibility = "hidden";
+    }
+});
+

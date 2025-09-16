@@ -103,3 +103,9 @@ footer {
 .form-check-label {
     margin-right: 10px;
 }
+
+.alert {
+    max-height: 40px;
+    max-width: 400px;
+    visibility: hidden;
+}
