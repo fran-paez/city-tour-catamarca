@@ -65,12 +65,33 @@
             <br>
 
             <div class="row">
-                    <!-- Campo de fecha -->
-                    <div class="col-md-6">
-                        <label for="fecha">Fecha:</label><br>
-                        <input type="date" id="fecha" name="fecha" required>
+                    <!-- Campo dias -->
+                    <p style="margin-bottom: 1%;">Dias previstos para recorrido:</p>
+                    <div id="checks_dias">
+                        <input class="form-check-input dias" type="checkbox" name="opcion_dia" value="lunes">
+                        <label class="form-check-label" for="check_lunes">L</label>
+                        <input class="form-check-input dias" type="checkbox" name="opcion_dia" value="martes">
+                        <label class="form-check-label" for="check_martes">Ma</label>
+                        <input class="form-check-input dias" type="checkbox" name="opcion_dia" value="miercoles">
+                        <label class="form-check-label" for="check_miercoles">Mi</label>
+                        <input class="form-check-input dias" type="checkbox" name="opcion_dia" value="jueves">
+                        <label class="form-check-label" for="check_jueves">J</label>
+                        <input class="form-check-input dias" type="checkbox" name="opcion_dia" value="viernes">
+                        <label class="form-check-label" for="check_viernes">V</label>
+                        <input class="form-check-input dias" type="checkbox" name="opcion_dia" value="sabado">
+                        <label class="form-check-label" for="check_sabado">S</label>
+                        <input class="form-check-input dias" type="checkbox" name="opcion_dia" value="domingo">
+                        <label class="form-check-label" for="check_domingo">D</label>
                     </div>
+                    <div> 
+                        <input class="form-check-input" type="checkbox" id="check_diario" value="option2">
+                        <label class="form-check-label" for="check_diario">Diariamente</label>
+                        <div id="dias_alert" class="alert alert-warning text-center" role="alert">
+                            Es necesario seleccionar al menos un dia.
+                        </div>
 
+                    </div>
+                    <br><br>
                     <!-- Campo de hora -->
                     <div class="col-md-6">
                         <label for="hora">Hora:</label><br>
@@ -119,5 +140,6 @@
     <footer>
         <p>&copy; 2025 CITYTOUR Catamarca - Todos los derechos reservados</p>
     </footer>
+    <script src="../js/script_recorridos.js"></script>
 </body>
 </html>
