@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Roles</title>
+</head>
+<body>
+    <h1>Lista de Roles</h1>
+
+    <ul>
+        {% for rol in roles %}
+            <li>
+                <strong>{{ rol.nombre }}</strong>
+                {% if rol.descripcion %}
+                    <p>{{ rol.descripcion }}</p>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No hay roles registrados.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <a href="{% url 'crear_rol' %}">Crear Nuevo Rol</a>
+</body>
+</html>
