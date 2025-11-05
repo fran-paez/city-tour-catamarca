@@ -1,0 +1,14 @@
+{% extends 'recorrido/base.html' %}
+
+{% block title %}Lista de Recorridos{% endblock %}
+
+{% block content %}
+<h2>Lista de Recorridos</h2>
+<ul>
+    {% for recorrido in recorridos %}
+        <li>{{ recorrido.nombre }} - {{ recorrido.descripcion }}</li>
+    {% empty %}
+        <li>No hay recorridos disponibles.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

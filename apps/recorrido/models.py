@@ -4,31 +4,29 @@ from django.db import models
 from django.db import models
 
 
-# --- MODELO PARADA ---
 class Parada(models.Model):
-    # Django ya crea un campo id automáticamente (no hace falta id_parada)
-    latitud = models.FloatField()
-    longitud = models.FloatField()
-    descripcion = models.TextField()
+    nombre = models.CharField(max_length=60)
+    descripcion_parada = models.TextField()
 
     ESTADOS = [
         ('activo', 'Activo'),
         ('inactivo', 'Inactivo'),
     ]
     estado = models.CharField(max_length=10, choices=ESTADOS, default='activo')
-
     visibilidad_pagina = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"Parada {self.id} - {self.descripcion[:30]}"
-
+        return f"Parada {self.id} - {self.descripcion_parada[:30]}"
 
 # --- MODELO RECORRIDO ---
 class Recorrido(models.Model):
     descripcion = models.TextField()
-    paradas = models.ManyToManyField(Parada, related_name='recorridos')
+    paradas = models.ManyToManyField(
+        Parada,
+        related_name='recorridos'
+    )
     duracion = models.IntegerField(help_text="Duración del recorrido en minutos")
-    precio_recorrido = models.DecimalField(max_digits=8, decimal_places=2)
+    precio = models.DecimalField(max_digits=8, decimal_places=2)
 
     ESTADOS = [
         ('activo', 'Activo'),
@@ -39,6 +37,11 @@ class Recorrido(models.Model):
     def __str__(self):
         return f"Recorrido {self.id} - {self.descripcion[:40]}"
 
+    # Validación para que un recorrido tenga entre 2 y 10 paradas
+    def clean(self):
+        super().clean()
+        if self.paradas.count() < 2 or self.paradas.count() > 10:
+            raise ValidationError('Un recorrido debe tener entre 2 y 10 paradas.')
 
 # --- MODELO ITINERARIO ---
 class Itinerario(models.Model):

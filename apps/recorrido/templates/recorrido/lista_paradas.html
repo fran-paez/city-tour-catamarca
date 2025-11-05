@@ -8,7 +8,7 @@
     <h1>Lista de Paradas</h1>
     <ul>
         {% for parada in paradas %}
-            <li>{{ parada.descripcion }} - Lat: {{ parada.latitud }}, Lon: {{ parada.longitud }}</li>
+            <li>{{ parada.nombre }} - Estado: {{ parada.estado }}, Descripcion: {{ parada.descripcion_parada }}</li>
         {% empty %}
             <li>No hay paradas registradas</li>
         {% endfor %}
