@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Paradas</title>
+</head>
+<body>
+    <h1>Lista de Paradas</h1>
+    <ul>
+        {% for parada in paradas %}
+            <li>{{ parada.descripcion }} - Lat: {{ parada.latitud }}, Lon: {{ parada.longitud }}</li>
+        {% empty %}
+            <li>No hay paradas registradas</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'crear_parada' %}">Crear nueva parada</a>
+</body>
+</html>
