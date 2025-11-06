@@ -46,7 +46,7 @@ def lista_recorridos(request):
 
 
 def crear_recorrido(request):
-    print("Llegamos a la vista crear_recorrido")  # línea de debug
+    # print("Llegamos a la vista crear_recorrido")  # línea de debug
     if request.method == 'POST':
         form = RecorridoForm(request.POST)
         if form.is_valid():

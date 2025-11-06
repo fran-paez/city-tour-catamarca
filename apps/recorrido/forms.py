@@ -6,7 +6,7 @@ class ParadaForm(forms.ModelForm):
         model = Parada
         fields = ['nombre', 'descripcion_parada', 'estado', 'visibilidad_pagina']
         widgets = {
-            'descripcion': forms.Textarea(attrs={'rows': 3, 'cols': 40}),
+            'descripcion_parada': forms.Textarea(attrs={'rows': 3, 'cols': 40}),
         }
 
 
@@ -15,5 +15,5 @@ class RecorridoForm(forms.ModelForm):
         model = Recorrido
         fields = ['descripcion', 'paradas', 'duracion', 'precio', 'estado']
         widgets = {
-            'paradas': forms.CheckboxSelectMultiple(),  # opcional, para elegir varias paradas
+            'paradas': forms.CheckboxSelectMultiple(),
         }

@@ -1,7 +1,5 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
+from django.forms import ValidationError
 
 
 class Parada(models.Model):
@@ -25,7 +23,7 @@ class Recorrido(models.Model):
         Parada,
         related_name='recorridos'
     )
-    duracion = models.IntegerField(help_text="Duración del recorrido en minutos")
+    duracion = models.IntegerField(help_text="DuraciÃ³n del recorrido en minutos")
     precio = models.DecimalField(max_digits=8, decimal_places=2)
 
     ESTADOS = [
@@ -36,13 +34,6 @@ class Recorrido(models.Model):
 
     def __str__(self):
         return f"Recorrido {self.id} - {self.descripcion[:40]}"
-
-    # Validación para que un recorrido tenga entre 2 y 10 paradas
-    def clean(self):
-        super().clean()
-        if self.paradas.count() < 2 or self.paradas.count() > 10:
-            raise ValidationError('Un recorrido debe tener entre 2 y 10 paradas.')
-
 # --- MODELO ITINERARIO ---
 class Itinerario(models.Model):
     recorrido = models.ForeignKey(Recorrido, on_delete=models.CASCADE, related_name='itinerarios')
