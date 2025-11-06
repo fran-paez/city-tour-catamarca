@@ -1,0 +1,19 @@
+
+{% block content %}
+  <h1>Paradas visibles</h1>
+
+  {% if paradas %}
+    <ul class="paradas-list">
+      {% for parada in paradas %}
+        <li class="parada-item">
+          <h3>{{ parada.nombre }}</h3>
+          <p>{{ parada.descripcion_parada }}</p>
+          {# Si quieres mostrar estado u otros campos: #}
+          {# <small>Estado: {{ parada.get_estado_display }}</small> #}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay paradas visibles actualmente.</p>
+  {% endif %}
+{% endblock %}

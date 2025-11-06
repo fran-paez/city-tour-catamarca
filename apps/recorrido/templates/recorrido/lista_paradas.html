@@ -1,18 +1,34 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Paradas</title>
-</head>
-<body>
+{% extends 'recorrido/base.html' %}
+
+{% block title %}Lista de Paradas{% endblock %}
+
+{% block content %}
+
     <h1>Lista de Paradas</h1>
-    <ul>
-        {% for parada in paradas %}
-            <li>{{ parada.nombre }} - Estado: {{ parada.estado }}, Descripcion: {{ parada.descripcion_parada }}</li>
-        {% empty %}
-            <li>No hay paradas registradas</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'crear_parada' %}">Crear nueva parada</a>
-</body>
-</html>
+
+    <table class="paradas-table" aria-describedby="lista-paradas">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for parada in paradas %}
+                <tr>
+                    <td>{{ parada.id }}</td>
+                    <td>{{ parada.nombre }}</td>
+                    <td>{{ parada.estado }}</td>
+                    <td>{{ parada.descripcion_parada }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No hay paradas registradas</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

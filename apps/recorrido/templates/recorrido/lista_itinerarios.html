@@ -1,0 +1,39 @@
+{% extends 'recorrido/base.html' %}
+
+{% block title %}Lista de Itinerarios{% endblock %}
+
+{% block content %}
+
+    <h1>Lista de Itinerarios</h1>
+
+    <table class="itinerarios-table" aria-describedby="lista-itinerarios">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Recorrido</th>
+                <th>Unidad</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Cupos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for itinerario in itinerarios %}
+                <tr>
+                    <td>{{ itinerario.id }}</td>
+                    <td>{{ itinerario.recorrido }}</td>
+                    <td>{{ itinerario.unidad }}</td>
+                    <td>{{ itinerario.fecha_itinerario|date:"d/m/Y" }}</td>
+                    <!-- NOTA: Esta de esta forma para que se vea día mes y año -->
+                    <td>{{ itinerario.hora_itinerario }}</td>
+                    <td>{{ itinerario.cupos }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No hay itinerarios registrados</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,11 +1,14 @@
-<!--{% extends 'recorrido/base.html' %}-->
+{% extends 'recorrido/base.html' %}
 
+{% block title %}Crear Recorrido{% endblock %}
 
-<h1>Crear Recorrido</h1>
-<p>TEST</p>
+{% block content %}
+<h2>Crear nuevo recorrido</h2>
 
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Guardar</button>
+    <button type="submit">Guardar recorrido</button>
 </form>
+
+{% endblock %}

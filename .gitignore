@@ -1,5 +1,5 @@
 *.env
-
+*.venv
 *.log
 
 *.py[codt]
@@ -34,6 +34,9 @@ docker-compose-develop.yml
 
 # Installer logs
 pip-log.txt
+
+# Static files
+staticfiles/
 
 # Unit test / coverage reports
 .coverage
