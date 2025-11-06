@@ -1,5 +1,5 @@
 from django import forms
-from .models import Parada
+from .models import Parada, Recorrido
 
 class ParadaForm(forms.ModelForm):
     class Meta:
@@ -7,4 +7,13 @@ class ParadaForm(forms.ModelForm):
         fields = ['nombre', 'descripcion_parada', 'estado', 'visibilidad_pagina']
         widgets = {
             'descripcion': forms.Textarea(attrs={'rows': 3, 'cols': 40}),
+        }
+
+
+class RecorridoForm(forms.ModelForm):
+    class Meta:
+        model = Recorrido
+        fields = ['descripcion', 'paradas', 'duracion', 'precio', 'estado']
+        widgets = {
+            'paradas': forms.CheckboxSelectMultiple(),  # opcional, para elegir varias paradas
         }
