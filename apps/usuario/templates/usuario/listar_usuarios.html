@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuarios</title>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+
+    <ul>
+        {% for usuario in usuarios %}
+            <li>
+                <strong>@{{ usuario.username }}</strong> ({{ usuario.get_full_name }})
+                <br>
+                <small>Email: {{ usuario.email }}</small>
+                <br>
+                <small>Rol: {{ usuario.rol.nombre|default:"Sin Rol" }}</small>
+            </li>
+            <hr>
+        {% empty %}
+            <li>No hay usuarios registrados.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <a href="{% url 'crear_usuario' %}">Crear Nuevo Usuario</a>
+    <br>
+    <a href="{% url 'listar_roles' %}">Ver Roles</a>
+</body>
+</html>
