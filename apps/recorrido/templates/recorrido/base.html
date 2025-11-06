@@ -2,28 +2,18 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}City Tour Catamarca{% endblock %}</title>
-    {% load static %}
-    <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}Agregar{% endblock %}</title>
 </head>
 <body>
     <header>
         <h1>City Tour Catamarca</h1>
-        <nav>
-            <a href="{% url 'lista_recorridos' %}">Recorridos</a> |
-            <a href="{% url 'crear_recorrido' %}">Crear Recorrido</a>
-        </nav>
-        <hr>
     </header>
 
     <main>
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 
     <footer>
-        <hr>
         <p>&copy; 2025 City Tour Catamarca</p>
     </footer>
 </body>

@@ -1,0 +1,11 @@
+<!--{% extends 'recorrido/base.html' %}-->
+
+
+<h1>Crear Recorrido</h1>
+<p>TEST</p>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+</form>
