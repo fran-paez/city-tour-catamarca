@@ -1,14 +1,15 @@
 {% extends 'recorrido/base.html' %}
 
-{% block title %}Lista de Paradas{% endblock %}
+{% block title %}Cargar Unidad{% endblock %}
 
 {% block content %}
+    <title>Cargar Unidad</title>
 
-    <h1>Crear Parada</h1>
+    <h1>Cargar Unidad</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Guardar Parada</button>
+        <button type="submit">Guardar Unidad</button>
     </form>
 
 {% endblock %}

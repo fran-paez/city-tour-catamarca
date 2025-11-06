@@ -1,5 +1,6 @@
 from django.db import models
-from django.forms import ValidationError
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 
 
 class Parada(models.Model):
@@ -16,14 +17,13 @@ class Parada(models.Model):
     def __str__(self):
         return f"Parada {self.id} - {self.descripcion_parada[:30]}"
 
-# --- MODELO RECORRIDO ---
 class Recorrido(models.Model):
     descripcion = models.TextField()
     paradas = models.ManyToManyField(
         Parada,
         related_name='recorridos'
     )
-    duracion = models.IntegerField(help_text="DuraciÃ³n del recorrido en minutos")
+    duracion = models.IntegerField(help_text="MIN")
     precio = models.DecimalField(max_digits=8, decimal_places=2)
 
     ESTADOS = [
@@ -34,12 +34,68 @@ class Recorrido(models.Model):
 
     def __str__(self):
         return f"Recorrido {self.id} - {self.descripcion[:40]}"
-# --- MODELO ITINERARIO ---
+    
+
 class Itinerario(models.Model):
     recorrido = models.ForeignKey(Recorrido, on_delete=models.CASCADE, related_name='itinerarios')
+    unidad = models.ForeignKey('Unidad', on_delete=models.PROTECT, related_name='itinerarios')
     fecha_itinerario = models.DateField()
     hora_itinerario = models.TimeField()
+    # Los cupos se inicializan al crear la instancia desde la cantidad de asientos de la unidad
     cupos = models.IntegerField()
+
+    def clean(self):
+        # Validaciones a
+        errors = {}
+        if not self.recorrido_id:
+            errors['recorrido'] = 'Debe tener un recorrido asociado.'
+        if not self.unidad_id:
+            errors['unidad'] = 'Debe tener una unidad asociada.'
+        if not self.fecha_itinerario:
+            errors['fecha_itinerario'] = 'Debe tener una fecha.'
+        if not self.hora_itinerario:
+            errors['hora_itinerario'] = 'Debe tener una hora.'
+
+        if self.unidad_id and self.cupos is not None:
+            max_asientos = self.unidad.cantidad_asientos
+            if self.cupos < 0:
+                errors['cupos'] = 'Los cupos no pueden ser negativos.'
+            elif self.cupos > max_asientos:
+                errors['cupos'] = f'Los cupos no pueden superar la cantidad de asientos de la unidad ({max_asientos}).'
+
+        if errors:
+            raise ValidationError(errors)
+
+    def save(self, *args, **kwargs):
+        # Si es creación (no tiene pk aún) y existe unidad pero no se proporcionaron cupos,
+        # inicializamos cupos con la cantidad de asientos de la unidad.
+        if self.pk is None:
+            # intentar inicializar cupos si no se pasó o es falsy (0)
+            try:
+                if (self.cupos is None or self.cupos == 0) and getattr(self, 'unidad', None):
+                    self.cupos = self.unidad.cantidad_asientos
+            except Exception:
+                # unidad posiblemente no resuelta aún; dejaremos que clean/migrate gestione errores
+                pass
+
+        # ejecutar validaciones antes de guardar
+        self.full_clean()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Itinerario {self.id} - {self.recorrido.descripcion[:30]} ({self.fecha_itinerario} {self.hora_itinerario})"
+
+
+class Unidad(models.Model):
+    patente = models.CharField(max_length=7, unique=True)
+    cantidad_asientos = models.IntegerField(validators=[MinValueValidator(10)])
+
+    ESTADOS = [
+        ('activo', 'Activo'),
+        ('inactivo', 'Inactivo'),
+    ]
+    estado = models.CharField(max_length=10, choices=ESTADOS, default='activo')
+
+    def __str__(self):
+        return f"Unidad {self.id} - {self.patente} ({self.cantidad_asientos} asientos)"
+    

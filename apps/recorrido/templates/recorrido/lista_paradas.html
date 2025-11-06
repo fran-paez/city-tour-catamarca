@@ -9,6 +9,7 @@
     <table class="paradas-table" aria-describedby="lista-paradas">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Estado</th>
                 <th>Descripción</th>
@@ -17,13 +18,14 @@
         <tbody>
             {% for parada in paradas %}
                 <tr>
+                    <td>{{ parada.id }}</td>
                     <td>{{ parada.nombre }}</td>
                     <td>{{ parada.estado }}</td>
                     <td>{{ parada.descripcion_parada }}</td>
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="3">No hay paradas registradas</td>
+                    <td colspan="4">No hay paradas registradas</td>
                 </tr>
             {% endfor %}
         </tbody>
