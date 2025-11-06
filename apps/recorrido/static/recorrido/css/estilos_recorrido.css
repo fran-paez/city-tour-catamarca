@@ -1,0 +1,46 @@
+/* haz una menu navegable elengante con bootstrap y css personalizado en estilos.css
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+ */
+nav {
+    background-color: #ffa600;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 12px 16px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #e59400;
+}
+
+.paradas-table { width:100%; border-collapse: collapse; font-family: Arial, sans-serif; }
+.paradas-table th, .paradas-table td { border: 1px solid #ddd; padding: 8px; }
+.paradas-table th { background: #f4f4f4; text-align: left; }
+.paradas-table tr:nth-child(even) { background: #fafafa; }
+.paradas-table caption { caption-side: top; font-weight: bold; margin-bottom: 8px; }
+

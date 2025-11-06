@@ -6,9 +6,8 @@ class ParadaForm(forms.ModelForm):
         model = Parada
         fields = ['nombre', 'descripcion_parada', 'estado', 'visibilidad_pagina']
         widgets = {
-            'descripcion_parada': forms.Textarea(attrs={'rows': 3, 'cols': 40}),
+            'descripcion_parada': forms.Textarea(attrs={'rows': 3, 'cols': 35}),
         }
-
 
 class RecorridoForm(forms.ModelForm):
     class Meta:

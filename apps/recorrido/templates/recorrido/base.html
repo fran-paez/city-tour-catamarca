@@ -1,20 +1,34 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Agregar{% endblock %}</title>
+    <title>{% block title %}Administrar itinerarios{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'recorrido/css/estilos_recorrido.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilos_global.css' %}">
 </head>
 <body>
     <header>
-        <h1>City Tour Catamarca</h1>
+        <h1>Administrar itinerarios</h1>
     </header>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'crear_parada' %}">Crear Parada</a></li>
+            <li><a href="{% url 'crear_recorrido' %}">Crear Recorrido</a></li>
+            <li><a href="{% url 'lista_paradas' %}">Lista de Paradas</a></li>
+            <li><a href="{% url 'lista_recorridos' %}">Lista de Recorridos</a></li>
+        </ul>
+    </nav>
+    <br><br>
 
     <main>
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        <p>&copy; 2025 City Tour Catamarca</p>
+    <br><br><br>
+    <footer id="footer" class="text-center">
+        <p>2025 CITYTOUR Catamarca - Todos los derechos reservados</p>
     </footer>
 </body>
 </html>

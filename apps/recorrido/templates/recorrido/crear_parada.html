@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
+{% extends 'recorrido/base.html' %}
+
+{% block title %}Lista de Paradas{% endblock %}
+
+{% block content %}
+
+
     <title>Crear Parada</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        form { max-width: 500px; margin: auto; }
-        label { display: block; margin-top: 10px; }
-        input, textarea, select { width: 100%; padding: 5px; margin-top: 5px; }
-        button { margin-top: 15px; padding: 10px 15px; }
-    </style>
-</head>
-<body>
+
+
     <h1>Crear Parada</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Guardar Parada</button>
     </form>
-</body>
-</html>
+
+{% endblock %}
