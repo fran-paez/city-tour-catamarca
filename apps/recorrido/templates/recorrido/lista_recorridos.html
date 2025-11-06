@@ -14,7 +14,7 @@
                 <th>ID</th>
                 <th>Descripción</th>
                 <th>Paradas</th>
-                <th>Duración (min)</th>
+                <th>Duración</th>
                 <th>Precio</th>
                 <th>Estado</th>
             </tr>
@@ -31,7 +31,7 @@
                         Sin paradas
                     {% endfor %}
                 </td>
-                <td>{{ recorrido.duracion }}</td>
+                <td>{{ recorrido.duracion }} min</td>
                 <td>${{ recorrido.precio }}</td>
                 <td>{{ recorrido.estado }}</td>
             </tr>

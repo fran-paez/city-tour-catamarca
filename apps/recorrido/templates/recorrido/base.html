@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'recorrido/css/estilos_recorrido.css' %}">
     <link rel="stylesheet" href="{% static 'css/estilos_global.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Todhri&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
@@ -16,7 +16,7 @@
         <h1>Administrar itinerarios</h1>
     </header>
 
-
+ <!-- Hice dos navbar para que no se vea sobrecargada una -->
     <nav>
         <ul>
             <li><a href="{% url 'lista_paradas' %}">Lista de Paradas</a></li>
@@ -35,9 +35,12 @@
         </ul>
     </nav>
 
+    <!-- NOTA: Se que las tablas hay una forma mas eficiente de generarlas pero de momento estoy probando, no seran finales. -->
+
     <br><br>
 
     <main>
+    
         {% block content %}{% endblock %}
     </main>
 

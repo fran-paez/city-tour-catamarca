@@ -78,7 +78,7 @@ class Itinerario(models.Model):
                 # unidad posiblemente no resuelta aún; dejaremos que clean/migrate gestione errores
                 pass
 
-        # ejecutar validaciones antes de guardar
+        # Validar para recien guardar
         self.full_clean()
         super().save(*args, **kwargs)
 

@@ -49,3 +49,10 @@ nav ul li a:hover {
 .recorridos-table th, .unidades-table th { background: #f4f4f4; text-align: left; }
 .recorridos-table tr:nth-child(even), .unidades-table tr:nth-child(even) { background: #fafafa; } 
 .recorridos-table caption, .unidades-table caption { caption-side: top; font-weight: bold; margin-bottom: 8px; }
+
+
+table { width:100%; border-collapse: collapse; font-family:'Montserrat', sans-serif; }
+table th, table td { border: 1px solid  #ddd; padding: 8px; }
+table th { background: #f4f4f4; text-align: left; }
+table tr:nth-child(even) { background: #fafafa; }
+table caption{ caption-side: top; font-weight: bold; margin-bottom: 8px; }
