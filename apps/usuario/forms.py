@@ -14,30 +14,40 @@ class RolForm(forms.ModelForm):
         fields = ['nombre', 'descripcion']
 
 
-# --- NUEVO FORMULARIO PARA USUARIOS ---
+# --- FORMULARIO PARA USUARIOS ---
 
 class UsuarioCreationForm(UserCreationForm):
     """
-    Un formulario personalizado para crear usuarios.
-    Hereda de UserCreationForm para manejar el hasheo de contraseñas.
+    Formulario para el registro de usuarios (crear Usuario).
+    Asigna 'Turista' por defecto.
     """
 
-
-    rol = forms.ModelChoiceField(
-        queryset=Rol.objects.all(),
-        required=True,
-        label="Rol del usuario"
-    )
+    # PASO 1: Hemos ELIMINADO el campo 'rol = forms.ModelChoiceField(...)'
+    # que estaba aquí. Ya no es necesario.
 
     class Meta(UserCreationForm.Meta):
         model = Usuario
-        fields = ('username', 'first_name', 'last_name', 'email', 'rol')
+
+        # PASO 2: Hemos ELIMINADO 'rol' de esta lista de campos.
+        # Ahora el formulario solo pedirá estos datos.
+        fields = ('username', 'first_name', 'last_name', 'email')
 
     def save(self, commit=True):
-        # Sobrescribimos el metodo save()
+        # PASO 3: Sobrescribimos el metodo save() para asignar el rol.
+
+        # Primero, corremos el save() original (sin guardar en BD)
+        # Esto nos da el objeto 'user' con la contraseña ya hasheada.
         user = super().save(commit=False)
 
-        user.rol = self.cleaned_data['rol']
+        try:
+            # --- MODIFICACIÓN AQUÍ ---
+            # Ahora buscamos o creamos el rol "TURISTA" en mayúsculas
+            turista_rol, created = Rol.objects.get_or_create(nombre="TURISTA")
+
+            user.rol = turista_rol
+
+        except Exception as e:
+            print(f"Error al asignar rol 'TURISTA' por defecto: {e}")
 
         if commit:
             user.save()

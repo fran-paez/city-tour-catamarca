@@ -144,11 +144,9 @@ APPEND_SLASH = False
 # --- Configuraciones de Autenticación ---
 
 # A dónde redirigir al usuario DESPUÉS de un inicio de sesión exitoso.
-# 'home' será una nueva URL que crearemos en apps/usuario/urls.py
 LOGIN_REDIRECT_URL = 'home'
 
 # A dónde redirigir al usuario si intenta acceder a una página
-# protegida (@login_required) sin haber iniciado sesión.
 LOGIN_URL = 'login'
 
 # A dónde redirigir al usuario DESPUÉS de cerrar sesión.

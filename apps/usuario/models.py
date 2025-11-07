@@ -2,13 +2,19 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
-# lado "UNO" de la relacion (roles)
 class Rol(models.Model):
     """
     Define los tipos de roles de usuario en el sistema (Administrador, Turista, Operador).
     """
     nombre = models.CharField(max_length=50, unique=True)
     descripcion = models.TextField(blank=True)
+
+    # sobreescribir save para guardar el nombre de los roles siempre con mayusculas
+    def save(self, *args, **kwargs):
+        # Convierte el nombre a mayúsculas ANTES de guardarlo
+        self.nombre = self.nombre.upper()
+        # Llama al metodo save() original para que lo guarde en la BD
+        super(Rol, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.nombre
@@ -18,7 +24,6 @@ class Rol(models.Model):
         verbose_name_plural = "Roles"
 
 
-# lado "MUCHOS" de la relacion (usuarios)
 class Usuario(AbstractUser):
     """
     Modelo de usuario extendido para incluir el rol del sistema.

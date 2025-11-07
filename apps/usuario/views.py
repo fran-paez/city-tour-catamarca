@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Rol, Usuario
 from .forms import RolForm, UsuarioCreationForm
-# Importamos esto para proteger la vista
 from django.contrib.auth.decorators import login_required
 from .models import Rol, Usuario
 from .forms import RolForm, UsuarioCreationForm
@@ -41,7 +40,7 @@ def crear_rol(request):
     return render(request, 'usuario/crear_rol.html', contexto)
 
 
-# --- NUEVAS VISTAS PARA USUARIO ---
+# --- VISTAS PARA USUARIO ---
 
 def listar_usuarios(request):
     """
@@ -73,14 +72,10 @@ def crear_usuario(request):
     }
     return render(request, 'usuario/crear_usuario.html', contexto)
 
-# --- NUEVA VISTA HOME ---
-@login_required  # <-- ¡MUY IMPORTANTE!
+# --- VISTA HOME ---
+@login_required
 def home_view(request):
     """
     Página de inicio que solo pueden ver los usuarios logueados.
     """
-    # El decorador @login_required se encarga de:
-    # 1. Si el usuario NO está logueado, lo redirige al LOGIN_URL (settings.py)
-    # 2. Si el usuario SÍ está logueado, le muestra la vista.
-
     return render(request, 'usuario/home.html')
