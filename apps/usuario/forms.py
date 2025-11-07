@@ -22,28 +22,18 @@ class UsuarioCreationForm(UserCreationForm):
     Asigna 'Turista' por defecto.
     """
 
-    # PASO 1: Hemos ELIMINADO el campo 'rol = forms.ModelChoiceField(...)'
-    # que estaba aquí. Ya no es necesario.
-
     class Meta(UserCreationForm.Meta):
         model = Usuario
-
-        # PASO 2: Hemos ELIMINADO 'rol' de esta lista de campos.
-        # Ahora el formulario solo pedirá estos datos.
         fields = ('username', 'first_name', 'last_name', 'email')
 
     def save(self, commit=True):
-        # PASO 3: Sobrescribimos el metodo save() para asignar el rol.
-
         # Primero, corremos el save() original (sin guardar en BD)
         # Esto nos da el objeto 'user' con la contraseña ya hasheada.
         user = super().save(commit=False)
 
         try:
-            # --- MODIFICACIÓN AQUÍ ---
-            # Ahora buscamos o creamos el rol "TURISTA" en mayúsculas
+            # Ahora buscamos o creamos el rol "TURISTA"
             turista_rol, created = Rol.objects.get_or_create(nombre="TURISTA")
-
             user.rol = turista_rol
 
         except Exception as e:
@@ -56,20 +46,47 @@ class UsuarioCreationForm(UserCreationForm):
 # --- FORMULARIO EDICION USUARIO ---
 
 class UsuarioChangeForm(UserChangeForm):
-    """
-    Formulario para actualizar un usuario existente.
-    Usado por Administradores (o usuarios para su propio perfil).
-    """
     password = None
-
-    # Añadimos el campo rol para que el Admin pueda editarlo
     rol = forms.ModelChoiceField(
         queryset=Rol.objects.all(),
         required=True,
         label="Rol del usuario"
     )
 
+    # modificar constructor para que admin no pueda cambiar su propio rol
+    def __init__(self, *args, **kwargs):
+        # Capturamos el 'request' que pasamos desde la vista
+        self.request = kwargs.pop('request', None)
+        super(UsuarioChangeForm, self).__init__(*args, **kwargs)
+
+        if self.instance and self.request:
+            es_admin = self.request.user.rol.nombre == 'ADMINISTRADOR'
+            es_el_mismo_usuario = self.request.user.id == self.instance.id
+
+            # Si el Admin se está editando a sí mismo...
+            if es_admin and es_el_mismo_usuario:
+                #  deshabilitamos el campo 'rol'.
+                self.fields['rol'].disabled = True
+
+    # metodo save (PARA DOBLE SEGURIDAD) ---
+    def save(self, commit=True):
+        # Obtenemos el usuario antes de guardarlo
+        user = super(UsuarioChangeForm, self).save(commit=False)
+
+        # Verificamos la misma condición de seguridad
+        if self.request:
+            es_admin = self.request.user.rol.nombre == 'ADMINISTRADOR'
+            es_el_mismo_usuario = self.request.user.id == self.instance.id
+
+            if es_admin and es_el_mismo_usuario:
+                # Si el Admin se está editando a sí mismo,
+                # forzamos a que su rol sea el que ya tenía
+                user.rol = self.request.user.rol
+
+        if commit:
+            user.save()
+        return user
+
     class Meta:
         model = Usuario
-        # Campos que se podrán editar
         fields = ('username', 'first_name', 'last_name', 'email', 'rol', 'is_active')

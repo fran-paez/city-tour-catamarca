@@ -89,16 +89,13 @@ def editar_usuario(request, usuario_id):
         # Si no es admin Y no es él mismo, le negamos el acceso.
         return HttpResponseForbidden("No tienes permiso para editar este usuario.")
 
-    # --- Lógica del formulario ---
     if request.method == 'POST':
-        # Pasamos la instancia para que el formulario sepa QUÉ usuario actualizar
-        form = UsuarioChangeForm(request.POST, instance=usuario_a_editar)
+        form = UsuarioChangeForm(request.POST, instance=usuario_a_editar, request=request)
         if form.is_valid():
             form.save()
             return redirect('listar_usuarios')
     else:
-        # Si es GET, creamos el formulario relleno con los datos del usuario
-        form = UsuarioChangeForm(instance=usuario_a_editar)
+        form = UsuarioChangeForm(instance=usuario_a_editar, request=request)
 
     contexto = {
         'form': form,
