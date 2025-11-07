@@ -29,6 +29,12 @@ urlpatterns = [
     path('lista/', views.listar_usuarios, name='listar_usuarios'),
     path('crear/', views.crear_usuario, name='crear_usuario'),
 
+# --- URLs PARA EDITAR Y ELIMINAR usuarios ---
+    # e.g., /usuario/editar/1/
+    path('editar/<int:usuario_id>/', views.editar_usuario, name='editar_usuario'),
+    # e.g., /usuario/eliminar/1/
+    path('eliminar/<int:usuario_id>/', views.eliminar_usuario, name='eliminar_usuario'),
+
     # --- URLs de Roles (CRUD) ---
     path('roles/', views.listar_roles, name='listar_roles'),
     path('roles/crear/', views.crear_rol, name='crear_rol'),

@@ -1,7 +1,7 @@
 # apps/usuario/forms.py
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import Rol, Usuario
 
 class RolForm(forms.ModelForm):
@@ -52,3 +52,24 @@ class UsuarioCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+# --- FORMULARIO EDICION USUARIO ---
+
+class UsuarioChangeForm(UserChangeForm):
+    """
+    Formulario para actualizar un usuario existente.
+    Usado por Administradores (o usuarios para su propio perfil).
+    """
+    password = None
+
+    # Añadimos el campo rol para que el Admin pueda editarlo
+    rol = forms.ModelChoiceField(
+        queryset=Rol.objects.all(),
+        required=True,
+        label="Rol del usuario"
+    )
+
+    class Meta:
+        model = Usuario
+        # Campos que se podrán editar
+        fields = ('username', 'first_name', 'last_name', 'email', 'rol', 'is_active')
