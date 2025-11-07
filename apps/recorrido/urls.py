@@ -11,10 +11,13 @@ urlpatterns = [
     path('parada/crear/', views.crear_parada, name='crear_parada'),
 
     # # Itinerarios
-    path('', views.lista_itinerarios, name='lista_itinerarios'),
     path('itinerario/crear/', views.crear_itinerario, name='crear_itinerario'),
+    path('itinerarios/', views.lista_itinerarios, name='lista_itinerarios'),
 
     # Unidades
     path('unidades/', views.lista_unidades, name='lista_unidades'),
     path('unidad/cargar/', views.agregar_unidad, name='agregar_unidad'),
+
+    # Pagina principal
+    path('', views.pagina_principal, name='pagina_principal'),
 ]

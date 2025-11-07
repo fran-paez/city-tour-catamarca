@@ -131,7 +131,7 @@ def crear_usuario(request):
         if form.is_valid():
             form.save()
             # Redirigimos a la lista de usuarios
-            return redirect('listar_usuarios')
+            return redirect('login')
     else:
         # Si es GET, creamos el formulario vacío
         form = UsuarioCreationForm()
@@ -200,11 +200,3 @@ def eliminar_usuario(request, usuario_id):
         'usuario': usuario_a_eliminar
     }
     return render(request, 'usuario/eliminar_usuario.html', contexto)
-
-# --- VISTA HOME ---
-@login_required
-def home_view(request):
-    """
-    Página de inicio que solo pueden ver los usuarios logueados.
-    """
-    return render(request, 'usuario/home.html')

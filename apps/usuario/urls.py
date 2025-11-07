@@ -1,8 +1,6 @@
 # apps/usuario/urls.py
 
 from django.urls import path
-from . import views
-from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 
@@ -22,8 +20,6 @@ urlpatterns = [
     ),
 
     # --- URLs de la App ---
-    # Una nueva vista "home" para recibir al usuario logueado
-    path('home/', views.home_view, name='home'),
 
     # --- URLs de Usuarios (CRUD) ---
     path('lista/', views.listar_usuarios, name='listar_usuarios'),

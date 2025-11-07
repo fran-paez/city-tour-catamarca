@@ -144,10 +144,7 @@ APPEND_SLASH = False
 # --- Configuraciones de Autenticación ---
 
 # A dónde redirigir al usuario DESPUÉS de un inicio de sesión exitoso.
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'pagina_principal'
 
-# A dónde redirigir al usuario si intenta acceder a una página
 LOGIN_URL = 'login'
-
-# A dónde redirigir al usuario DESPUÉS de cerrar sesión.
 LOGOUT_REDIRECT_URL = 'login'
