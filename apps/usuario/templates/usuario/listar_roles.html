@@ -14,7 +14,14 @@
                 {% if rol.descripcion %}
                     <p>{{ rol.descripcion }}</p>
                 {% endif %}
+
+                {% if rol.nombre != 'ADMINISTRADOR' %}
+                    <br>
+                    <a href="{% url 'editar_rol' rol.id %}">Editar</a>
+                    | <a href="{% url 'eliminar_rol' rol.id %}" style="color: red;">Eliminar</a>
+                {% endif %}
             </li>
+            <hr>
         {% empty %}
             <li>No hay roles registrados.</li>
         {% endfor %}
@@ -22,5 +29,7 @@
 
     <hr>
     <a href="{% url 'crear_rol' %}">Crear Nuevo Rol</a>
+    <br>
+    <a href="{% url 'home' %}">Volver al Home</a>
 </body>
 </html>

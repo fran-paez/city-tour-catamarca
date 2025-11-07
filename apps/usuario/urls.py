@@ -39,5 +39,9 @@ urlpatterns = [
     path('roles/', views.listar_roles, name='listar_roles'),
     path('roles/crear/', views.crear_rol, name='crear_rol'),
 
+# e.g., /usuario/roles/editar/1/
+    path('roles/editar/<int:rol_id>/', views.editar_rol, name='editar_rol'),
+    # e.g., /usuario/roles/eliminar/1/
+    path('roles/eliminar/<int:rol_id>/', views.eliminar_rol, name='eliminar_rol'),
 
 ]

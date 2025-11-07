@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Rol</title>
+</head>
+<body>
+    <h1>Editar Rol: {{ rol.nombre }}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+    <hr>
+    <a href="{% url 'listar_roles' %}">Cancelar y volver a la lista</a>
+</body>
+</html>

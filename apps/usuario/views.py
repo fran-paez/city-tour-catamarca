@@ -9,10 +9,15 @@ from .forms import RolForm, UsuarioCreationForm, UsuarioChangeForm
 
 # --- Vistas para ROL ---
 
+@login_required
 def listar_roles(request):
     """
     Vista para listar todos los roles existentes.
     """
+
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
+
     roles = Rol.objects.all()
 
     contexto = {
@@ -21,11 +26,15 @@ def listar_roles(request):
 
     return render(request, 'usuario/listar_roles.html', contexto)
 
-
+@login_required
 def crear_rol(request):
     """
     Vista para crear un nuevo Rol usando el RolForm.
     """
+
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
+
     if request.method == 'POST':
         form = RolForm(request.POST)
         if form.is_valid():
@@ -40,6 +49,65 @@ def crear_rol(request):
 
     return render(request, 'usuario/crear_rol.html', contexto)
 
+
+@login_required
+def editar_rol(request, rol_id):
+    """
+    Vista para editar un Rol existente.
+    """
+    # 1. Seguridad de Acceso: Solo Admins pueden editar roles.
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
+
+    rol_a_editar = get_object_or_404(Rol, id=rol_id)
+
+    # 2. Seguridad de Regla de Negocio: No se puede editar el rol ADMIN.
+    if rol_a_editar.nombre == 'ADMINISTRADOR':
+        # (Opcional: puedes añadir un mensaje de error)
+        return redirect('listar_roles')
+
+    if request.method == 'POST':
+        form = RolForm(request.POST, instance=rol_a_editar)
+        if form.is_valid():
+            # El método save() del MODELO se encargará de
+            # guardar el nombre en MAYÚSCULAS automáticamente.
+            form.save()
+            return redirect('listar_roles')
+    else:
+        form = RolForm(instance=rol_a_editar)
+
+    contexto = {
+        'form': form,
+        'rol': rol_a_editar
+    }
+    return render(request, 'usuario/editar_rol.html', contexto)
+
+
+@login_required
+def eliminar_rol(request, rol_id):
+    """
+    Vista para eliminar un Rol.
+    """
+    # 1. Seguridad de Acceso: Solo Admins.
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
+
+    rol_a_eliminar = get_object_or_404(Rol, id=rol_id)
+
+    # 2. Seguridad de Regla de Negocio: No se puede eliminar el rol ADMIN.
+    if rol_a_eliminar.nombre == 'ADMINISTRADOR':
+        return redirect('listar_roles')
+
+    # Solo eliminamos por POST (por seguridad)
+    if request.method == 'POST':
+        rol_a_eliminar.delete()
+        return redirect('listar_roles')
+
+    # Si es GET, mostramos confirmación
+    contexto = {
+        'rol': rol_a_eliminar
+    }
+    return render(request, 'usuario/eliminar_rol.html', contexto)
 
 # --- VISTAS PARA USUARIO ---
 
