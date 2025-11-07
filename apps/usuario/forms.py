@@ -67,6 +67,8 @@ class UsuarioChangeForm(UserChangeForm):
             if es_admin and es_el_mismo_usuario:
                 #  deshabilitamos el campo 'rol'.
                 self.fields['rol'].disabled = True
+                # deshabilitar campo para dejar inactivo
+                self.fields['is_active'].disabled = True
 
     # metodo save (PARA DOBLE SEGURIDAD) ---
     def save(self, commit=True):
@@ -82,6 +84,8 @@ class UsuarioChangeForm(UserChangeForm):
                 # Si el Admin se está editando a sí mismo,
                 # forzamos a que su rol sea el que ya tenía
                 user.rol = self.request.user.rol
+                # forzar que quede activo
+                user.is_active = True
 
         if commit:
             user.save()
