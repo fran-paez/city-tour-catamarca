@@ -1,15 +1,43 @@
+{% extends 'reserva/base_reserva.html' %}
 
-{% block content %}
-  <h1>Paradas visibles</h1>
+{% block reserva_content %}
+    <nav style="background-color: #eee; padding: 10px;">
 
+        <a href="{% url 'index' %}">Inicio</a>
+        {% if request.user.is_authenticated %}
+            <span> | Bienvenido, <strong>@{{ request.user.username }}</strong></span>
+            <span> (Rol: {{ request.user.rol.nombre }})</span>
+
+            <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Cerrar Sesión</button>
+            </form>
+
+            {% if request.user.rol.nombre == 'ADMINISTRADOR' %}
+                <span> | </span>
+                <a href="{% url 'listar_usuarios' %}">Gestionar Usuarios</a>
+                <span> | </span>
+                <a href="{% url 'listar_roles' %}">Gestionar Roles</a>
+                {% endif %}
+
+        {% else %}
+            <span> | </span>
+            <a href="{% url 'login' %}">Iniciar Sesión</a>
+            <span> | </span>
+            <a href="{% url 'crear_usuario' %}">Registrarse</a>
+
+        {% endif %}
+    </nav>
+  <h1>Paradas visibles</h1> 
   {% if paradas %}
     <ul class="paradas-list">
       {% for parada in paradas %}
         <li class="parada-item">
-          <h3>{{ parada.nombre }}</h3>
-          <p>{{ parada.descripcion_parada }}</p>
+          <h3>{{ parada.nombre }}:</h3>
+          <p style="display: inline;">{{ parada.descripcion_parada }}</p>
           {# Si quieres mostrar estado u otros campos: #}
-          {# <small>Estado: {{ parada.get_estado_display }}</small> #}
+          <small>Estado: {{ parada.get_estado_display }}</small>
+
         </li>
       {% endfor %}
     </ul>

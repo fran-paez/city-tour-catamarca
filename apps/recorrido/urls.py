@@ -18,6 +18,5 @@ urlpatterns = [
     path('unidades/', views.lista_unidades, name='lista_unidades'),
     path('unidad/cargar/', views.agregar_unidad, name='agregar_unidad'),
 
-    # Pagina principal
-    path('', views.pagina_principal, name='pagina_principal'),
+
 ]

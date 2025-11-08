@@ -59,7 +59,7 @@ ROOT_URLCONF = 'city_tour_catamarca.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,7 +144,7 @@ APPEND_SLASH = False
 # --- Configuraciones de Autenticación ---
 
 # A dónde redirigir al usuario DESPUÉS de un inicio de sesión exitoso.
-LOGIN_REDIRECT_URL = 'pagina_principal'
+LOGIN_REDIRECT_URL = 'index'
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
