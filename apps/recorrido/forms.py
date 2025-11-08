@@ -12,7 +12,7 @@ class ParadaForm(forms.ModelForm):
 class RecorridoForm(forms.ModelForm):
     class Meta:
         model = Recorrido
-        fields = ['descripcion', 'paradas', 'duracion', 'precio', 'estado']
+        fields = ['nombre_recorrido', 'descripcion_recorrido', 'paradas', 'duracion', 'precio', 'estado']
         widgets = {
             'paradas': forms.CheckboxSelectMultiple(),
         }

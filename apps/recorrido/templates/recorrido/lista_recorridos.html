@@ -12,6 +12,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Paradas</th>
                 <th>Duración</th>
@@ -23,7 +24,8 @@
         {% for recorrido in recorridos %}
             <tr>
                 <td>{{ recorrido.id }}</td>
-                <td>{{ recorrido.descripcion }}</td>
+                <td>{{recorrido.nombre_recorrido}}</td>
+                <td>{{ recorrido.descripcion_recorrido }}</td>
                 <td>
                     {% for parada in recorrido.paradas.all %}
                         {{ parada.nombre }}{% if not forloop.last %}, {% endif %}

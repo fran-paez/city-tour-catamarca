@@ -37,18 +37,14 @@ class Parada(models.Model):
     imagen = models.ImageField(upload_to=renombrar_imagen_parada, blank=True, null=True,
     default='paradas/default.jpg')
 
-
     def __str__(self):
-        return f"Parada {self.id} - {self.descripcion_parada[:30]}"
-
-
-
-
+        return f"Parada {self.id} - {self.nombre[:30]}"
 
 
 
 class Recorrido(models.Model):
-    descripcion = models.TextField()
+    nombre_recorrido=  models.CharField(max_length=30)
+    descripcion_recorrido = models.TextField()
     paradas = models.ManyToManyField(
         Parada,
         related_name='recorridos'
@@ -63,7 +59,7 @@ class Recorrido(models.Model):
     estado = models.CharField(max_length=10, choices=ESTADOS, default='activo')
 
     def __str__(self):
-        return f"Recorrido {self.id} - {self.descripcion[:40]}"
+        return f"Recorrido {self.id} - {self.descripcion_recorrido[:40]}"
     
 
 class Itinerario(models.Model):
