@@ -9,6 +9,39 @@
 
 {% block global_content %}
 
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'paradas_disponibles' %}">Puntos turisticos</a></li>
+
+        {% if request.user.is_authenticated %}
+
+            {% if request.user.rol.nombre == 'ADMINISTRADOR' %}
+                <li><a href="{% url 'listar_usuarios' %}">Gestionar Usuarios</a></li>
+                <li><a href="{% url 'listar_roles' %}">Gestionar Roles</a></li>
+                <li><a href="{% url 'lista_itinerarios' %}">Gestionar itinerarios</a></li>
+            {% endif %}
+
+            <span>Bienvenido, <strong>@{{ request.user.username }}</strong>(Rol: {{ request.user.rol.nombre }})</span>
+
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Cerrar Sesión</button>
+            </form>
+
+        {% else %}
+            <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+            <li><a href="{% url 'crear_usuario' %}">Registrarse</a></li>
+
+        {% endif %}
+        </ul>
+    </nav>
+
+
+
+
+
+
 
 <div class="contenedor_reserva">
     <h1>hola</h1>

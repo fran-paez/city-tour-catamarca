@@ -7,9 +7,88 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* sombra suave */
 }
 
-h1 {
-    background-color: red;    /* color de texto */
-}
 body {
-    background-color: yellow !important;
+    background-color: rgb(0, 0, 0) !important;
 }
+
+nav {
+    background-color: #ffa600;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+nav ul li {
+    margin: 0 15px;
+}
+nav ul li a {
+    display: inline-block;
+    padding: 12px 16px;
+    color: white;
+    text-decoration: none;
+    /*font-weight: bold;*/
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+nav ul li a:hover {
+    background-color: #e59400;
+}
+
+nav span {
+    color: rgb(0, 0, 0) !important; /* Cambia 'blue' por el color que desees */
+    display: inline-block;
+    padding: 12px 16px;
+}
+button{
+    background-color: #ffa600;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 14px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #000000;
+    color:white;
+
+}
+
+
+.contenedor_paradas {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.lista-paradas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.tarjeta-parada {
+  display: block;
+  text-decoration: none;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tarjeta-parada:hover {
+  transform: scale(1.03);
+  background-color: #f0f0f0;
+}
+
