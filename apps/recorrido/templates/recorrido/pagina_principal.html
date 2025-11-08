@@ -1,9 +1,14 @@
-{% extends 'reserva/base_reserva.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CityTour Catamarca</title>
+</head>
+<body>
 
-{% block reserva_content %}
     <nav style="background-color: #eee; padding: 10px;">
 
-        <a href="{% url 'index' %}">Inicio</a>
+        <a href="{% url 'pagina_principal' %}">Inicio</a>
         {% if request.user.is_authenticated %}
             <span> | Bienvenido, <strong>@{{ request.user.username }}</strong></span>
             <span> (Rol: {{ request.user.rol.nombre }})</span>
@@ -28,20 +33,14 @@
 
         {% endif %}
     </nav>
-  <h1>Paradas visibles</h1> 
-  {% if paradas %}
-    <ul class="paradas-list">
-      {% for parada in paradas %}
-        <li class="parada-item">
-          <h3>{{ parada.nombre }}:</h3>
-          <p style="display: inline;">{{ parada.descripcion_parada }}</p>
-          {# Si quieres mostrar estado u otros campos: #}
-          <small>Estado: {{ parada.get_estado_display }}</small>
 
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No hay paradas visibles actualmente.</p>
-  {% endif %}
-{% endblock %}
+    <h1>Bienvenido a CityTour Catamarca</h1>
+    <p>Esta es la descripción del servicio...</p>
+
+    <hr>
+
+    <h2>Recorridos Disponibles</h2>
+    <p>Aquí se mostrarán los recorridos...</p>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>{% block title %}City Tour Catamarca{% endblock %}</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estilos_global.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- # FUENTE MONTSERRAT -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Todhri&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+
+
+    <main>
+      {% block global_content %}{% endblock %}
+    </main>
+
+
+    <br><br>
+    <footer id="footer" class="text-center">
+        <p>2025 CITYTOUR Catamarca - Todos los derechos reservados</p>
+    </footer>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

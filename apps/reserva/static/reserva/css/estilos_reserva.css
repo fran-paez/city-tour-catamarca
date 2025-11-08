@@ -1,0 +1,15 @@
+.contenedor_reserva {
+    max-width: 1000px;            /* ancho máximo */
+    margin: 40px auto;            /* centrado horizontal */
+    padding: 30px;
+    background-color: #ffffff;    /* fondo blanco */
+    border-radius: 12px;          /* bordes redondeados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* sombra suave */
+}
+
+h1 {
+    background-color: red;    /* color de texto */
+}
+body {
+    background-color: yellow !important;
+}

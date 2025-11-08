@@ -7,24 +7,34 @@
 <body>
     <h1>Lista de Usuarios</h1>
 
-    <ul>
-        {% for usuario in usuarios %}
-            <li>
-                <strong>@{{ usuario.username }}</strong> ({{ usuario.get_full_name }})
-                <br>
-                <small>Email: {{ usuario.email }}</small>
-                <br>
-                <small>Rol: {{ usuario.rol.nombre|default:"Sin Rol" }}</small>
-            </li>
-            <hr>
-        {% empty %}
-            <li>No hay usuarios registrados.</li>
-        {% endfor %}
-    </ul>
+    {% if request.user.rol.nombre == 'ADMINISTRADOR' %}
+        <ul>
+            {% for usuario in usuarios %}
+                <li>
+                    <strong>@{{ usuario.username }}</strong> ({{ usuario.get_full_name }})
+                    <br>
+                    <small>Email: {{ usuario.email }}</small>
+                    <br>
+                    <small>Rol: {{ usuario.rol.nombre|default:"Sin Rol" }}</small>
+                    <br>
+
+                    <a href="{% url 'editar_usuario' usuario.id %}">Editar</a>
+
+                    {% if request.user.id != usuario.id %}
+                        | <a href="{% url 'eliminar_usuario' usuario.id %}" style="color: red;">Eliminar</a>
+                    {% endif %}
+                </li>
+                <hr>
+            {% empty %}
+                <li>No hay usuarios registrados.</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tienes permisos para ver esta lista.</p>
+    {% endif %}
 
     <hr>
     <a href="{% url 'crear_usuario' %}">Crear Nuevo Usuario</a>
     <br>
-    <a href="{% url 'listar_roles' %}">Ver Roles</a>
 </body>
 </html>
