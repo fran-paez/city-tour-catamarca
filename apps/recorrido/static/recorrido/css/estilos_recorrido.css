@@ -56,3 +56,7 @@ table th, table td { border: 1px solid  #ddd; padding: 8px; }
 table th { background: #f4f4f4; text-align: left; }
 table tr:nth-child(even) { background: #fafafa; }
 table caption{ caption-side: top; font-weight: bold; margin-bottom: 8px; }
+
+body{
+    background-color: green;
+}

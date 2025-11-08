@@ -1,17 +1,16 @@
-<!DOCTYPE html>
+{% extends 'base_global.html' %}
 {% load static %}
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Administrar itinerarios{% endblock %}</title>
+    {% block title %}Administrar itinerarios{% endblock %}
+    {% block extra_head %}
     <link rel="stylesheet" href="{% static 'recorrido/css/estilos_recorrido.css' %}">
     <link rel="stylesheet" href="{% static 'css/estilos_global.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Todhri&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Todhri&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"> -->
+    {% endblock %}
+
+    {% block global_content %}
     <header>
         <h1>Administrar itinerarios</h1>
     </header>
@@ -45,8 +44,6 @@
     </main>
 
     <br><br><br>
-    <footer id="footer" class="text-center">
-        <p>2025 CITYTOUR Catamarca - Todos los derechos reservados</p>
-    </footer>
-</body>
-</html>
+
+    {% endblock %}
+

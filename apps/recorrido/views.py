@@ -49,7 +49,7 @@ def crear_parada(request):
     if request.user.rol.nombre != 'ADMINISTRADOR':
         return HttpResponseForbidden("No tienes permiso para realizar esta acción.")
     if request.method == 'POST':
-        form = ParadaForm(request.POST)
+        form = ParadaForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
             return redirect('lista_paradas') 
