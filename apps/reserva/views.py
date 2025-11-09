@@ -10,12 +10,20 @@ def index(request):
     paradas = Parada.objects.filter(visibilidad_pagina=True).order_by('nombre')[:4]
     return render(request, 'reserva/index.html', {'paradas': paradas})
 
+def paradas_disponibles(request):
+    paradas = Parada.objects.filter(visibilidad_pagina=True).order_by('nombre')
+    return render(request, 'reserva/index.html', {'paradas': paradas})
+
+
 
 def parada_detalles(request, parada_id):
     parada = get_object_or_404(Parada, id=parada_id)
-    return render(request, 'reserva/parada_detalles.html', {'parada': parada})
-
-
+    # Obtener todos los recorridos que incluyen esta parada y están activos
+    recorridos = parada.recorridos.filter(estado='activo')
+    return render(request, 'reserva/parada_detalles.html', {
+        'parada': parada,
+        'recorridos': recorridos
+    })
 
 
     

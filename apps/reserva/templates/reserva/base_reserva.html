@@ -9,15 +9,17 @@
 
 {% block global_content %}
 
+    <h1 class="titulo">CITY TOUR CATAMARCA</h1>
+
     {% if request.user.is_authenticated %}
         <span>Bienvenido, <strong>@{{ request.user.username }}</strong>(Rol: {{ request.user.rol.nombre }})</span>
         <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}
-            <button type="submit">Cerrar Sesión</button>
+            <button class="sesion" type="submit">Cerrar Sesión</button>
         </form>
     {% else %}
-        <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
-        <li><a href="{% url 'crear_usuario' %}">Registrarse</a></li>
+        <li><a class="sesion" href="{% url 'login' %}">Iniciar Sesión</a></li>
+        <li><a class="sesion" href="{% url 'crear_usuario' %}">Registrarse</a></li>
     {% endif %}
 
     <nav>

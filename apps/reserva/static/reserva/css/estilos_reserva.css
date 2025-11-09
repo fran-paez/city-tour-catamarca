@@ -1,21 +1,32 @@
+body{
+    background-color: #000000;
+}
+
+h1{
+    color: rgb(0, 0, 0);
+    text-align:center;
+    margin-bottom: 30px;
+
+}
 .contenedor_reserva {
-    max-width: 1000px;            /* ancho máximo */
-    margin: 40px auto;            /* centrado horizontal */
-    padding: 30px;
+    max-width: 1200px;            /* ancho máximo */
+    margin: 0 auto;            /* centrado horizontal */
+    padding: 20px;
     background-color: #ffffff;    /* fondo blanco */
     border-radius: 12px;          /* bordes redondeados */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* sombra suave */
 }
 
 
-span {
+span, h1.titulo{
     color: rgb(255, 255, 255) !important; /* Cambia 'blue' por el color que desees */
     display: inline-block;
     padding: 12px 16px;
 }
-button{
+button.sesion{
     background-color: #ffa600;
     color: rgb(0, 0, 0);
+    display: inline;
     border: none;
     padding: 14px 20px;
     border-radius: 5px;
@@ -27,22 +38,6 @@ button:hover {
     color:white;
 
 }
-
-body{
-    background-color: #000000;
-}
-
-
-/* Contenedor principal de la sección de reservas */
-.contenedor_reserva {
-    max-width: 1200px;          /* Ancho máximo del contenedor */
-    margin: 0 auto;             /* Centra el contenedor horizontalmente */
-    padding: 20px;              /* Espacio interno alrededor del contenido */
-}
-
-
-
-
 
 
 /* Contenedor grid para las tarjetas de paradas */
@@ -95,6 +90,108 @@ body{
     background: #f63e02;                   /* Fondo blanco para el área del texto */
 }
 
+/*-------------------------------------PARADA DETALLES---------------------------------- */
+/* Estilos para la sección de recorridos */
+
+h3 { 
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+/* Estilos para la tabla */
+.tabla-recorridos {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+}
+
+.tabla-recorridos thead {
+    background: linear-gradient(135deg, #ffa600, #e59400);
+}
+
+.tabla-recorridos th {
+    padding: 15px 12px;
+    text-align: left;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabla-recorridos tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tabla-recorridos tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+.tabla-recorridos td {
+    padding: 15px 12px;
+    color: #495057;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tabla-recorridos td:first-child {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.tabla-recorridos td:nth-child(2) {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.tabla-recorridos td:nth-child(3) {
+    color: #28a745;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Mensaje cuando no hay recorridos */
+.sin-recorridos {
+    text-align: center;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px dashed #dee2e6;
+    color: #6c757d;
+    margin: 30px 0;
+}
+
+.sin-recorridos p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ========== ESTILOS RESPONSIVE PARA DISPOSITIVOS MÓVILES ========== */
 @media (max-width: 768px) {
     /* Ajusta el grid para pantallas más pequeñas */
@@ -112,5 +209,25 @@ body{
     .card-parada h3 {
         font-size: 1rem;                    /* Tamaño de fuente más pequeño */
         padding: 12px 8px;                  /* Menos padding interno */
+    }
+}
+
+@media (max-width: 768px) {
+    .recorridos-tabla {
+        margin: 20px 0;
+        padding: 15px;
+    }
+    
+    .tabla-recorridos {
+        font-size: 0.9rem;
+    }
+    
+    .tabla-recorridos th,
+    .tabla-recorridos td {
+        padding: 12px 8px;
+    }
+    
+    .tabla-recorridos th {
+        font-size: 0.85rem;
     }
 }

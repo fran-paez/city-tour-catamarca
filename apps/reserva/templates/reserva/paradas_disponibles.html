@@ -1,0 +1,21 @@
+{% extends 'reserva/base_reserva.html' %}
+
+{% block reserva_content %}
+<h1>Paradas visibles</h1>
+
+    {% if paradas %}
+    <div class="contenedor-paradas">
+      {% for parada in paradas %}
+        <a href="{% url 'parada_detalles' parada.id %}" class="card-parada">
+          <div class="parada-imagen">
+            <img src="{{ parada.imagen.url }}" alt="{{ parada.nombre }}" style="width: 100px;height: 100px;">
+          </div>
+          <h3>{{ parada.nombre }}</h3>
+        </a>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p>No hay paradas visibles actualmente.</p>
+    {% endif %}
+  
+{% endblock %}
