@@ -3,12 +3,14 @@
 {% block reserva_content %}
 <div class="detalle-parada-contenedor">
     <div class="tarjeta-detalle">
-        <h1 class="titulo-parada">{{ parada.nombre }}</h1>
+        
 
 
         <div class="detalle-img">
             <img src="{{ parada.imagen.url }}" alt="{{ parada.nombre }}">
         </div>
+
+        <h1 class="titulo-parada">{{ parada.nombre }}</h1>
 
         <div class="detalle-info">
             <p><strong>Descripción:</strong> {{ parada.descripcion_parada }}</p>
@@ -23,9 +25,9 @@
             </p>
         </div>
 
-        <!-- <div class="botones-detalle">
+        <div class="botones-detalle">
             <a href="{% url 'paradas_disponibles' %}" class="btn-volver">Volver a la lista</a>
-        </div> -->
+        </div>
     </div>
 </div>
 {% endblock %}

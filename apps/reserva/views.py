@@ -6,13 +6,15 @@ import os
 
 
 def index(request):
-    paradas = Parada.objects.filter(visibilidad_pagina=True).order_by('nombre')  # opcional order_by
+    # Obtener solo las primeras 4 paradas visibles
+    paradas = Parada.objects.filter(visibilidad_pagina=True).order_by('nombre')[:4]
     return render(request, 'reserva/index.html', {'paradas': paradas})
 
 
 def parada_detalles(request, parada_id):
     parada = get_object_or_404(Parada, id=parada_id)
     return render(request, 'reserva/parada_detalles.html', {'parada': parada})
+
 
 
 

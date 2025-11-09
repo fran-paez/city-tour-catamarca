@@ -7,41 +7,9 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* sombra suave */
 }
 
-body {
-    background-color: rgb(0, 0, 0) !important;
-}
 
-nav {
-    background-color: #ffa600;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-nav ul li {
-    margin: 0 15px;
-}
-nav ul li a {
-    display: inline-block;
-    padding: 12px 16px;
-    color: white;
-    text-decoration: none;
-    /*font-weight: bold;*/
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-nav ul li a:hover {
-    background-color: #e59400;
-}
-
-nav span {
-    color: rgb(0, 0, 0) !important; /* Cambia 'blue' por el color que desees */
+span {
+    color: rgb(255, 255, 255) !important; /* Cambia 'blue' por el color que desees */
     display: inline-block;
     padding: 12px 16px;
 }
@@ -60,35 +28,89 @@ button:hover {
 
 }
 
-
-.contenedor_paradas {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+body{
+    background-color: #000000;
 }
 
-.lista-paradas {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+
+/* Contenedor principal de la sección de reservas */
+.contenedor_reserva {
+    max-width: 1200px;          /* Ancho máximo del contenedor */
+    margin: 0 auto;             /* Centra el contenedor horizontalmente */
+    padding: 20px;              /* Espacio interno alrededor del contenido */
 }
 
-.tarjeta-parada {
-  display: block;
-  text-decoration: none;
-  color: black;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+
+
+
+
+/* Contenedor grid para las tarjetas de paradas */
+.contenedor-paradas {
+    display: grid;                          /* Usa CSS Grid para el layout */
+    grid-template-columns: repeat(4, 1fr);  /* 4 columnas de igual tamaño que ocupan todo el ancho */
+    gap: 30px;                             /* Espacio entre las tarjetas */
 }
 
-.tarjeta-parada:hover {
-  transform: scale(1.03);
-  background-color: #f0f0f0;
+/* Estilos para cada tarjeta individual de parada */
+.card-parada {
+    display: block;                        /* Usa display block para flujo normal */
+    text-decoration: none;                 /* Quita el subrayado de los enlaces */
+    background: white;                    /* Fondo blanco para la tarjeta */
+    border-radius: 12px;                  /* Esquinas redondeadas */
+    overflow: hidden;                     /* Oculta cualquier contenido que sobresalga */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para efecto de elevación */
+    transition: all 0.3s ease;            /* Transición suave para efectos hover */
+    border: 1px solid #e0e0e0;           /* Borde sutil alrededor de la tarjeta */
 }
 
+/* Efectos cuando el usuario pasa el mouse sobre la tarjeta */
+.card-parada:hover {
+    transform: translateY(-5px);         /* Levanta la tarjeta 5px hacia arriba */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); /* Aumenta la sombra para mayor profundidad */
+    text-decoration: none;                /* Mantiene sin subrayado en hover */
+}
+
+/* Contenedor de la imagen de la parada */
+.parada-imagen {
+    width: 100%;                         /* La imagen ocupa el 100% del ancho de la tarjeta */
+}
+
+/* Estilos para la imagen dentro de la tarjeta */
+.parada-imagen img {
+    width: 100%;                         /* Imagen ocupa todo el ancho disponible */
+    /*height: 150px;                       /* Altura fija para consistencia visual */
+    object-fit: cover;                   /* Recorta la imagen para que cubra el espacio sin distorsionarse */
+    display: block;                      /* Elimina espacio extra debajo de la imagen */
+}
+
+/* Estilos para el nombre de la parada debajo de la imagen */
+.card-parada h3 {
+    margin: 0;                           /* Elimina márgenes por defecto */
+    padding: 15px 10px;                  /* Espacio interno alrededor del texto */
+    font-size: 1.1rem;                   /* Tamaño de fuente ligeramente aumentado */
+    text-align: center;                  /* Centra el texto horizontalmente */
+    font-weight: 600;                    /* Texto en negrita semi */
+    color: #ffffff;                     /* Color de texto azul oscuro */
+    background: #f63e02;                   /* Fondo blanco para el área del texto */
+}
+
+/* ========== ESTILOS RESPONSIVE PARA DISPOSITIVOS MÓVILES ========== */
+@media (max-width: 768px) {
+    /* Ajusta el grid para pantallas más pequeñas */
+    .contenedor-paradas {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles en lugar de 4 */
+        gap: 15px;                          /* Menos espacio entre tarjetas */
+    }
+    
+    /* Reduce la altura de las imágenes en móvil */
+    .parada-imagen img {
+        height: 120px;                      /* Altura reducida para móviles */
+    }
+    
+    /* Ajusta el texto para pantallas pequeñas */
+    .card-parada h3 {
+        font-size: 1rem;                    /* Tamaño de fuente más pequeño */
+        padding: 12px 8px;                  /* Menos padding interno */
+    }
+}

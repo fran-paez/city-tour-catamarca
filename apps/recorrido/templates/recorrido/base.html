@@ -1,19 +1,19 @@
 {% extends 'base_global.html' %}
 {% load static %}
     {% block title %}Administrar itinerarios{% endblock %}
-    {% block extra_head %}
-    <link rel="stylesheet" href="{% static 'recorrido/css/estilos_recorrido.css' %}">
-    <link rel="stylesheet" href="{% static 'css/estilos_global.css' %}">
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Todhri&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"> -->
+    {% block styles_head %}
+    <link rel="stylesheet" href="{% static 'recorrido/css/estilos_recorrido.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/estilos_global.css' %}"> -->
     {% endblock %}
 
+
     {% block global_content %}
+
     <header>
         <h1>Administrar itinerarios</h1>
     </header>
+    <a href="{% url 'index' %}">🏠</a>
 
  <!-- Hice dos navbar para que no se vea sobrecargada una -->
     <nav>
@@ -39,7 +39,6 @@
     <br><br>
 
     <main>
-    
         {% block content %}{% endblock %}
     </main>
 
