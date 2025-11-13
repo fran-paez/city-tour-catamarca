@@ -22,7 +22,7 @@ urlpatterns = [
     path('', include('apps.reserva.urls')),
     path('usuario/', include('apps.usuario.urls')),
     path('gestion/', include('apps.recorrido.urls')),
-    # path('informes/', include('apps.informe.urls')),
+    path('informes/', include('apps.informe.urls')),
 ]
 
 from django.conf import settings

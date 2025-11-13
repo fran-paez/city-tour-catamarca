@@ -10,7 +10,6 @@ from django.dispatch import receiver
 from django.conf import settings
 
 
-
 def renombrar_imagen_parada(instance, filename):
     extension = os.path.splitext(filename)[1]
     if instance.id:
