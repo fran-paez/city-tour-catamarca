@@ -3,6 +3,16 @@
 {% block reserva_content %}
 <h1>Paradas visibles</h1>
 
+    <!-- ... Seccion de notificaciones ... -->
+    {% if notificaciones %}
+        <div class="notificacion-bar">
+            <h4>Avisos Importantes</h4>
+            {% for noti in notificaciones %}
+                <p><strong>{{ noti.titulo }}:</strong> {{ noti.mensaje }} ({{ noti.fecha_hora|date:"d/m/Y" }})</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% if paradas %}
     <div class="contenedor-paradas">
       {% for parada in paradas %}

@@ -108,7 +108,7 @@ class Itinerario(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Itinerario {self.id} - {self.recorrido.descripcion[:30]} ({self.fecha_itinerario} {self.hora_itinerario})"
+        return f"Itinerario {self.id} - {self.recorrido.descripcion_recorrido[:30]} ({self.fecha_itinerario} {self.hora_itinerario})"
 
 
 class Unidad(models.Model):
