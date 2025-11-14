@@ -36,6 +36,7 @@
                         <th>Nombre del Recorrido</th>
                         <th>Duración</th>
                         <th>Precio</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +45,9 @@
                         <td>{{ recorrido.nombre_recorrido }}</td>
                         <td>{{ recorrido.duracion }} min</td>
                         <td>${{ recorrido.precio }}</td>
+                        <td>
+                            <a href="{% url 'recorrido_detalles' recorrido.id %}" class="btn-detalle">Ver Detalles</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

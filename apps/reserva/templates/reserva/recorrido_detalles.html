@@ -9,6 +9,20 @@
     <p><strong>Descripción:</strong> {{ recorrido.descripcion_recorrido }}</p>
     <p><strong>Duración:</strong> {{ recorrido.duracion }} minutos</p>
 
+    <h2>Paradas del Recorrido</h2>
+    {% if recorrido.paradas.all %}
+        <ul>
+            {% for parada in recorrido.paradas.all %}
+                <li>
+                    {{ parada.nombre }}
+                    <a href="{% url 'parada_detalles' parada.id %}">Ver detalles</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Este recorrido no tiene paradas asignadas.</p>
+    {% endif %}
+
     <h2>Próximos Itinerarios</h2>
     {% if itinerarios %}
         <ul>
