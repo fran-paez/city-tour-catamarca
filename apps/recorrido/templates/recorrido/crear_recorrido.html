@@ -3,9 +3,10 @@
 {% block title %}Crear Recorrido{% endblock %}
 
 {% block content %}
-<h2>Crear nuevo recorrido</h2>
+
 
 <form method="POST">
+    <h1>Crear nuevo recorrido</h1>
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Guardar recorrido</button>

@@ -8,6 +8,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Guardar Cambios</button>
+        <a href="{% url 'lista_recorridos' %}">Cancelar</a>
     </form>
-    <a href="{% url 'lista_recorridos' %}">Cancelar</a>
+
 {% endblock %}
