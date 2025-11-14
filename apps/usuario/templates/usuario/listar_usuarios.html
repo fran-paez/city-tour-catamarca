@@ -21,7 +21,9 @@
                     <td>{{ usuario.rol.nombre }}</td>
                     <td>
                         <a href="{% url 'editar_usuario' usuario.pk %}" class="btn-editar">Editar</a>
-                        <a href="{% url 'eliminar_usuario' usuario.pk %}" class="btn-eliminar">Eliminar</a>
+                        {% if usuario.id != request.user.id %}
+                            <a href="{% url 'eliminar_usuario' usuario.pk %}" class="btn-eliminar">Eliminar</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
