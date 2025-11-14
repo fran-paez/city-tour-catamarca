@@ -1,0 +1,25 @@
+{% extends 'base_global.html' %}
+{% load static %}
+
+{% block title %}Panel de Informes{% endblock %}
+
+{% block styles_head %}
+    <link rel="stylesheet" href="{% static 'informe/css/estilos_informe.css' %}">
+{% endblock %}
+
+{% block global_content %}
+    <header>
+        <h1>Panel de Informes</h1>
+    </header>
+    <a href="{% url 'index' %}">Inicio</a>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'lista_itinerarios' %}">Volver a Panel de Gestión</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+{% endblock %}

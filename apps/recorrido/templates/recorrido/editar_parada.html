@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Parada</title>
-</head>
-<body>
+{% extends 'recorrido/base.html' %}
+
+{% block title %}Editar Parada{% endblock %}
+
+{% block content %}
     <h1>Editar Parada</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -12,5 +10,4 @@
         <button type="submit">Guardar Cambios</button>
     </form>
     <a href="{% url 'lista_paradas' %}">Cancelar</a>
-</body>
-</html>
+{% endblock %}

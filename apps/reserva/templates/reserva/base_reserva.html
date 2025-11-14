@@ -26,11 +26,12 @@
         <ul>
             <li><a href="{% url 'index' %}">Inicio</a></li>
             <li><a href="{% url 'paradas_disponibles' %}">Puntos turisticos</a></li>
+            <li><a href="{% url 'recorridos_activos' %}">Recorridos activos</a></li>
 
             {% if request.user.is_authenticated and  request.user.rol.nombre == 'ADMINISTRADOR' %}
                 <li><a href="{% url 'listar_usuarios' %}">Gestionar Usuarios</a></li>
-                <li><a href="{% url 'listar_roles' %}">Gestionar Roles</a></li>
-                <li><a href="{% url 'lista_itinerarios' %}">Gestionar itinerarios</a></li>
+                <li><a href="{% url 'lista_itinerarios' %}">Gestionar Viajes</a></li>
+                <li><a href="{% url 'listar_notificaciones' %}">Gestionar Notificaciones</a></li>
             {% endif %}
 
         </ul>

@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard de Informes</title>
-</head>
-<body>
-    <h1>Dashboard de Informes (Solo Admin)</h1>
+{% extends 'informe/base.html' %}
+
+{% block title %}Dashboard de Informes{% endblock %}
+
+{% block content %}
+    <h1>Dashboard de Informes</h1>
     <p>Selecciona un informe para generar.</p>
 
     <!-- 1. INFORME DE PASAJEROS POR RANGO DE FECHAS -->
     <fieldset>
         <legend><strong>Estadísticas de Pasajeros por Rango de Fechas</strong></legend>
         <form action="{% url 'informe_pasajeros_fechas' %}" method="GET" target="_blank">
-            <!-- ... (contenido de este formulario sin cambios) ... -->
             <label for="fecha_inicio_pas">Fecha de Inicio:</label>
             <input type="date" id="fecha_inicio_pas" name="fecha_inicio" required>
 
@@ -36,17 +33,10 @@
     <!-- 2. LISTADO DE RESERVAS POR RECORRIDO -->
     <fieldset>
         <legend><strong>Listado de Reservas por Recorrido</strong></legend>
-
         <form action="{% url 'informe_reservas_por_recorrido' %}" method="GET" target="_blank">
-
-            <!-- ... (desplegable de Recorridos sin cambios) ... -->
             <label for="recorrido_id">Selecciona un Recorrido:</label>
             <select name="recorrido_id" id="recorrido_id" required>
                 <option value="">-- Todos los Recorridos --</option>
-                <!--
-                  Rellenamos el desplegable con los recorridos
-                  que pasamos desde la vista 'dashboard_informes'
-                -->
                 {% for recorrido in recorridos %}
                     <option value="{{ recorrido.id }}">{{ recorrido.nombre_recorrido }}</option>
                 {% endfor %}
@@ -75,12 +65,10 @@
 
     <hr>
 
-
     <!-- 3. NUEVO INFORME DE PARADAS MÁS UTILIZADAS -->
     <fieldset>
         <legend><strong>Estadísticas de Paradas más Utilizadas</strong></legend>
         <form action="{% url 'informe_paradas_utilizadas' %}" method="GET" target="_blank">
-
             <label for="fecha_inicio_par">Fecha de Inicio:</label>
             <input type="date" id="fecha_inicio_par" name="fecha_inicio" required>
 
@@ -110,8 +98,4 @@
         <a href="{% url 'informe_recorridos_activos' %}?formato=excel" target="_blank">Excel</a> |
         <a href="{% url 'informe_recorridos_activos' %}?formato=csv" target="_blank">CSV</a>
     </fieldset>
-
-    <br>
-    <a href="{% url 'index' %}">Volver a la Página Principal</a>
-</body>
-</html>
+{% endblock %}

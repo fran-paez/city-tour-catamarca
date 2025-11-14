@@ -1,6 +1,6 @@
 {% extends 'base_global.html' %}
 {% load static %}
-    {% block title %}Administrar itinerarios{% endblock %}
+    {% block title %}Panel de Gestión{% endblock %}
 
     {% block styles_head %}
     <link rel="stylesheet" href="{% static 'recorrido/css/estilos_recorrido.css' %}">
@@ -11,9 +11,9 @@
     {% block global_content %}
 
     <header>
-        <h1>Administrar itinerarios</h1>
+        <h1>Panel de Gestión</h1>
     </header>
-    <a href="{% url 'index' %}">🏠</a>
+    <a href="{% url 'index' %}">Inicio</a>
 
  <!-- Hice dos navbar para que no se vea sobrecargada una -->
     <nav>
@@ -22,6 +22,7 @@
             <li><a href="{% url 'lista_recorridos' %}">Lista de Recorridos</a></li>
             <li><a href="{% url 'lista_unidades' %}">Lista de Unidades</a></li>
             <li><a href="{% url 'lista_itinerarios' %}">Lista de Itinerarios</a></li>
+            <li><a href="{% url 'dashboard_informes' %}">Generar Informes</a></li>
         </ul>
     </nav>
     <hr>
