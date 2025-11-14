@@ -1,24 +1,25 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Iniciar Sesión</title>
-</head>
-<body>
-    <h1>Iniciar Sesión en CityTour</h1>
+{% extends 'usuario/base_usuario.html' %}
 
-    {% if form.errors %}
-        <p style="color: red;">Tu usuario o contraseña son incorrectos. Intenta de nuevo. Si el problema persiste, tu usuario puede estar bloqueado por inactividad, por favor contacta a un administrador</p>
-    {% endif %}
+{% block title %}Iniciar Sesión{% endblock %}
 
-    <form method="POST">
-        {% csrf_token %}
+{% block usuario_content %}
+<div class="login-container">
+    <div class="login-form">
+        <h1>Iniciar Sesión</h1>
 
-        {{ form.as_p }}
+        {% if form.errors %}
+            <p class="error-message">Tu usuario o contraseña son incorrectos. Intenta de nuevo. Si el error persiste, puedes estar inactivo, por favor contacta con un administrador</p>
+        {% endif %}
 
-        <button type="submit">Entrar</button>
-    </form>
-    <br>
-    <a href="{% url 'index' %}">Volver a la página principal</a>
-</body>
-</html>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn-iniciar-sesion" type="submit">Entrar</button>
+        </form>
+        <br>
+        <div class="login-links">
+            <a href="{% url 'index' %}">Volver al Inicio</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

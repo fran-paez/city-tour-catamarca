@@ -1,0 +1,31 @@
+{% extends 'base_global.html' %}
+{% load static %}
+
+{% block title %}Gestión de Usuarios y Roles{% endblock %}
+
+{% block styles_head %}
+    <link rel="stylesheet" href="{% static 'usuario/css/estilos_usuario.css' %}">
+{% endblock %}
+
+{% block global_content %}
+<div class="gestion-container">
+    {% if request.user.is_authenticated and  request.user.rol.nombre == 'ADMINISTRADOR' %}
+    <nav class="gestion-nav">
+        <ul>
+            <li><a href="{% url 'listar_usuarios' %}">Gestionar Usuarios</a></li>
+            <li><a href="{% url 'crear_usuario' %}">Crear Usuario</a></li>
+            <hr>
+            <li><a href="{% url 'listar_roles' %}">Gestionar Roles</a></li>
+            <li><a href="{% url 'crear_rol' %}">Crear Rol</a></li>
+            <hr>
+            <li><a href="{% url 'index' %}">Volver al Inicio</a></li>
+        </ul>
+    </nav>
+    {% endif %}
+
+    <main class="gestion-content">
+        {% block usuario_content %}
+        {% endblock %}
+    </main>
+</div>
+{% endblock %}

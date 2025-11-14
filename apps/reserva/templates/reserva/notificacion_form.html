@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ titulo_pagina }}</title>
-</head>
-<body>
-    <h1>{{ titulo_pagina }}</h1>
+{% extends 'base_global.html' %}
 
-    <form method="POST">
+{% block title %}Formulario de Notificación{% endblock %}
+
+{% block global_content %}
+    <h1>Formulario de Notificación</h1>
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Guardar</button>
+        <button type="submit">Guardar Notificación</button>
     </form>
-
-    <hr>
     <a href="{% url 'listar_notificaciones' %}">Cancelar</a>
-</body>
-</html>
+{% endblock %}

@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Usuario</title>
-</head>
-<body>
-    <h1>Editar a: {{ usuario_editado.username }}</h1>
+{% extends 'usuario/base_usuario.html' %}
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar Cambios</button>
-    </form>
+{% block title %}Editar Usuario{% endblock %}
 
-    <hr>
-    <a href="{% url 'listar_usuarios' %}">Cancelar y volver a la lista</a>
-</body>
-</html>
+{% block usuario_content %}
+    <div class="form-container">
+        <h1>Editar Usuario: {{ form.instance.username }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,34 +1,28 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Roles</title>
-</head>
-<body>
-    <h1>Lista de Roles</h1>
+{% extends 'usuario/base_usuario.html' %}
 
-    <ul>
-        {% for rol in roles %}
-            <li>
-                <strong>{{ rol.nombre }}</strong>
-                {% if rol.descripcion %}
-                    <p>{{ rol.descripcion }}</p>
-                {% endif %}
+{% block title %}Listado de Roles{% endblock %}
 
-                {% if rol.nombre != 'ADMINISTRADOR' %}
-                    <br>
-                    <a href="{% url 'editar_rol' rol.id %}">Editar</a>
-                    | <a href="{% url 'eliminar_rol' rol.id %}" style="color: red;">Eliminar</a>
-                {% endif %}
-            </li>
-            <hr>
-        {% empty %}
-            <li>No hay roles registrados.</li>
-        {% endfor %}
-    </ul>
-
-    <hr>
-    <a href="{% url 'crear_rol' %}">Crear Nuevo Rol</a>
-    <br>
-</body>
-</html>
+{% block usuario_content %}
+    <h1>Listado de Roles</h1>
+    <table class="tabla-gestion">
+        <thead>
+            <tr>
+                <th>Nombre del Rol</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rol in roles %}
+                <tr>
+                    <td>{{ rol.nombre }}</td>
+                    <td>{{ rol.descripcion }}</td>
+                    <td>
+                        <a href="{% url 'editar_rol' rol.pk %}" class="btn-editar">Editar</a>
+                        <a href="{% url 'eliminar_rol' rol.pk %}" class="btn-eliminar">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,40 +1,30 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Usuarios</title>
-</head>
-<body>
-    <h1>Lista de Usuarios</h1>
+{% extends 'usuario/base_usuario.html' %}
 
-    {% if request.user.rol.nombre == 'ADMINISTRADOR' %}
-        <ul>
+{% block title %}Listado de Usuarios{% endblock %}
+
+{% block usuario_content %}
+    <h1>Listado de Usuarios</h1>
+    <table class="tabla-gestion">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for usuario in usuarios %}
-                <li>
-                    <strong>@{{ usuario.username }}</strong> ({{ usuario.get_full_name }})
-                    <br>
-                    <small>Email: {{ usuario.email }}</small>
-                    <br>
-                    <small>Rol: {{ usuario.rol.nombre|default:"Sin Rol" }}</small>
-                    <br>
-
-                    <a href="{% url 'editar_usuario' usuario.id %}">Editar</a>
-
-                    {% if request.user.id != usuario.id %}
-                        | <a href="{% url 'eliminar_usuario' usuario.id %}" style="color: red;">Eliminar</a>
-                    {% endif %}
-                </li>
-                <hr>
-            {% empty %}
-                <li>No hay usuarios registrados.</li>
+                <tr>
+                    <td>{{ usuario.username }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.rol.nombre }}</td>
+                    <td>
+                        <a href="{% url 'editar_usuario' usuario.pk %}" class="btn-editar">Editar</a>
+                        <a href="{% url 'eliminar_usuario' usuario.pk %}" class="btn-eliminar">Eliminar</a>
+                    </td>
+                </tr>
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No tienes permisos para ver esta lista.</p>
-    {% endif %}
-
-    <hr>
-    <a href="{% url 'crear_usuario' %}">Crear Nuevo Usuario</a>
-    <br>
-</body>
-</html>
+        </tbody>
+    </table>
+{% endblock %}

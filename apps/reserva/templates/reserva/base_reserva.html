@@ -18,8 +18,8 @@
             <button class="sesion" type="submit">Cerrar Sesión</button>
         </form>
     {% else %}
-        <li><a class="sesion" href="{% url 'login' %}">Iniciar Sesión</a></li>
-        <li><a class="sesion" href="{% url 'crear_usuario' %}">Registrarse</a></li>
+        <a class="sesion btn-sesion" href="{% url 'login' %}">Iniciar Sesión</a>
+        <a class="sesion btn-registrarse" href="{% url 'crear_usuario' %}">Registrarse</a>
     {% endif %}
 
     <nav>

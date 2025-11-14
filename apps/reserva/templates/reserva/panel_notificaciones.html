@@ -1,33 +1,43 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Panel de Notificaciones</title>
-</head>
-<body>
+{% extends 'base_global.html' %}
+
+{% block title %}Panel de Notificaciones{% endblock %}
+
+{% block global_content %}
     <h1>Panel de Notificaciones</h1>
-    <p>Gestiona las notificaciones del sistema.</p>
     <a href="{% url 'crear_notificacion' %}">Crear Nueva Notificación</a>
+
+    {% if notificaciones %}
+        <table class="tabla-gestion">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Mensaje</th>
+                    <th>Fecha</th>
+                    <th>Itinerario Afectado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notificacion in notificaciones %}
+                    <tr>
+                        <td>{{ notificacion.titulo }}</td>
+                        <td>{{ notificacion.mensaje }}</td>
+                        <td>{{ notificacion.fecha_hora|date:"d/m/Y H:i" }}</td>
+                        <td>{{ notificacion.itinerario_afectado|default:"N/A" }}</td>
+                        <td>
+                            <a href="{% url 'editar_notificacion' notificacion.pk %}">Editar</a>
+                            <a href="{% url 'eliminar_notificacion' notificacion.pk %}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay notificaciones creadas.</p>
+    {% endif %}
+
+    <hr>
+    <a href="{% url 'index' %}">Volver al Inicio</a>
     <hr>
 
-    {% for noti in notificaciones %}
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-            <h4>{{ noti.titulo }}</h4>
-            <p>{{ noti.mensaje }}</p>
-            <small>
-                Publicado por: {{ noti.creado_por.username }} | {{ noti.fecha_hora }} <br>
-                Itinerario Afectado: {{ noti.itinerario_afectado|default:"N/A" }} <br>
-                <strong>¿Visible en Página Principal?: {% if noti.es_publica %}SÍ{% else %}NO{% endif %}</strong>
-            </small>
-            <br><br>
-            <a href="{% url 'editar_notificacion' noti.pk %}">Editar</a>
-            | <a href="{% url 'eliminar_notificacion' noti.pk %}" style="color: red;">Eliminar</a>
-        </div>
-    {% empty %}
-        <p>No hay notificaciones creadas.</p>
-    {% endfor %}
-
-    <br>
-    <a href="{% url 'index' %}">Volver a la Página Principal</a>
-</body>
-</html>
+{% endblock %}

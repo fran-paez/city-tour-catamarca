@@ -46,7 +46,7 @@
                         <td>{{ recorrido.duracion }} min</td>
                         <td>${{ recorrido.precio }}</td>
                         <td>
-                            <a href="{% url 'recorrido_detalles' recorrido.id %}" class="btn-detalle">Ver Detalles</a>
+                            <a href="{% url 'recorrido_detalles' recorrido.id %}" class="btn-detalle-simple">Ver Detalles</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -62,7 +62,7 @@
     <br><br><br>
 
         <div class="botones-detalle">
-            <a href="{% url 'index' %}" class="btn-volver">Volver</a>
+            <a href="{% url 'paradas_disponibles' %}" class="btn-volver">Volver a puntos turisticos</a>
         </div>
     </div>
 </div>

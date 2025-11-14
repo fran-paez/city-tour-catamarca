@@ -40,3 +40,20 @@ nav ul li a {
     border-radius: 4px;
     transition: background-color 0.3s;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+table th {
+    background-color: #343a40;
+    color: white;
+}

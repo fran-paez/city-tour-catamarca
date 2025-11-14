@@ -215,16 +215,18 @@ button:hover {
 .tabla-itinerarios {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 .tabla-itinerarios th, .tabla-itinerarios td {
     border: 1px solid #ddd;
     padding: 12px;
-    text-align: center;
+    text-align: left;
 }
 
 .tabla-itinerarios th {
-    background-color: #f4f4f4;
+    background-color: #343a40;
+    color: white;
 }
 
 .btn-reservar {
@@ -245,12 +247,22 @@ button:hover {
     margin-top: 40px;
 }
 
-.btn-volver {
+.btn-volver, .btn-registrarse {
     background-color: #6c757d;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-sesion {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
@@ -263,47 +275,18 @@ button:hover {
 .tabla-recorridos {
     width: 100%;
     border-collapse: collapse;
-    margin: 0 auto;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
+    margin-top: 20px;
 }
 
-.tabla-recorridos thead {
-    background: linear-gradient(135deg, #ffa600, #e59400);
+.tabla-recorridos th, .tabla-recorridos td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
 }
 
 .tabla-recorridos th {
-    padding: 15px 12px;
-    text-align: left;
+    background-color: #343a40;
     color: white;
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.tabla-recorridos tbody tr {
-    transition: all 0.3s ease;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.tabla-recorridos tbody tr:hover {
-    background-color: #f8f9fa;
-    transform: translateX(5px);
-}
-
-.tabla-recorridos td {
-    padding: 15px 12px;
-    color: #495057;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.tabla-recorridos td:first-child {
-    font-weight: 600;
-    color: #2c3e50;
 }
 
 .sin-recorridos {
@@ -374,6 +357,7 @@ button:hover {
 .tabla-mis-reservas {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 .tabla-mis-reservas th, .tabla-mis-reservas td {
@@ -383,7 +367,7 @@ button:hover {
 }
 
 .tabla-mis-reservas th {
-    background-color: #007bff;
+    background-color: #343a40;
     color: white;
 }
 
