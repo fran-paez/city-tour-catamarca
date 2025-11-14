@@ -8,8 +8,9 @@
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Confirmar Reserva</button>
+            <button type="submit" class="btn-confirmar">Guardar reserva</button>
         </form>
-        <a href="{% url 'mis_reservas' %}">Cancelar</a>
+        <br>
+        <a href="{% url 'mis_reservas' %}" class="btn-cancelar-confirm">Cancelar</a>
     </div>
 {% endblock %}

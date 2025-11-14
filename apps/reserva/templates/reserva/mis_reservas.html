@@ -5,6 +5,14 @@
 {% block reserva_content %}
     <h1>Mis Reservas</h1>
 
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% if reservas %}
         <table class="tabla-mis-reservas">
             <thead>
@@ -25,7 +33,10 @@
                         <td>{{ reserva.get_estado_display }}</td>
                         <td>
                             <a href="{% url 'detalle_reserva' reserva.pk %}">Ver Detalle</a>
-                            {% if reserva.estado == 'C' %}
+                            {% if reserva.estado == 'P' %}
+                                | <a href="{% url 'confirmar_reserva' reserva.pk %}">Confirmar</a>
+                            {% endif %}
+                            {% if reserva.estado == 'P' or reserva.estado == 'C' %}
                                 | <a href="{% url 'cancelar_reserva' reserva.pk %}">Cancelar</a>
                             {% endif %}
                         </td>
