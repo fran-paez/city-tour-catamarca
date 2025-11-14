@@ -4,4 +4,4 @@ from django.contrib import admin
 from django.contrib import admin
 from .models import Parada
 
-admin.site.register(Parada)
+# admin.site.register(Parada)
