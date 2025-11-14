@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 import csv
 import datetime
+from django.contrib import messages
 
 from reportlab.lib.pagesizes import A4
 
@@ -19,13 +20,13 @@ from openpyxl.styles import Font, Alignment
 @login_required
 def dashboard_informes(request):
     if request.user.rol.nombre != 'ADMINISTRADOR':
-        return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para acceder a esta seccion.'
+        }
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
-    # Obtenemos todos los recorridos para pasarlos al template
-    # y que el admin pueda elegir uno en el formulario.
     recorridos_disponibles = Recorrido.objects.filter(estado='activo')
-    # ... (código sin cambios) ...
-
     contexto = {
         'recorridos': recorridos_disponibles
     }
@@ -36,29 +37,31 @@ def dashboard_informes(request):
 @login_required
 def generar_informe_pasajeros_fechas(request):
     if request.user.rol.nombre != 'ADMINISTRADOR':
-        return HttpResponseForbidden("Acceso denegado")
+        contexto_error = {
+            'error_titulo': 'Accion Denegada',
+            'error_mensaje': 'No tienes permisos para realizar esta accion.'
+        }
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
-    # 2. Obtener datos de la URL
     fecha_inicio_str = request.GET.get('fecha_inicio', None)
     fecha_fin_str = request.GET.get('fecha_fin', None)
     formato = request.GET.get('formato', 'pdf')
 
     if not (fecha_inicio_str and fecha_fin_str):
+        messages.error(request, "Por favor, selecciona un rango de fechas.")
         return redirect('dashboard_informes')
 
     try:
         fecha_inicio = datetime.datetime.strptime(fecha_inicio_str, '%Y-%m-%d').date()
         fecha_fin = datetime.datetime.strptime(fecha_fin_str, '%Y-%m-%d').date()
     except ValueError:
-        return HttpResponse("Fechas inválidas. Use el formato AAAA-MM-DD.")
+        messages.error(request, "Fechas inválidas. Use el formato AAAA-MM-DD.")
+        return redirect('dashboard_informes')
 
     if fecha_inicio > fecha_fin:
-        return HttpResponse(
-            "Error: La 'Fecha de Inicio' no puede ser posterior a la 'Fecha de Fin'.",
-            status=400
-        )
+        messages.error(request, "Error: La 'Fecha de Inicio' no puede ser posterior a la 'Fecha de Fin'.")
+        return redirect('dashboard_informes')
 
-    # 3. Consulta a la BD
     reservas = Reserva.objects.filter(
         itinerario__fecha_itinerario__range=[fecha_inicio, fecha_fin],
         estado='C'
@@ -67,13 +70,10 @@ def generar_informe_pasajeros_fechas(request):
         'itinerario__recorrido'
     ).order_by('itinerario__fecha_itinerario')
 
-    # 4. Calcular el total
-    # ... (código sin cambios) ...
     total_pasajeros = 0
     for reserva in reservas:
         total_pasajeros += reserva.cantidad_asientos
 
-    # --- LOGICA PARA CSV ---
     if formato == 'csv':
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = f'attachment; filename="reporte_pasajeros_{fecha_inicio_str}_al_{fecha_fin_str}.csv"'
@@ -93,7 +93,6 @@ def generar_informe_pasajeros_fechas(request):
         writer.writerow(['Total de Pasajeros:', total_pasajeros])
         return response
 
-    # --- LOGICA PARA PDF ---
     elif formato == 'pdf':
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="reporte_pasajeros_{fecha_inicio_str}_al_{fecha_fin_str}.pdf"'
@@ -103,13 +102,11 @@ def generar_informe_pasajeros_fechas(request):
         y = height - (2 * cm)
         x = 2 * cm
         p.setFont("Helvetica-Bold", 16)
-        # ... (código sin cambios) ...
         p.drawString(x, y, "Reporte de Pasajeros por Fecha")
         y -= 0.5 * cm
         p.line(x, y, width - (2 * cm), y);
         y -= 1 * cm
         p.setFont("Helvetica", 12)
-        # ... (código sin cambios) ...
         p.drawString(x, y, f"Período: {fecha_inicio_str} al {fecha_fin_str}")
         y -= 0.5 * cm
         p.drawString(x, y, "Estado: CONFIRMADAS");
@@ -140,7 +137,6 @@ def generar_informe_pasajeros_fechas(request):
         p.save()
         return response
 
-    # --- LÓGICA PARA EXCEL ---
     elif formato == 'excel':
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = f'attachment; filename="reporte_pasajeros_{fecha_inicio_str}_al_{fecha_fin_str}.xlsx"'
@@ -187,49 +183,43 @@ def generar_informe_pasajeros_fechas(request):
 # --- VISTA DE RESERVAS POR RECORRIDO ---
 @login_required
 def generar_informe_por_recorrido(request):
-    """
-    Genera un reporte de reservas para un recorrido específico,
-    en un rango de fechas.
-    """
-    # 1. Seguridad
     if request.user.rol.nombre != 'ADMINISTRADOR':
-        return HttpResponseForbidden("Acceso denegado")
+        contexto_error = {
+            'error_titulo': 'Accion Denegada',
+            'error_mensaje': 'No tienes permisos para realizar esta accion.'
+        }
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
-    # 2. Obtener datos de la URL
     fecha_inicio_str = request.GET.get('fecha_inicio', None)
     fecha_fin_str = request.GET.get('fecha_fin', None)
     formato = request.GET.get('formato', 'pdf')
     recorrido_id = request.GET.get('recorrido_id', None)
 
-    # 3. Validar datos
     if not (fecha_inicio_str and fecha_fin_str and recorrido_id):
+        messages.error(request, "Por favor, completa todos los campos.")
         return redirect('dashboard_informes')
 
     try:
         fecha_inicio = datetime.datetime.strptime(fecha_inicio_str, '%Y-%m-%d').date()
         fecha_fin = datetime.datetime.strptime(fecha_fin_str, '%Y-%m-%d').date()
-        recorrido = Recorrido.objects.get(pk=recorrido_id)  # Verificamos que el recorrido exista
+        recorrido = Recorrido.objects.get(pk=recorrido_id)
     except (ValueError, Recorrido.DoesNotExist):
-        return HttpResponse("Datos inválidos (Fecha o Recorrido no existe).", status=400)
+        messages.error(request, "Datos inválidos (Fecha o Recorrido no existe).")
+        return redirect('dashboard_informes')
 
     if fecha_inicio > fecha_fin:
-        # ... (código sin cambios) ...
-        return HttpResponse(
-            "Error: La 'Fecha de Inicio' no puede ser posterior a la 'Fecha de Fin'.",
-            status=400
-        )
+        messages.error(request, "Error: La 'Fecha de Inicio' no puede ser posterior a la 'Fecha de Fin'.")
+        return redirect('dashboard_informes')
 
-    # 4. Consulta a la BD
     reservas = Reserva.objects.filter(
         itinerario__fecha_itinerario__range=[fecha_inicio, fecha_fin],
-        itinerario__recorrido_id=recorrido_id,  # <-- ¡EL NUEVO FILTRO!
+        itinerario__recorrido_id=recorrido_id,
         estado='C'
     ).select_related(
         'turista',
         'itinerario__recorrido'
     ).order_by('itinerario__fecha_itinerario')
 
-    # 5. Calcular el total
     total_pasajeros = 0
     for reserva in reservas:
         total_pasajeros += reserva.cantidad_asientos
@@ -257,7 +247,6 @@ def generar_informe_por_recorrido(request):
         writer.writerow(['Total de Pasajeros:', total_pasajeros])
         return response
 
-    # --- LOGICA PARA PDF ---
     elif formato == 'pdf':
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="reporte_por_recorrido_{fecha_inicio_str}_al_{fecha_fin_str}.pdf"'
@@ -265,7 +254,6 @@ def generar_informe_por_recorrido(request):
         width, height = A4
         y = height - (2 * cm)
         x = 2 * cm
-        # ... (código sin cambios) ...
         p.setFont("Helvetica-Bold", 16)
         p.drawString(x, y, titulo_reporte)
         y -= 1 * cm
@@ -297,7 +285,6 @@ def generar_informe_por_recorrido(request):
         p.save()
         return response
 
-    # --- LÓGICA PARA EXCEL ---
     elif formato == 'excel':
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = f'attachment; filename="reporte_por_recorrido_{fecha_inicio_str}_al_{fecha_fin_str}.xlsx"'
@@ -340,28 +327,19 @@ def generar_informe_por_recorrido(request):
 # --- VISTA PARA RECORRIDOS ACTIVOS ---
 @login_required()
 def generar_informe_recorridos_activos(request):
-    """
-    Genera un listado simple de todos los recorridos
-    cuyo estado es 'activo'. No usa fechas.
-    """
-    # 1. Seguridad
     if request.user.rol.nombre != 'ADMINISTRADOR':
-        return HttpResponseForbidden("Acceso denegado")
+        contexto_error = {
+            'error_titulo': 'Accion Denegada',
+            'error_mensaje': 'No tienes permisos para realizar esta accion.'
+        }
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
-    # 2. Obtener formato (no hay fechas)
     formato = request.GET.get('formato', 'pdf')
-
-    # 3. Consulta a la BD
     recorridos = Recorrido.objects.filter(estado='activo').order_by('nombre_recorrido')
-
-    # Obtener solo la fecha actual
     hoy = datetime.date.today()
-    # Formatear como string (DD/MM/AAAA)
     fecha_actual_str = hoy.strftime("%d/%m/%Y")
-
     titulo_reporte = f"Listado de Recorridos Activos | Fecha: {fecha_actual_str}"
 
-    # --- LOGICA PARA CSV ---
     if formato == 'csv':
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = f'attachment; filename="recorridos_activos_{fecha_actual_str}.csv"'
@@ -379,7 +357,6 @@ def generar_informe_recorridos_activos(request):
             ])
         return response
 
-    # --- LOGICA PARA PDF ---
     elif formato == 'pdf':
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="recorridos_activos_{fecha_actual_str}.pdf"'
@@ -408,7 +385,6 @@ def generar_informe_recorridos_activos(request):
         p.save()
         return response
 
-    # --- LOGICA PARA EXCEL ---
     elif formato == 'excel':
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = f'attachment; filename="recorridos_activos_{fecha_actual_str}.xlsx"'
@@ -441,54 +417,47 @@ def generar_informe_recorridos_activos(request):
 # --- VISTA PARA PARADAS MÁS UTILIZADAS ---
 @login_required
 def generar_informe_paradas_utilizadas(request):
-    """
-    Genera un reporte de paradas (como punto_partida)
-    agrupadas por cantidad de reservas y pasajeros,
-    en un rango de fechas.
-    """
-    # 1. Seguridad
     if request.user.rol.nombre != 'ADMINISTRADOR':
-        return HttpResponseForbidden("Acceso denegado")
+        contexto_error = {
+            'error_titulo': 'Accion Denegada',
+            'error_mensaje': 'No tienes permisos para realizar esta accion.'
+        }
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
-    # 2. Obtener datos de la URL
     fecha_inicio_str = request.GET.get('fecha_inicio', None)
     fecha_fin_str = request.GET.get('fecha_fin', None)
     formato = request.GET.get('formato', 'pdf')
 
     if not (fecha_inicio_str and fecha_fin_str):
+        messages.error(request, "Por favor, selecciona un rango de fechas.")
         return redirect('dashboard_informes')
 
     try:
         fecha_inicio = datetime.datetime.strptime(fecha_inicio_str, '%Y-%m-%d').date()
         fecha_fin = datetime.datetime.strptime(fecha_fin_str, '%Y-%m-%d').date()
     except ValueError:
-        return HttpResponse("Fechas inválidas. Use el formato AAAA-MM-DD.")
+        messages.error(request, "Fechas inválidas. Use el formato AAAA-MM-DD.")
+        return redirect('dashboard_informes')
 
     if fecha_inicio > fecha_fin:
-        return HttpResponse(
-            "Error: La 'Fecha de Inicio' no puede ser posterior a la 'Fecha de Fin'.",
-            status=400
-        )
+        messages.error(request, "Error: La 'Fecha de Inicio' no puede ser posterior a la 'Fecha de Fin'.")
+        return redirect('dashboard_informes')
 
-    # Usamos .values() para agrupar por el nombre de la parada
-    # Usamos .annotate() para crear los campos calculados (total_reservas, total_pasajeros)
-    # Contamos las reservas confirmadas ('C') en el rango de fechas.
     datos_paradas = Reserva.objects.filter(
         itinerario__fecha_itinerario__range=[fecha_inicio, fecha_fin],
         estado='C'
     ).values(
-        'punto_partida__nombre'  # Agrupar por el nombre de la parada
+        'punto_partida__nombre'
     ).annotate(
-        total_reservas=Count('id'),  # Contar cuántas reservas
-        total_pasajeros=Sum('cantidad_asientos')  # Sumar cuántos asientos
+        total_reservas=Count('id'),
+        total_pasajeros=Sum('cantidad_asientos')
     ).order_by(
-        '-total_pasajeros'  # Ordenar de más pasajeros a menos
+        '-total_pasajeros'
     )
 
     titulo_reporte = "Paradas más Utilizadas (como Punto de Partida)"
     subtitulo_periodo = f"Período: {fecha_inicio_str} al {fecha_fin_str}"
 
-    # --- LOGICA PARA CSV ---
     if formato == 'csv':
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = f'attachment; filename="paradas_utilizadas_{fecha_inicio_str}_al_{fecha_fin_str}.csv"'
@@ -505,7 +474,6 @@ def generar_informe_paradas_utilizadas(request):
             ])
         return response
 
-    # --- LOGICA PARA PDF ---
     elif formato == 'pdf':
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="paradas_utilizadas_{fecha_inicio_str}_al_{fecha_fin_str}.pdf"'
@@ -537,7 +505,6 @@ def generar_informe_paradas_utilizadas(request):
         p.save()
         return response
 
-    # --- LOGICA PARA EXCEL ---
     elif formato == 'excel':
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = f'attachment; filename="paradas_utilizadas_{fecha_inicio_str}_al_{fecha_fin_str}.xlsx"'

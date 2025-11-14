@@ -6,10 +6,18 @@
     <h1>Dashboard de Informes</h1>
     <p>Selecciona un informe para generar.</p>
 
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <!-- 1. INFORME DE PASAJEROS POR RANGO DE FECHAS -->
     <fieldset>
         <legend><strong>Estadísticas de Pasajeros por Rango de Fechas</strong></legend>
-        <form action="{% url 'informe_pasajeros_fechas' %}" method="GET" target="_blank">
+        <form action="{% url 'informe_pasajeros_fechas' %}" method="GET">
             <label for="fecha_inicio_pas">Fecha de Inicio:</label>
             <input type="date" id="fecha_inicio_pas" name="fecha_inicio" required>
 
@@ -33,7 +41,7 @@
     <!-- 2. LISTADO DE RESERVAS POR RECORRIDO -->
     <fieldset>
         <legend><strong>Listado de Reservas por Recorrido</strong></legend>
-        <form action="{% url 'informe_reservas_por_recorrido' %}" method="GET" target="_blank">
+        <form action="{% url 'informe_reservas_por_recorrido' %}" method="GET">
             <label for="recorrido_id">Selecciona un Recorrido:</label>
             <select name="recorrido_id" id="recorrido_id" required>
                 <option value="">-- Todos los Recorridos --</option>
@@ -68,7 +76,7 @@
     <!-- 3. NUEVO INFORME DE PARADAS MÁS UTILIZADAS -->
     <fieldset>
         <legend><strong>Estadísticas de Paradas más Utilizadas</strong></legend>
-        <form action="{% url 'informe_paradas_utilizadas' %}" method="GET" target="_blank">
+        <form action="{% url 'informe_paradas_utilizadas' %}" method="GET">
             <label for="fecha_inicio_par">Fecha de Inicio:</label>
             <input type="date" id="fecha_inicio_par" name="fecha_inicio" required>
 
@@ -94,8 +102,8 @@
         <legend><strong>Listado de Recorridos Activos</strong></legend>
         <p>Este informe lista todos los recorridos actualmente activos en el sistema (no requiere fechas).</p>
         Generar como:
-        <a href="{% url 'informe_recorridos_activos' %}?formato=pdf" target="_blank">PDF</a> |
-        <a href="{% url 'informe_recorridos_activos' %}?formato=excel" target="_blank">Excel</a> |
-        <a href="{% url 'informe_recorridos_activos' %}?formato=csv" target="_blank">CSV</a>
+        <a href="{% url 'informe_recorridos_activos' %}?formato=pdf">PDF</a> |
+        <a href="{% url 'informe_recorridos_activos' %}?formato=excel">Excel</a> |
+        <a href="{% url 'informe_recorridos_activos' %}?formato=csv">CSV</a>
     </fieldset>
 {% endblock %}
