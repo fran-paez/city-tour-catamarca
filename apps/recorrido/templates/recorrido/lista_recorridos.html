@@ -18,6 +18,7 @@
                 <th>Duración</th>
                 <th>Precio</th>
                 <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +37,10 @@
                 <td>{{ recorrido.duracion }} min</td>
                 <td>${{ recorrido.precio }}</td>
                 <td>{{ recorrido.estado }}</td>
+                <td>
+                    <a href="{% url 'editar_recorrido' recorrido.pk %}">Editar</a>
+                    <a href="{% url 'eliminar_recorrido' recorrido.pk %}">Eliminar</a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

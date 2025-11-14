@@ -13,6 +13,7 @@
                 <th>Patente</th>
                 <th>Cantidad de Asientos</th>
                 <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -22,10 +23,14 @@
                     <td>{{ unidad.patente }}</td>
                     <td>{{ unidad.cantidad_asientos }}</td>
                     <td>{{ unidad.estado }}</td>
+                    <td>
+                        <a href="{% url 'editar_unidad' unidad.pk %}">Editar</a>
+                        <a href="{% url 'eliminar_unidad' unidad.pk %}">Eliminar</a>
+                    </td>
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="4">No hay unidades registradas</td>
+                    <td colspan="5">No hay unidades registradas</td>
                 </tr>
             {% endfor %}
         </tbody>
