@@ -47,4 +47,6 @@
     {% else %}
         <p>No tienes ninguna reserva activa o pasada.</p>
     {% endif %}
+<br>
+<a href="{% url 'reservas_canceladas' %}" class="btn-detalle-simple">Ver mis reservas canceladas</a>
 {% endblock %}

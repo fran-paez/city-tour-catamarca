@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from apps.reserva.forms import NotificacionForm, ReservaForm
 from django.db import transaction
 from django.contrib import messages
+from django.db.models import Q
 
 def index(request):
     paradas = Parada.objects.filter(visibilidad_pagina=True).order_by('nombre')[:4]
@@ -41,8 +42,15 @@ def recorrido_detalles(request, recorrido_id):
 def mis_reservas(request):
     if request.user.rol.nombre != 'TURISTA':
         return HttpResponseForbidden("Acceso denegado.")
-    reservas = Reserva.objects.filter(turista=request.user).order_by('-fecha_reserva')
+    reservas = Reserva.objects.filter(turista=request.user).filter(Q(estado='P') | Q(estado='C')).order_by('-fecha_reserva')
     return render(request, 'reserva/mis_reservas.html', {'reservas': reservas})
+
+@login_required
+def reservas_canceladas(request):
+    if request.user.rol.nombre != 'TURISTA':
+        return HttpResponseForbidden("Acceso denegado.")
+    reservas = Reserva.objects.filter(turista=request.user, estado='A').order_by('-fecha_reserva')
+    return render(request, 'reserva/reservas_canceladas.html', {'reservas': reservas})
 
 @login_required
 def crear_reserva(request):
@@ -110,7 +118,6 @@ def cancelar_reserva(request, pk):
         return HttpResponseForbidden("No puedes cancelar esta reserva.")
 
     if request.method == 'POST':
-        # Si la reserva estaba confirmada, devolvemos los cupos
         if reserva.estado == 'C':
             itinerario = reserva.itinerario
             itinerario_datetime = datetime.combine(itinerario.fecha_itinerario, itinerario.hora_itinerario)
@@ -123,7 +130,7 @@ def cancelar_reserva(request, pk):
             itinerario.cupos += reserva.cantidad_asientos
             itinerario.save()
 
-        reserva.estado = 'A'  # Cancelada
+        reserva.estado = 'A'
         reserva.save()
         messages.success(request, 'La reserva ha sido cancelada.')
         return redirect('mis_reservas')

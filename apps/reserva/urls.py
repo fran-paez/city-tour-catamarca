@@ -16,6 +16,7 @@ urlpatterns = [
 
     # --- Crud de reservas del turista ---
     path('mis_reservas/', views.mis_reservas, name='mis_reservas'),
+    path('reservas_canceladas/', views.reservas_canceladas, name='reservas_canceladas'),
     path('crear/', views.crear_reserva, name='crear_reserva'),
     path('detalle/<int:pk>/', views.detalle_reserva, name='detalle_reserva'),
     path('confirmar/<int:pk>/', views.confirmar_reserva, name='confirmar_reserva'),
