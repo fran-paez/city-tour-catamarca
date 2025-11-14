@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recorridos Activos</title>
+</head>
+<body>
+    <h1>Recorridos Activos</h1>
+
+    {% if recorridos %}
+        <ul>
+            {% for recorrido in recorridos %}
+                <li>
+                    <a href="{% url 'recorrido_detalles' recorrido.id %}">
+                        {{ recorrido.nombre_recorrido }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay recorridos activos en este momento.</p>
+    {% endif %}
+
+    <a href="{% url 'index' %}">Volver al inicio</a>
+</body>
+</html>

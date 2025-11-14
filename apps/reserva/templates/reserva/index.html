@@ -27,5 +27,21 @@
     {% else %}
       <p>No hay paradas visibles actualmente.</p>
     {% endif %}
+
+    <h2>Nuestros Recorridos</h2>
+    {% if recorridos %}
+        <ul>
+            {% for recorrido in recorridos %}
+                <li>
+                    <a href="{% url 'recorrido_detalles' recorrido.id %}">
+                        {{ recorrido.nombre_recorrido }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'recorridos_activos' %}">Ver todos los recorridos</a>
+    {% else %}
+        <p>No hay recorridos para mostrar.</p>
+    {% endif %}
   
 {% endblock %}

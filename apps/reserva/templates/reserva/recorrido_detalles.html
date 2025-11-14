@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Recorrido</title>
+</head>
+<body>
+    <h1>{{ recorrido.nombre_recorrido }}</h1>
+    <p><strong>Descripción:</strong> {{ recorrido.descripcion_recorrido }}</p>
+    <p><strong>Duración:</strong> {{ recorrido.duracion }} minutos</p>
+
+    <h2>Próximos Itinerarios</h2>
+    {% if itinerarios %}
+        <ul>
+            {% for itinerario in itinerarios %}
+                <li>
+                    <strong>Fecha:</strong> {{ itinerario.fecha_itinerario }} a las {{ itinerario.hora_itinerario }} <br>
+                    <strong>Cupos disponibles:</strong> {{ itinerario.cupos }} <br>
+                    {% if user.is_authenticated and user.rol.nombre == 'TURISTA' %}
+                        <a href="{% url 'crear_reserva' %}?itinerario_id={{ itinerario.id }}">Reservar</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay itinerarios futuros para este recorrido.</p>
+    {% endif %}
+
+    <a href="{% url 'recorridos_activos' %}">Volver a los recorridos</a>
+</body>
+</html>

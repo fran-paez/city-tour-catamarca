@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from apps.recorrido.models import Parada
+from apps.recorrido.models import Parada, Recorrido
 from apps.reserva.models import Notificacion, Reserva
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render, redirect
@@ -11,6 +11,7 @@ from django.db import transaction
 def index(request):
     # Obtener solo las primeras 4 paradas visibles
     paradas = Parada.objects.filter(visibilidad_pagina=True).order_by('nombre')[:4]
+    recorridos = Recorrido.objects.filter(estado='activo').order_by('nombre_recorrido')[:4]
 
     # Buscamos las 5 notificaciones más nuevas
     # que estén marcadas como 'es_publica'.
@@ -20,13 +21,14 @@ def index(request):
 
     contexto = {
         'notificaciones': notificaciones_publicas,
-        'paradas': paradas
+        'paradas': paradas,
+        'recorridos': recorridos
     }
     return render(request, 'reserva/index.html', contexto)
 
 def paradas_disponibles(request):
     paradas = Parada.objects.filter(visibilidad_pagina=True).order_by('nombre')
-    return render(request, 'reserva/index.html', {'paradas': paradas})
+    return render(request, 'reserva/paradas_disponibles.html', {'paradas': paradas})
 
 
 def parada_detalles(request, parada_id):
@@ -38,9 +40,21 @@ def parada_detalles(request, parada_id):
         'recorridos': recorridos
     })
 
-def paradas_disponibles(request):
-    paradas = Parada.objects.filter(visibilidad_pagina=True).order_by('nombre')  # opcional order_by
-    return render(request, 'reserva/paradas_disponibles.html', {'paradas': paradas})
+def recorridos_activos(request):
+    recorridos = Recorrido.objects.filter(estado='activo').order_by('nombre_recorrido')
+    return render(request, 'reserva/recorridos_activos.html', {'recorridos': recorridos})
+
+def recorrido_detalles(request, recorrido_id):
+    recorrido = get_object_or_404(Recorrido, id=recorrido_id)
+    # Obtener itinerarios futuros para este recorrido
+    itinerarios = recorrido.itinerarios.filter(fecha_itinerario__gte=timezone.now().date()).order_by('fecha_itinerario', 'hora_itinerario')
+    
+    contexto = {
+        'recorrido': recorrido,
+        'itinerarios': itinerarios
+    }
+    return render(request, 'reserva/recorrido_detalles.html', contexto)
+
 
 # CRUD para notificaciones
 
