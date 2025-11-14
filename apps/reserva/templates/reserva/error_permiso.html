@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso Denegado</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding-top: 50px; }
+        .error-container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .error-titulo { color: #d9534f; } /* Rojo */
+        .boton-volver {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #007bff; /* Azul */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <!--
+          Estas variables (error_titulo, error_mensaje) las pasaremos
+          desde la vista (ver Paso 2).
+        -->
+        <h1 class="error-titulo">{{ error_titulo|default:"Acceso Denegado (403)" }}</h1>
+
+        <p>{{ error_mensaje|default:"No tienes los permisos necesarios para ver esta página." }}</p>
+
+        <p>Si crees que esto es un error, por favor contacta al administrador.</p>
+
+        <!-- El botón que pediste -->
+        <a href="{% url 'index' %}" class="boton-volver">Volver a la Página Principal</a>
+    </div>
+</body>
+</html>
