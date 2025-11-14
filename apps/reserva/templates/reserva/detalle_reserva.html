@@ -1,0 +1,24 @@
+{% extends 'reserva/base_reserva.html' %}
+
+{% block title %}Detalle de la Reserva{% endblock %}
+
+{% block reserva_content %}
+    <div class="detalle-container">
+        <h1>Detalle de la Reserva</h1>
+        <p><strong>Recorrido:</strong> {{ reserva.itinerario.recorrido.nombre_recorrido }}</p>
+        <p><strong>Fecha del Viaje:</strong> {{ reserva.itinerario.fecha_itinerario|date:"d/m/Y" }} a las {{ reserva.itinerario.hora_itinerario }}</p>
+        <p><strong>Cantidad de Asientos:</strong> {{ reserva.cantidad_asientos }}</p>
+        <p><strong>Punto de Partida:</strong> {{ reserva.punto_partida.nombre }}</p>
+        <p><strong>Fecha de Prereserva:</strong> {{ reserva.fecha_reserva|date:"d/m/Y H:i" }}</p>
+        <p><strong>Estado:</strong> {{ reserva.get_estado_display }}</p>
+
+        {% if reserva.estado == 'P' %}
+            <form action="{% url 'confirmar_reserva' reserva.pk %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-confirmar">Confirmar Reserva</button>
+            </form>
+        {% endif %}
+
+        <a href="{% url 'mis_reservas' %}" class="btn-volver">Volver a Mis Reservas</a>
+    </div>
+{% endblock %}

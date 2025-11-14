@@ -1,0 +1,69 @@
+{% extends 'reserva/base_reserva.html' %}
+
+{% block reserva_content %}
+<div class="detalle-parada-contenedor">
+    <div class="tarjeta-detalle">
+        
+
+
+        <div class="detalle-img">
+            <img src="{{ parada.imagen_url }}" alt="{{ parada.nombre }}">
+        </div>
+
+        <h1 class="titulo-parada">{{ parada.nombre }}</h1>
+
+        <div class="detalle-info">
+            <p>{{ parada.descripcion_parada }}</p>
+            <p><strong>Estado:</strong> {{ parada.get_estado_display }}</p>
+            <p><strong>Visible en la página:</strong> 
+                {% if parada.visibilidad_pagina %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+                
+            </p>
+        </div>
+    
+    <br><br><br>
+
+    {% if recorridos %}
+        <!-- <div class="recorridos-tabla"> -->
+            <h3>Recorridos que incluyen este punto turistico</h3>
+            <table class="tabla-recorridos">
+                <thead>
+                    <tr>
+                        <th>Nombre del Recorrido</th>
+                        <th>Duración</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recorrido in recorridos %}
+                    <tr>
+                        <td>{{ recorrido.nombre_recorrido }}</td>
+                        <td>{{ recorrido.duracion }} min</td>
+                        <td>${{ recorrido.precio }}</td>
+                        <td>
+                            <a href="{% url 'recorrido_detalles' recorrido.id %}" class="btn-detalle-simple">Ver Detalles</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        <!-- </div> -->
+        {% else %}
+        <div class="sin-recorridos">
+            <p>Esta parada no está incluida en ningún recorrido activo.</p>
+        </div>
+    {% endif %}
+
+    <br><br><br>
+
+        <div class="botones-detalle">
+            <a href="{% url 'paradas_disponibles' %}" class="btn-volver">Volver a puntos turisticos</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2,16 +2,50 @@
 {% load static %}
 
 
-{% block extra_head %}
+{% block styles_head %}
 <link rel="stylesheet" href="{% static 'reserva/css/estilos_reserva.css' %}">
 {% endblock %}
 
 
 {% block global_content %}
 
+    <h1 class="titulo">CITY TOUR CATAMARCA</h1>
+
+    {% if request.user.is_authenticated %}
+        <span>Bienvenido, <strong>@{{ request.user.username }}</strong>(Rol: {{ request.user.rol.nombre }})</span>
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button class="sesion" type="submit">Cerrar Sesión</button>
+        </form>
+    {% else %}
+        <a class="sesion btn-sesion" href="{% url 'login' %}">Iniciar Sesión</a>
+        <a class="sesion btn-registrarse" href="{% url 'crear_usuario' %}">Registrarse</a>
+    {% endif %}
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'paradas_disponibles' %}">Puntos turisticos</a></li>
+            <li><a href="{% url 'recorridos_activos' %}">Recorridos activos</a></li>
+            {% if request.user.is_authenticated and  request.user.rol.nombre == 'TURISTA' %}
+            <li><a href="{% url 'mis_reservas' %}">Mis reservas</a></li>
+            <li><a href="{% url 'crear_reserva' %}">Crear Reserva</a></li>
+            {% endif %}
+            {% if request.user.is_authenticated and  request.user.rol.nombre == 'ADMINISTRADOR' %}
+                <li><a href="{% url 'listar_usuarios' %}">Gestionar Usuarios</a></li>
+                <li><a href="{% url 'lista_itinerarios' %}">Gestionar Viajes</a></li>
+                <li><a href="{% url 'listar_notificaciones' %}">Gestionar Notificaciones</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+
+    <br><br><br>
+
+
 
 <div class="contenedor_reserva">
-    <h1>hola</h1>
     {% block reserva_content %}
     {% endblock %}
 </div>

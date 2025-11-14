@@ -1,0 +1,101 @@
+{% extends 'informe/base.html' %}
+
+{% block title %}Dashboard de Informes{% endblock %}
+
+{% block content %}
+    <h1>Dashboard de Informes</h1>
+    <p>Selecciona un informe para generar.</p>
+
+    <!-- 1. INFORME DE PASAJEROS POR RANGO DE FECHAS -->
+    <fieldset>
+        <legend><strong>Estadísticas de Pasajeros por Rango de Fechas</strong></legend>
+        <form action="{% url 'informe_pasajeros_fechas' %}" method="GET" target="_blank">
+            <label for="fecha_inicio_pas">Fecha de Inicio:</label>
+            <input type="date" id="fecha_inicio_pas" name="fecha_inicio" required>
+
+            <label for="fecha_fin_pas">Fecha de Fin:</label>
+            <input type="date" id="fecha_fin_pas" name="fecha_fin" required>
+
+            <br><br>
+            <label for="formato_pas">Formato:</label>
+            <select name="formato" id="formato_pas">
+                <option value="pdf">PDF</option>
+                <option value="excel">Excel</option>
+                <option value="csv">CSV</option>
+            </select>
+
+            <button type="submit">Generar Informe</button>
+        </form>
+    </fieldset>
+
+    <hr>
+
+    <!-- 2. LISTADO DE RESERVAS POR RECORRIDO -->
+    <fieldset>
+        <legend><strong>Listado de Reservas por Recorrido</strong></legend>
+        <form action="{% url 'informe_reservas_por_recorrido' %}" method="GET" target="_blank">
+            <label for="recorrido_id">Selecciona un Recorrido:</label>
+            <select name="recorrido_id" id="recorrido_id" required>
+                <option value="">-- Todos los Recorridos --</option>
+                {% for recorrido in recorridos %}
+                    <option value="{{ recorrido.id }}">{{ recorrido.nombre_recorrido }}</option>
+                {% endfor %}
+            </select>
+
+            <br><br>
+
+            <label for="fecha_inicio_rec">Fecha de Inicio:</label>
+            <input type="date" id="fecha_inicio_rec" name="fecha_inicio" required>
+
+            <label for="fecha_fin_rec">Fecha de Fin:</label>
+            <input type="date" id="fecha_fin_rec" name="fecha_fin" required>
+
+            <br><br>
+
+            <label for="formato_rec">Formato:</label>
+            <select name="formato" id="formato_rec">
+                <option value="pdf">PDF</option>
+                <option value="excel">Excel</option>
+                <option value="csv">CSV</option>
+            </select>
+
+            <button type="submit">Generar Informe</button>
+        </form>
+    </fieldset>
+
+    <hr>
+
+    <!-- 3. NUEVO INFORME DE PARADAS MÁS UTILIZADAS -->
+    <fieldset>
+        <legend><strong>Estadísticas de Paradas más Utilizadas</strong></legend>
+        <form action="{% url 'informe_paradas_utilizadas' %}" method="GET" target="_blank">
+            <label for="fecha_inicio_par">Fecha de Inicio:</label>
+            <input type="date" id="fecha_inicio_par" name="fecha_inicio" required>
+
+            <label for="fecha_fin_par">Fecha de Fin:</label>
+            <input type="date" id="fecha_fin_par" name="fecha_fin" required>
+
+            <br><br>
+            <label for="formato_par">Formato:</label>
+            <select name="formato" id="formato_par">
+                <option value="pdf">PDF</option>
+                <option value="excel">Excel</option>
+                <option value="csv">CSV</option>
+            </select>
+
+            <button type="submit">Generar Informe</button>
+        </form>
+    </fieldset>
+
+    <hr>
+
+    <!-- 4. NUEVO INFORME DE RECORRIDOS ACTIVOS -->
+    <fieldset>
+        <legend><strong>Listado de Recorridos Activos</strong></legend>
+        <p>Este informe lista todos los recorridos actualmente activos en el sistema (no requiere fechas).</p>
+        Generar como:
+        <a href="{% url 'informe_recorridos_activos' %}?formato=pdf" target="_blank">PDF</a> |
+        <a href="{% url 'informe_recorridos_activos' %}?formato=excel" target="_blank">Excel</a> |
+        <a href="{% url 'informe_recorridos_activos' %}?formato=csv" target="_blank">CSV</a>
+    </fieldset>
+{% endblock %}

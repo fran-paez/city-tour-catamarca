@@ -1,15 +1,445 @@
+body{
+    background-color: #000000;
+}
+
+h1{
+    color: rgb(0, 0, 0);
+    text-align:center;
+    margin-bottom: 30px;
+
+}
 .contenedor_reserva {
-    max-width: 1000px;            /* ancho máximo */
-    margin: 40px auto;            /* centrado horizontal */
-    padding: 30px;
+    max-width: 1200px;            /* ancho máximo */
+    margin: 0 auto;            /* centrado horizontal */
+    padding: 20px;
     background-color: #ffffff;    /* fondo blanco */
     border-radius: 12px;          /* bordes redondeados */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* sombra suave */
 }
 
-h1 {
-    background-color: red;    /* color de texto */
+
+span, h1.titulo{
+    color: rgb(255, 255, 255) !important; /* Cambia 'blue' por el color que desees */
+    display: inline-block;
+    padding: 12px 16px;
 }
-body {
-    background-color: yellow !important;
+button.sesion{
+    background-color: #ffa600;
+    color: rgb(0, 0, 0);
+    display: inline;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #000000;
+    color:white;
+
+}
+
+
+/* Contenedor grid para las tarjetas de paradas */
+.contenedor-paradas, .contenedor-recorridos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Estilos para cada tarjeta individual de parada */
+.card-parada {
+    display: block;
+    text-decoration: none;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+
+/* Efectos cuando el usuario pasa el mouse sobre la tarjeta */
+.card-parada:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+}
+
+/* Contenedor de la imagen de la parada */
+.parada-imagen {
+    width: 100%;
+}
+
+/* Estilos para la imagen dentro de la tarjeta */
+.parada-imagen img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Estilos para el nombre de la parada debajo de la imagen */
+.card-parada h3 {
+    margin: 0;
+    padding: 15px 10px;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 600;
+    color: #ffffff;
+    background: #f63e02;
+}
+
+/* Estilos para las tarjetas de recorridos (sin imagen) */
+.card-recorrido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: #007bff; /* Color azul para diferenciar */
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #0056b3;
+    text-align: center;
+    min-height: 150px;
+}
+
+.card-recorrido:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    background: #0056b3;
+}
+
+.card-recorrido h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+
+/*-------------------------------------PARADA DETALLES Y RECORRIDO DETALLES---------------------------------- */
+.detalle-parada-contenedor, .detalle-recorrido-contenedor {
+    padding: 20px;
+}
+
+.tarjeta-detalle {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    padding: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.detalle-img {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.detalle-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.titulo-parada, .titulo-recorrido {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.detalle-info {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.seccion-paradas, .seccion-itinerarios {
+    margin-top: 40px;
+}
+
+.seccion-paradas h3, .seccion-itinerarios h3 {
+    border-bottom: 2px solid #ffa600;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.lista-paradas-recorrido {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-paradas-recorrido li {
+    background: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.lista-paradas-recorrido li:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-detalle-simple {
+    background-color: #ffa600;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.btn-detalle-simple:hover {
+    background-color: #e59400;
+}
+
+
+.tabla-itinerarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-itinerarios th, .tabla-itinerarios td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-itinerarios th {
+    background-color: #343a40;
+    color: white;
+}
+
+.btn-reservar {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-reservar:hover {
+    background-color: #218838;
+}
+
+.botones-detalle {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-volver, .btn-registrarse {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-sesion {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-volver:hover {
+    background-color: #5a6268;
+}
+
+
+/* Estilos para la tabla en parada_detalles */
+.tabla-recorridos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-recorridos th, .tabla-recorridos td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-recorridos th {
+    background-color: #343a40;
+    color: white;
+}
+
+.sin-recorridos {
+    text-align: center;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px dashed #dee2e6;
+    color: #6c757d;
+    margin: 30px 0;
+}
+
+.notificacion-bar {
+    background-color: #FFF8E1; /* Cream color */
+    border: 1px solid #FFD54F; /* A slightly darker shade for the border */
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px auto; /* Centers the box horizontally */
+    max-width: 800px; /* Adjust width as needed */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.notificacion-bar h4 {
+    margin-top: 0;
+    color: #333;
+}
+
+.notificacion-bar p {
+    margin-bottom: 5px;
+}
+
+/* --- ESTILOS PARA GESTIÓN DE RESERVAS --- */
+.gestion-reserva-container {
+    display: flex;
+    gap: 20px;
+}
+
+.gestion-reserva-nav {
+    flex: 0 0 200px; /* Ancho fijo para la navegación */
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.gestion-reserva-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.gestion-reserva-nav ul li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.gestion-reserva-nav ul li a:hover {
+    background-color: #e9ecef;
+}
+
+.gestion-reserva-content {
+    flex-grow: 1; /* El contenido ocupa el resto del espacio */
+}
+
+.tabla-mis-reservas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-mis-reservas th, .tabla-mis-reservas td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-mis-reservas th {
+    background-color: #343a40;
+    color: white;
+}
+
+.form-container, .detalle-container, .cancelar-container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.btn-confirmar {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cancelar-confirm {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.messages .success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.messages .error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+
+/* ========== ESTILOS RESPONSIVE PARA DISPOSITIVOS MÓVILES ========== */
+@media (max-width: 768px) {
+    .contenedor-paradas, .contenedor-recorridos {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .parada-imagen img {
+        height: 120px;
+    }
+    
+    .card-parada h3, .card-recorrido h3 {
+        font-size: 1rem;
+        padding: 12px 8px;
+    }
+
+    .tarjeta-detalle {
+        padding: 15px;
+    }
+
+    .titulo-parada, .titulo-recorrido {
+        font-size: 1.8rem;
+    }
+
+    .gestion-reserva-container {
+        flex-direction: column;
+    }
 }

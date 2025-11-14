@@ -1,0 +1,13 @@
+{% extends 'recorrido/base.html' %}
+
+{% block title %}Editar Recorrido{% endblock %}
+
+{% block content %}
+    <h1>Editar Recorrido</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <a href="{% url 'lista_recorridos' %}">Cancelar</a>
+{% endblock %}

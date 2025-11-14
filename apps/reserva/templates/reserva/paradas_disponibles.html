@@ -1,0 +1,23 @@
+{% extends 'reserva/base_reserva.html' %}
+
+{% block reserva_content %}
+<h1>Puntos turísticos disponibles</h1>
+
+    {% if paradas %}
+    <div class="contenedor-paradas">
+      {% for parada in paradas %}
+        <a href="{% url 'parada_detalles' parada.id %}" class="card-parada">
+          <div class="parada-imagen">
+            <img src="{{ parada.imagen.url }}" alt="{{ parada.nombre }}" style="width: 100px;height: 100px;">
+          </div>
+          <h3>{{ parada.nombre }}</h3>
+        </a>
+      {% endfor %}
+    </div>
+<br><br>
+    <a href="{% url 'index' %}" class="btn-volver">Volver al inicio</a>
+    {% else %}
+      <p>No hay paradas visibles actualmente.</p>
+    {% endif %}
+  
+{% endblock %}

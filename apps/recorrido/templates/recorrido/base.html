@@ -1,20 +1,19 @@
-<!DOCTYPE html>
+{% extends 'base_global.html' %}
 {% load static %}
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Administrar itinerarios{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'recorrido/css/estilos_recorrido.css' %}">
-    <link rel="stylesheet" href="{% static 'css/estilos_global.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    {% block title %}Panel de Gestión{% endblock %}
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Todhri&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-</head>
-<body>
+    {% block styles_head %}
+    <link rel="stylesheet" href="{% static 'recorrido/css/estilos_recorrido.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/estilos_global.css' %}"> -->
+    {% endblock %}
+
+
+    {% block global_content %}
+
     <header>
-        <h1>Administrar itinerarios</h1>
+        <h1>Panel de Gestión</h1>
     </header>
+    <a href="{% url 'index' %}">Inicio</a>
 
  <!-- Hice dos navbar para que no se vea sobrecargada una -->
     <nav>
@@ -23,6 +22,7 @@
             <li><a href="{% url 'lista_recorridos' %}">Lista de Recorridos</a></li>
             <li><a href="{% url 'lista_unidades' %}">Lista de Unidades</a></li>
             <li><a href="{% url 'lista_itinerarios' %}">Lista de Itinerarios</a></li>
+            <li><a href="{% url 'dashboard_informes' %}">Generar Informes</a></li>
         </ul>
     </nav>
     <hr>
@@ -40,13 +40,10 @@
     <br><br>
 
     <main>
-    
         {% block content %}{% endblock %}
     </main>
 
     <br><br><br>
-    <footer id="footer" class="text-center">
-        <p>2025 CITYTOUR Catamarca - Todos los derechos reservados</p>
-    </footer>
-</body>
-</html>
+
+    {% endblock %}
+

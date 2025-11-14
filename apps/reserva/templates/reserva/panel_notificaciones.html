@@ -1,0 +1,43 @@
+{% extends 'base_global.html' %}
+
+{% block title %}Panel de Notificaciones{% endblock %}
+
+{% block global_content %}
+    <h1>Panel de Notificaciones</h1>
+    <a href="{% url 'crear_notificacion' %}">Crear Nueva Notificación</a>
+
+    {% if notificaciones %}
+        <table class="tabla-gestion">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Mensaje</th>
+                    <th>Fecha</th>
+                    <th>Itinerario Afectado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notificacion in notificaciones %}
+                    <tr>
+                        <td>{{ notificacion.titulo }}</td>
+                        <td>{{ notificacion.mensaje }}</td>
+                        <td>{{ notificacion.fecha_hora|date:"d/m/Y H:i" }}</td>
+                        <td>{{ notificacion.itinerario_afectado|default:"N/A" }}</td>
+                        <td>
+                            <a href="{% url 'editar_notificacion' notificacion.pk %}">Editar</a>
+                            <a href="{% url 'eliminar_notificacion' notificacion.pk %}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay notificaciones creadas.</p>
+    {% endif %}
+
+    <hr>
+    <a href="{% url 'index' %}">Volver al Inicio</a>
+    <hr>
+
+{% endblock %}

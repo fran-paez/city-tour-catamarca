@@ -1,21 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Parada, Recorrido, Unidad, Itinerario
+from .forms import ParadaForm, RecorridoForm, UnidadForm, ItinerarioForm
 
-# Create your views here.
-from .models import Parada
-from .forms import ParadaForm
-
-from .models import Recorrido
-from .forms import RecorridoForm
-
-from .models import Unidad
-from .forms import UnidadForm
-
-from .models import Itinerario
-from .forms import ItinerarioForm
-
-
+# Vistas de Listado
 @login_required
 def lista_paradas(request):
     if request.user.rol.nombre != 'ADMINISTRADOR':
@@ -44,18 +33,18 @@ def lista_unidades(request):
     unidades = Unidad.objects.all()
     return render(request, 'recorrido/lista_unidades.html', {'unidades': unidades})
 
+# Vistas de Creación
 @login_required
 def crear_parada(request):
     if request.user.rol.nombre != 'ADMINISTRADOR':
         return HttpResponseForbidden("No tienes permiso para realizar esta acción.")
     if request.method == 'POST':
-        form = ParadaForm(request.POST)
+        form = ParadaForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('lista_paradas') 
+            return redirect('lista_paradas')
     else:
         form = ParadaForm()
-
     return render(request, 'recorrido/crear_parada.html', {'form': form})
 
 @login_required
@@ -97,17 +86,100 @@ def crear_itinerario(request):
         form = ItinerarioForm()
     return render(request, 'recorrido/crear_itinerario.html', {'form': form})
 
-def pagina_principal(request):
-    """
-    Esta es la PÁGINA PRINCIPAL PÚBLICA.
-    Cualquiera (logueado o no) puede verla.
-    """
-    # Cuando tengas los modelos:
-    # recorridos = Recorrido.objects.filter(activo=True)
+# Vistas de Edición
+@login_required
+def editar_parada(request, pk):
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para realizar esta acción.")
+    parada = get_object_or_404(Parada, pk=pk)
+    if request.method == 'POST':
+        form = ParadaForm(request.POST, request.FILES, instance=parada)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_paradas')
+    else:
+        form = ParadaForm(instance=parada)
+    return render(request, 'recorrido/editar_parada.html', {'form': form})
 
-    contexto = {
-        # 'recorridos': recorridos
-    }
+@login_required
+def editar_recorrido(request, pk):
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para realizar esta acción.")
+    recorrido = get_object_or_404(Recorrido, pk=pk)
+    if request.method == 'POST':
+        form = RecorridoForm(request.POST, instance=recorrido)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_recorridos')
+    else:
+        form = RecorridoForm(instance=recorrido)
+    return render(request, 'recorrido/editar_recorrido.html', {'form': form})
 
-    # Necesitarás crear este template:
-    return render(request, 'recorrido/pagina_principal.html', contexto)
+@login_required
+def editar_unidad(request, pk):
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para realizar esta acción.")
+    unidad = get_object_or_404(Unidad, pk=pk)
+    if request.method == 'POST':
+        form = UnidadForm(request.POST, instance=unidad)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_unidades')
+    else:
+        form = UnidadForm(instance=unidad)
+    return render(request, 'recorrido/editar_unidad.html', {'form': form})
+
+@login_required
+def editar_itinerario(request, pk):
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para realizar esta acción.")
+    itinerario = get_object_or_404(Itinerario, pk=pk)
+    if request.method == 'POST':
+        form = ItinerarioForm(request.POST, instance=itinerario)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_itinerarios')
+    else:
+        form = ItinerarioForm(instance=itinerario)
+    return render(request, 'recorrido/editar_itinerario.html', {'form': form})
+
+# Vistas de Eliminación
+@login_required
+def eliminar_parada(request, pk):
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para realizar esta acción.")
+    parada = get_object_or_404(Parada, pk=pk)
+    if request.method == 'POST':
+        parada.delete()
+        return redirect('lista_paradas')
+    return render(request, 'recorrido/eliminar_parada.html', {'parada': parada})
+
+@login_required
+def eliminar_recorrido(request, pk):
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para realizar esta acción.")
+    recorrido = get_object_or_404(Recorrido, pk=pk)
+    if request.method == 'POST':
+        recorrido.delete()
+        return redirect('lista_recorridos')
+    return render(request, 'recorrido/eliminar_recorrido.html', {'recorrido': recorrido})
+
+@login_required
+def eliminar_unidad(request, pk):
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para realizar esta acción.")
+    unidad = get_object_or_404(Unidad, pk=pk)
+    if request.method == 'POST':
+        unidad.delete()
+        return redirect('lista_unidades')
+    return render(request, 'recorrido/eliminar_unidad.html', {'unidad': unidad})
+
+@login_required
+def eliminar_itinerario(request, pk):
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        return HttpResponseForbidden("No tienes permiso para realizar esta acción.")
+    itinerario = get_object_or_404(Itinerario, pk=pk)
+    if request.method == 'POST':
+        itinerario.delete()
+        return redirect('lista_itinerarios')
+    return render(request, 'recorrido/eliminar_itinerario.html', {'itinerario': itinerario})

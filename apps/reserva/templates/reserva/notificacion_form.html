@@ -1,0 +1,13 @@
+{% extends 'base_global.html' %}
+
+{% block title %}Formulario de Notificación{% endblock %}
+
+{% block global_content %}
+    <h1>Formulario de Notificación</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Notificación</button>
+    </form>
+    <a href="{% url 'listar_notificaciones' %}">Cancelar</a>
+{% endblock %}

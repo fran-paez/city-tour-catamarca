@@ -1,47 +1,54 @@
 {% extends 'reserva/base_reserva.html' %}
 
 {% block reserva_content %}
-    <nav style="background-color: #eee; padding: 10px;">
 
-        <a href="{% url 'index' %}">Inicio</a>
-        {% if request.user.is_authenticated %}
-            <span> | Bienvenido, <strong>@{{ request.user.username }}</strong></span>
-            <span> (Rol: {{ request.user.rol.nombre }})</span>
+<!-- ... Seccion de notificaciones ... -->
+    {% if notificaciones %}
+        <div class="notificacion-bar">
+            <h4>Avisos Importantes</h4>
+            {% for noti in notificaciones %}
+                <p>
+                    <strong>{{ noti.titulo }}:</strong> {{ noti.mensaje }}
+                    {% if noti.itinerario_afectado %}
+                        <br><em>(Afecta al recorrido: {{ noti.itinerario_afectado.recorrido.nombre_recorrido }} del {{ noti.itinerario_afectado.fecha_itinerario|date:"d/m/Y" }} a las {{ noti.itinerario_afectado.hora_itinerario }})</em>
+                    {% endif %}
+                    <br><small>({{ noti.fecha_hora|date:"d/m/Y" }})</small>
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+<h1>Puntos turísticos destacados</h1>
 
-            <form action="{% url 'logout' %}" method="POST" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit">Cerrar Sesión</button>
-            </form>
-
-            {% if request.user.rol.nombre == 'ADMINISTRADOR' %}
-                <span> | </span>
-                <a href="{% url 'listar_usuarios' %}">Gestionar Usuarios</a>
-                <span> | </span>
-                <a href="{% url 'listar_roles' %}">Gestionar Roles</a>
-                {% endif %}
-
-        {% else %}
-            <span> | </span>
-            <a href="{% url 'login' %}">Iniciar Sesión</a>
-            <span> | </span>
-            <a href="{% url 'crear_usuario' %}">Registrarse</a>
-
-        {% endif %}
-    </nav>
-  <h1>Paradas visibles</h1> 
-  {% if paradas %}
-    <ul class="paradas-list">
+    {% if paradas %}
+    <div class="contenedor-paradas">
       {% for parada in paradas %}
-        <li class="parada-item">
-          <h3>{{ parada.nombre }}:</h3>
-          <p style="display: inline;">{{ parada.descripcion_parada }}</p>
-          {# Si quieres mostrar estado u otros campos: #}
-          <small>Estado: {{ parada.get_estado_display }}</small>
-
-        </li>
+        <a href="{% url 'parada_detalles' parada.id %}" class="card-parada">
+          <div class="parada-imagen">
+            <img src="{{ parada.imagen_url }}" alt="{{ parada.nombre }}">
+          </div>
+          <h3>{{ parada.nombre }}</h3>
+        </a>
       {% endfor %}
-    </ul>
-  {% else %}
-    <p>No hay paradas visibles actualmente.</p>
-  {% endif %}
+    </div>
+<br>
+    <a href="{% url 'paradas_disponibles' %}" class="btn-detalle-simple">Ver todos los puntos turísticos</a>
+    {% else %}
+      <p>No hay paradas visibles actualmente.</p>
+    {% endif %}
+
+    <h1>Nuestros Recorridos</h1>
+    {% if recorridos %}
+        <div class="contenedor-recorridos">
+            {% for recorrido in recorridos %}
+                <a href="{% url 'recorrido_detalles' recorrido.id %}" class="card-recorrido">
+                    <h3>{{ recorrido.nombre_recorrido }}</h3>
+                </a>
+            {% endfor %}
+        </div>
+        <br>
+        <a href="{% url 'recorridos_activos' %}" class="btn-detalle-simple">Ver todos los recorridos</a>
+    {% else %}
+        <p>No hay recorridos para mostrar.</p>
+    {% endif %}
+  
 {% endblock %}

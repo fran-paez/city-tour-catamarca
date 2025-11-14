@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear Rol</title>
-</head>
-<body>
-    <h1>Crear Nuevo Rol</h1>
+{% extends 'usuario/base_usuario.html' %}
 
-    <form method="POST">
-        {% csrf_token %} {{ form.as_p }} <button type="submit">Guardar Rol</button>
-    </form>
+{% block title %}Crear Rol{% endblock %}
 
-    <hr>
-    <a href="{% url 'listar_roles' %}">Volver a la lista</a>
-</body>
-</html>
+{% block usuario_content %}
+    <div class="form-container">
+        <h1>Crear Nuevo Rol</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar Rol</button>
+        </form>
+    </div>
+{% endblock %}

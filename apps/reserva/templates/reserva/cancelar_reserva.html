@@ -1,0 +1,25 @@
+{% extends 'reserva/base_reserva.html' %}
+
+{% block title %}Cancelar Reserva{% endblock %}
+
+{% block reserva_content %}
+    <div class="cancelar-container">
+        <h1>¿Estás seguro de que deseas cancelar esta reserva?</h1>
+        
+        <p><strong>Recorrido:</strong> {{ reserva.itinerario.recorrido.nombre_recorrido }}</p>
+        <p><strong>Fecha:</strong> {{ reserva.itinerario.fecha_itinerario|date:"d/m/Y" }} a las {{ reserva.itinerario.hora_itinerario }}</p>
+        <p><strong>Estado actual:</strong> {{ reserva.get_estado_display }}</p>
+
+        {% if reserva.estado == 'C' %}
+            <p class="aviso">Al cancelar una reserva confirmada, los asientos se liberarán, pero la acción no se puede deshacer.</p>
+        {% else %}
+            <p class="aviso">Esta acción eliminará tu prereserva. No se puede deshacer.</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn-cancelar-confirm">Sí, cancelar</button>
+            <a href="{% url 'mis_reservas' %}" class="btn-volver">No, volver</a>
+        </form>
+    </div>
+{% endblock %}

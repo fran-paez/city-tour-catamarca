@@ -1,0 +1,22 @@
+{% extends 'reserva/base_reserva.html' %}
+
+{% block title %}Recorridos Activos{% endblock %}
+
+{% block reserva_content %}
+    <h1>Recorridos Activos</h1>
+
+    {% if recorridos %}
+        <div class="contenedor-recorridos">
+            {% for recorrido in recorridos %}
+                <a href="{% url 'recorrido_detalles' recorrido.id %}" class="card-recorrido">
+                    <h3>{{ recorrido.nombre_recorrido }}</h3>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay recorridos activos en este momento.</p>
+    {% endif %}
+
+    <br><br>
+    <a href="{% url 'index' %}" class="btn-volver">Volver al inicio</a>
+{% endblock %}
