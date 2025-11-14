@@ -41,54 +41,85 @@ button:hover {
 
 
 /* Contenedor grid para las tarjetas de paradas */
-.contenedor-paradas {
-    display: grid;                          /* Usa CSS Grid para el layout */
-    grid-template-columns: repeat(4, 1fr);  /* 4 columnas de igual tamaño que ocupan todo el ancho */
-    gap: 30px;                             /* Espacio entre las tarjetas */
+.contenedor-paradas, .contenedor-recorridos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
 }
 
 /* Estilos para cada tarjeta individual de parada */
 .card-parada {
-    display: block;                        /* Usa display block para flujo normal */
-    text-decoration: none;                 /* Quita el subrayado de los enlaces */
-    background: white;                    /* Fondo blanco para la tarjeta */
-    border-radius: 12px;                  /* Esquinas redondeadas */
-    overflow: hidden;                     /* Oculta cualquier contenido que sobresalga */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para efecto de elevación */
-    transition: all 0.3s ease;            /* Transición suave para efectos hover */
-    border: 1px solid #e0e0e0;           /* Borde sutil alrededor de la tarjeta */
+    display: block;
+    text-decoration: none;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
 }
 
 /* Efectos cuando el usuario pasa el mouse sobre la tarjeta */
 .card-parada:hover {
-    transform: translateY(-5px);         /* Levanta la tarjeta 5px hacia arriba */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); /* Aumenta la sombra para mayor profundidad */
-    text-decoration: none;                /* Mantiene sin subrayado en hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
 }
 
 /* Contenedor de la imagen de la parada */
 .parada-imagen {
-    width: 100%;                         /* La imagen ocupa el 100% del ancho de la tarjeta */
+    width: 100%;
 }
 
 /* Estilos para la imagen dentro de la tarjeta */
 .parada-imagen img {
-    width: 100%;                         /* Imagen ocupa todo el ancho disponible */
-    /*height: 150px;                       /* Altura fija para consistencia visual */
-    object-fit: cover;                   /* Recorta la imagen para que cubra el espacio sin distorsionarse */
-    display: block;                      /* Elimina espacio extra debajo de la imagen */
+    width: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 /* Estilos para el nombre de la parada debajo de la imagen */
 .card-parada h3 {
-    margin: 0;                           /* Elimina márgenes por defecto */
-    padding: 15px 10px;                  /* Espacio interno alrededor del texto */
-    font-size: 1.1rem;                   /* Tamaño de fuente ligeramente aumentado */
-    text-align: center;                  /* Centra el texto horizontalmente */
-    font-weight: 600;                    /* Texto en negrita semi */
-    color: #ffffff;                     /* Color de texto azul oscuro */
-    background: #f63e02;                   /* Fondo blanco para el área del texto */
+    margin: 0;
+    padding: 15px 10px;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 600;
+    color: #ffffff;
+    background: #f63e02;
 }
+
+/* Estilos para las tarjetas de recorridos (sin imagen) */
+.card-recorrido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: #007bff; /* Color azul para diferenciar */
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #0056b3;
+    text-align: center;
+    min-height: 150px;
+}
+
+.card-recorrido:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    background: #0056b3;
+}
+
+.card-recorrido h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
 
 /*-------------------------------------PARADA DETALLES---------------------------------- */
 /* Estilos para la sección de recorridos */
@@ -175,40 +206,43 @@ h3 {
     font-size: 1.1rem;
 }
 
+.notificacion-bar {
+    background-color: #FFF8E1; /* Cream color */
+    border: 1px solid #FFD54F; /* A slightly darker shade for the border */
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px auto; /* Centers the box horizontally */
+    max-width: 800px; /* Adjust width as needed */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+}
 
+.notificacion-bar h4 {
+    margin-top: 0;
+    color: #333;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.notificacion-bar p {
+    margin-bottom: 5px;
+}
 
 /* ========== ESTILOS RESPONSIVE PARA DISPOSITIVOS MÓVILES ========== */
 @media (max-width: 768px) {
     /* Ajusta el grid para pantallas más pequeñas */
-    .contenedor-paradas {
-        grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles en lugar de 4 */
-        gap: 15px;                          /* Menos espacio entre tarjetas */
+    .contenedor-paradas, .contenedor-recorridos {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
     }
     
     /* Reduce la altura de las imágenes en móvil */
     .parada-imagen img {
-        height: 120px;                      /* Altura reducida para móviles */
+        height: 120px;
     }
     
     /* Ajusta el texto para pantallas pequeñas */
-    .card-parada h3 {
-        font-size: 1rem;                    /* Tamaño de fuente más pequeño */
-        padding: 12px 8px;                  /* Menos padding interno */
+    .card-parada h3, .card-recorrido h3 {
+        font-size: 1rem;
+        padding: 12px 8px;
     }
 }
 

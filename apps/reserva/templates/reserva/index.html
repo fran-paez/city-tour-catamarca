@@ -1,44 +1,50 @@
 {% extends 'reserva/base_reserva.html' %}
 
 {% block reserva_content %}
-<h1>Paradas visibles</h1>
 
-    <!-- ... Seccion de notificaciones ... -->
+<!-- ... Seccion de notificaciones ... -->
     {% if notificaciones %}
         <div class="notificacion-bar">
             <h4>Avisos Importantes</h4>
             {% for noti in notificaciones %}
-                <p><strong>{{ noti.titulo }}:</strong> {{ noti.mensaje }} ({{ noti.fecha_hora|date:"d/m/Y" }})</p>
+                <p>
+                    <strong>{{ noti.titulo }}:</strong> {{ noti.mensaje }}
+                    {% if noti.itinerario_afectado %}
+                        <br><em>(Afecta al recorrido: {{ noti.itinerario_afectado.recorrido.nombre_recorrido }} del {{ noti.itinerario_afectado.fecha_itinerario|date:"d/m/Y" }} a las {{ noti.itinerario_afectado.hora_itinerario }})</em>
+                    {% endif %}
+                    <br><small>({{ noti.fecha_hora|date:"d/m/Y" }})</small>
+                </p>
             {% endfor %}
         </div>
     {% endif %}
+<h1>Puntos turísticos destacados</h1>
 
     {% if paradas %}
     <div class="contenedor-paradas">
       {% for parada in paradas %}
         <a href="{% url 'parada_detalles' parada.id %}" class="card-parada">
           <div class="parada-imagen">
-            <img src="{{ parada.imagen_url }}" alt="{{ parada.nombre }}" style="width: 100px;height: 100px;">
+            <img src="{{ parada.imagen_url }}" alt="{{ parada.nombre }}">
           </div>
           <h3>{{ parada.nombre }}</h3>
         </a>
       {% endfor %}
     </div>
+    <a href="{% url 'paradas_disponibles' %}">Ver todos los puntos turísticos</a>
     {% else %}
       <p>No hay paradas visibles actualmente.</p>
     {% endif %}
 
-    <h2>Nuestros Recorridos</h2>
+    <h1>Nuestros Recorridos</h1>
     {% if recorridos %}
-        <ul>
+        <div class="contenedor-recorridos">
             {% for recorrido in recorridos %}
-                <li>
-                    <a href="{% url 'recorrido_detalles' recorrido.id %}">
-                        {{ recorrido.nombre_recorrido }}
-                    </a>
-                </li>
+                <a href="{% url 'recorrido_detalles' recorrido.id %}" class="card-recorrido">
+                    <h3>{{ recorrido.nombre_recorrido }}</h3>
+                </a>
             {% endfor %}
-        </ul>
+        </div>
+        <br>
         <a href="{% url 'recorridos_activos' %}">Ver todos los recorridos</a>
     {% else %}
         <p>No hay recorridos para mostrar.</p>

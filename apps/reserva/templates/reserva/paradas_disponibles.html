@@ -1,7 +1,7 @@
 {% extends 'reserva/base_reserva.html' %}
 
 {% block reserva_content %}
-<h1>Paradas visibles</h1>
+<h1>Puntos turísticos disponibles</h1>
 
     {% if paradas %}
     <div class="contenedor-paradas">
@@ -14,6 +14,7 @@
         </a>
       {% endfor %}
     </div>
+    <a href="{% url 'index' %}">Volver al inicio</a>
     {% else %}
       <p>No hay paradas visibles actualmente.</p>
     {% endif %}
