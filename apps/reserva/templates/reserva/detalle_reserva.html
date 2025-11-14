@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Reserva</title>
+    <style>
+        .ticket {
+            border: 2px dashed #ccc;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-family: Arial, sans-serif;
+        }
+        .ticket h1 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .ticket strong {
+            display: inline-block;
+            width: 150px; /* Alinea las etiquetas */
+        }
+        .cancelado {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+      La vista 'detalle_reserva' nos pasa el objeto 'reserva'
+      con todos sus datos.
+    -->
+    <div class="ticket {% if reserva.estado == 'A' %}cancelado{% endif %}">
+        <h1>Detalle de Reserva (ID: {{ reserva.id }})</h1>
+
+        <h3>Datos del Viaje</h3>
+        <p><strong>Recorrido:</strong> {{ reserva.itinerario.recorrido.nombre_recorrido }}</p>
+        <p><strong>Fecha del Viaje:</strong> {{ reserva.itinerario.fecha_itinerario }}</p>
+        <p><strong>Hora de Salida:</strong> {{ reserva.itinerario.hora_itinerario }}</p>
+
+        <hr>
+
+        <h3>Datos de tu Reserva</h3>
+        <p><strong>Reservado a nombre de:</strong> {{ reserva.turista.get_full_name }}</p>
+        <p><strong>Cantidad de Asientos:</strong> {{ reserva.cantidad_asientos }}</p>
+        <p><strong>Punto de Partida:</strong> {{ reserva.punto_partida.nombre }}</p>
+        <p><strong>Fecha de Compra:</strong> {{ reserva.fecha_reserva|date:"d/m/Y H:i" }} hs</p>
+        <p><strong>Estado:</strong> <strong style="color: {% if reserva.estado == 'C' %}green{% elif reserva.estado == 'A' %}red{% else %}orange{% endif %}; width: auto;">
+            {{ reserva.get_estado_display }}
+        </strong></p>
+    </div>
+
+    <div style="text-align: center;">
+        <!-- Mostramos el botón de cancelar solo si la reserva NO está ya cancelada -->
+        {% if reserva.estado != 'A' %}
+            <a href="{% url 'cancelar_reserva' reserva.pk %}" style="color: red; margin-right: 20px;">Cancelar esta Reserva</a>
+        {% endif %}
+
+        <a href="{% url 'mis_reservas' %}">Volver a Mis Reservas</a>
+    </div>
+
+</body>
+</html>
