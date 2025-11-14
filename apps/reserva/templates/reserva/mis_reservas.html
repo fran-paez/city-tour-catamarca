@@ -1,39 +1,39 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mis Reservas</title>
-</head>
-<body>
+{% extends 'reserva/base_reserva.html' %}
+
+{% block title %}Mis Reservas{% endblock %}
+
+{% block reserva_content %}
     <h1>Mis Reservas</h1>
-    <p>Aquí puedes ver el historial de tus reservas confirmadas y pendientes.</p>
-    <a href="{% url 'crear_reserva' %}">Hacer una Nueva Reserva</a>
-    <hr>
 
-    {% for reserva in reservas %}
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;
-                    {% if reserva.estado == 'A' %}background-color: #f9eaea; text-decoration: line-through;{% endif %}
-                    {% if reserva.estado == 'P' %}background-color: #fff8e1;{% endif %}">
-
-            <h4>Recorrido: {{ reserva.itinerario.recorrido.nombre_recorrido }}</h4>
-            <p>
-                <strong>Fecha del Viaje:</strong> {{ reserva.itinerario.fecha_itinerario }} a las {{ reserva.itinerario.hora_itinerario }} <br>
-                <strong>Cantidad:</strong> {{ reserva.cantidad_asientos }} asientos <br>
-                <strong>Punto de Partida:</strong> {{ reserva.punto_partida.nombre }} <br>
-                <strong>Estado:</strong> {{ reserva.get_estado_display }}
-            </p>
-
-            <a href="{% url 'detalle_reserva' reserva.pk %}">Ver Detalle</a>
-
-            {% if reserva.estado != 'A' %}
-                | <a href="{% url 'cancelar_reserva' reserva.pk %}" style="color: red;">Cancelar Reserva</a>
-            {% endif %}
-        </div>
-    {% empty %}
-        <p>Aún no tienes reservas.</p>
-    {% endfor %}
-
-    <br>
-    <a href="{% url 'index' %}">Volver a la Página Principal</a>
-</body>
-</html>
+    {% if reservas %}
+        <table class="tabla-mis-reservas">
+            <thead>
+                <tr>
+                    <th>Recorrido</th>
+                    <th>Fecha</th>
+                    <th>Asientos</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reserva in reservas %}
+                    <tr>
+                        <td>{{ reserva.itinerario.recorrido.nombre_recorrido }}</td>
+                        <td>{{ reserva.itinerario.fecha_itinerario|date:"d/m/Y" }} a las {{ reserva.itinerario.hora_itinerario }}</td>
+                        <td>{{ reserva.cantidad_asientos }}</td>
+                        <td>{{ reserva.get_estado_display }}</td>
+                        <td>
+                            <a href="{% url 'detalle_reserva' reserva.pk %}">Ver Detalle</a>
+                            {% if reserva.estado == 'C' %}
+                                | <a href="{% url 'cancelar_reserva' reserva.pk %}">Cancelar</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No tienes ninguna reserva activa o pasada.</p>
+    {% endif %}
+{% endblock %}

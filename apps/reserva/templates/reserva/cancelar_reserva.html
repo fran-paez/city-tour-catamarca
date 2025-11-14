@@ -1,42 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Cancelar Reserva</title>
-</head>
-<body>
-    {% if puede_cancelar %}
-        <h1>¿Estás seguro que deseas cancelar esta reserva?</h1>
+{% extends 'reserva/base_reserva.html' %}
 
-        <div style="background-color: #f9eaea; border: 1px solid red; padding: 10px;">
-            <h4>Recorrido: {{ reserva.itinerario.recorrido.nombre_recorrido }}</h4>
-            <p>
-                <strong>Fecha del Viaje:</strong> {{ reserva.itinerario.fecha_itinerario }} a las {{ reserva.itinerario.hora_itinerario }} <br>
-                <strong>Cantidad:</strong> {{ reserva.cantidad_asientos }} asientos <br>
-                <strong>Estado:</strong> {{ reserva.get_estado_display }}
-            </p>
-        </div>
+{% block title %}Cancelar Reserva{% endblock %}
 
-        <p>Esta acción no se puede deshacer.</p>
-
-        <form method="POST">
-            {% csrf_token %}
-            <button type="submit" style="color: red;">Sí, cancelar mi reserva</button>
-            <br><br>
-            <a href="{% url 'mis_reservas' %}">No, volver a mis reservas</a>
-        </form>
-    {% else %}
-        <h1>No se puede cancelar la reserva</h1>
-        <div style="background-color: #f9eaea; border: 1px solid red; padding: 10px;">
-            <h4>Recorrido: {{ reserva.itinerario.recorrido.nombre_recorrido }}</h4>
-            <p>
-                <strong>Fecha del Viaje:</strong> {{ reserva.itinerario.fecha_itinerario }} a las {{ reserva.itinerario.hora_itinerario }} <br>
-                <strong>Cantidad:</strong> {{ reserva.cantidad_asientos }} asientos <br>
-                <strong>Estado:</strong> {{ reserva.get_estado_display }}
-            </p>
-        </div>
-        <p style="color: red;">{{ error_cancelacion }}</p>
-        <a href="{% url 'mis_reservas' %}">Volver a mis reservas</a>
-    {% endif %}
-</body>
-</html>
+{% block reserva_content %}
+    <div class="cancelar-container">
+        {% if puede_cancelar %}
+            <h1>¿Estás seguro que deseas cancelar esta reserva?</h1>
+            <p><strong>Recorrido:</strong> {{ reserva.itinerario.recorrido.nombre_recorrido }}</p>
+            <p><strong>Fecha:</strong> {{ reserva.itinerario.fecha_itinerario|date:"d/m/Y" }} a las {{ reserva.itinerario.hora_itinerario }}</p>
+            <p>Esta acción no se puede deshacer.</p>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" style="color: red;">Sí, cancelar mi reserva</button>
+            </form>
+        {% else %}
+            <h1>No se puede cancelar la reserva</h1>
+            <p style="color: red;">{{ error_cancelacion }}</p>
+        {% endif %}
+        <a href="{% url 'mis_reservas' %}">Volver a Mis Reservas</a>
+    </div>
+{% endblock %}

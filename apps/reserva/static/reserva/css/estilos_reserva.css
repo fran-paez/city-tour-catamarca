@@ -121,20 +121,147 @@ button:hover {
 }
 
 
-/*-------------------------------------PARADA DETALLES---------------------------------- */
-/* Estilos para la sección de recorridos */
-
-h3 { 
-    color: #2c3e50;
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 1.4rem;
-    font-weight: 600;
+/*-------------------------------------PARADA DETALLES Y RECORRIDO DETALLES---------------------------------- */
+.detalle-parada-contenedor, .detalle-recorrido-contenedor {
+    padding: 20px;
 }
 
-/* Estilos para la tabla */
+.tarjeta-detalle {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    padding: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.detalle-img {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.detalle-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.titulo-parada, .titulo-recorrido {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.detalle-info {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.seccion-paradas, .seccion-itinerarios {
+    margin-top: 40px;
+}
+
+.seccion-paradas h3, .seccion-itinerarios h3 {
+    border-bottom: 2px solid #ffa600;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.lista-paradas-recorrido {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-paradas-recorrido li {
+    background: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.lista-paradas-recorrido li:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-detalle-simple {
+    background-color: #ffa600;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.btn-detalle-simple:hover {
+    background-color: #e59400;
+}
+
+
+.tabla-itinerarios {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-itinerarios th, .tabla-itinerarios td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.tabla-itinerarios th {
+    background-color: #f4f4f4;
+}
+
+.btn-reservar {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-reservar:hover {
+    background-color: #218838;
+}
+
+.botones-detalle {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-volver {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-volver:hover {
+    background-color: #5a6268;
+}
+
+
+/* Estilos para la tabla en parada_detalles */
 .tabla-recorridos {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     margin: 0 auto;
     background: white;
@@ -179,18 +306,6 @@ h3 {
     color: #2c3e50;
 }
 
-.tabla-recorridos td:nth-child(2) {
-    color: #6c757d;
-    font-weight: 500;
-}
-
-.tabla-recorridos td:nth-child(3) {
-    color: #28a745;
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-
-/* Mensaje cuando no hay recorridos */
 .sin-recorridos {
     text-align: center;
     padding: 30px;
@@ -199,11 +314,6 @@ h3 {
     border: 2px dashed #dee2e6;
     color: #6c757d;
     margin: 30px 0;
-}
-
-.sin-recorridos p {
-    margin: 0;
-    font-size: 1.1rem;
 }
 
 .notificacion-bar {
@@ -226,42 +336,90 @@ h3 {
     margin-bottom: 5px;
 }
 
+/* --- ESTILOS PARA GESTIÓN DE RESERVAS --- */
+.gestion-reserva-container {
+    display: flex;
+    gap: 20px;
+}
+
+.gestion-reserva-nav {
+    flex: 0 0 200px; /* Ancho fijo para la navegación */
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.gestion-reserva-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.gestion-reserva-nav ul li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.gestion-reserva-nav ul li a:hover {
+    background-color: #e9ecef;
+}
+
+.gestion-reserva-content {
+    flex-grow: 1; /* El contenido ocupa el resto del espacio */
+}
+
+.tabla-mis-reservas {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-mis-reservas th, .tabla-mis-reservas td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-mis-reservas th {
+    background-color: #007bff;
+    color: white;
+}
+
+.form-container, .detalle-container, .cancelar-container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+
 /* ========== ESTILOS RESPONSIVE PARA DISPOSITIVOS MÓVILES ========== */
 @media (max-width: 768px) {
-    /* Ajusta el grid para pantallas más pequeñas */
     .contenedor-paradas, .contenedor-recorridos {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 15px;
     }
     
-    /* Reduce la altura de las imágenes en móvil */
     .parada-imagen img {
         height: 120px;
     }
     
-    /* Ajusta el texto para pantallas pequeñas */
     .card-parada h3, .card-recorrido h3 {
         font-size: 1rem;
         padding: 12px 8px;
     }
-}
 
-@media (max-width: 768px) {
-    .recorridos-tabla {
-        margin: 20px 0;
+    .tarjeta-detalle {
         padding: 15px;
     }
-    
-    .tabla-recorridos {
-        font-size: 0.9rem;
+
+    .titulo-parada, .titulo-recorrido {
+        font-size: 1.8rem;
     }
-    
-    .tabla-recorridos th,
-    .tabla-recorridos td {
-        padding: 12px 8px;
-    }
-    
-    .tabla-recorridos th {
-        font-size: 0.85rem;
+
+    .gestion-reserva-container {
+        flex-direction: column;
     }
 }

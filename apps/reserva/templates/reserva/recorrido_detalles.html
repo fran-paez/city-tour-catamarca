@@ -1,45 +1,72 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Detalles del Recorrido</title>
-</head>
-<body>
-    <h1>{{ recorrido.nombre_recorrido }}</h1>
-    <p><strong>Descripción:</strong> {{ recorrido.descripcion_recorrido }}</p>
-    <p><strong>Duración:</strong> {{ recorrido.duracion }} minutos</p>
+{% extends 'reserva/base_reserva.html' %}
 
-    <h2>Paradas del Recorrido</h2>
-    {% if recorrido.paradas.all %}
-        <ul>
-            {% for parada in recorrido.paradas.all %}
-                <li>
-                    {{ parada.nombre }}
-                    <a href="{% url 'parada_detalles' parada.id %}">Ver detalles</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Este recorrido no tiene paradas asignadas.</p>
-    {% endif %}
+{% block title %}Detalles del Recorrido{% endblock %}
 
-    <h2>Próximos Itinerarios</h2>
-    {% if itinerarios %}
-        <ul>
-            {% for itinerario in itinerarios %}
-                <li>
-                    <strong>Fecha:</strong> {{ itinerario.fecha_itinerario }} a las {{ itinerario.hora_itinerario }} <br>
-                    <strong>Cupos disponibles:</strong> {{ itinerario.cupos }} <br>
-                    {% if user.is_authenticated and user.rol.nombre == 'TURISTA' %}
-                        <a href="{% url 'crear_reserva' %}?itinerario_id={{ itinerario.id }}">Reservar</a>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay itinerarios futuros para este recorrido.</p>
-    {% endif %}
+{% block reserva_content %}
+<div class="detalle-recorrido-contenedor">
+    <div class="tarjeta-detalle">
+        <h1 class="titulo-recorrido">{{ recorrido.nombre_recorrido }}</h1>
 
-    <a href="{% url 'recorridos_activos' %}">Volver a los recorridos</a>
-</body>
-</html>
+        <div class="detalle-info">
+            <p>{{ recorrido.descripcion_recorrido }}</p>
+            <p><strong>Duración:</strong> {{ recorrido.duracion }} minutos</p>
+        </div>
+
+        <div class="seccion-paradas">
+            <h3>Paradas del Recorrido</h3>
+            {% if recorrido.paradas.all %}
+                <ul class="lista-paradas-recorrido">
+                    {% for parada in recorrido.paradas.all %}
+                        <li>
+                            {{ parada.nombre }}
+                            <a href="{% url 'parada_detalles' parada.id %}" class="btn-detalle-simple">Ver</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Este recorrido no tiene paradas asignadas.</p>
+            {% endif %}
+        </div>
+
+        <div class="seccion-itinerarios">
+            <h3>Próximos Itinerarios</h3>
+            {% if itinerarios %}
+                <table class="tabla-itinerarios">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Cupos</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for itinerario in itinerarios %}
+                            <tr>
+                                <td>{{ itinerario.fecha_itinerario|date:"d/m/Y" }}</td>
+                                <td>{{ itinerario.hora_itinerario }}</td>
+                                <td>{{ itinerario.cupos }}</td>
+                                <td>
+                                    {% if user.is_authenticated and user.rol.nombre == 'TURISTA' and itinerario.cupos > 0 %}
+                                        <a href="{% url 'crear_reserva' %}?itinerario_id={{ itinerario.id }}" class="btn-reservar">Reservar</a>
+                                    {% elif itinerario.cupos == 0 %}
+                                        <span>Completo</span>
+                                    {% else %}
+                                        <a href="{% url 'login' %}?next={{ request.path }}">Login para reservar</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No hay itinerarios futuros para este recorrido.</p>
+            {% endif %}
+        </div>
+
+        <div class="botones-detalle">
+            <a href="{% url 'recorridos_activos' %}" class="btn-volver">Volver a Recorridos</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

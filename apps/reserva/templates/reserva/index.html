@@ -30,7 +30,8 @@
         </a>
       {% endfor %}
     </div>
-    <a href="{% url 'paradas_disponibles' %}">Ver todos los puntos turísticos</a>
+<br>
+    <a href="{% url 'paradas_disponibles' %}" class="btn-detalle-simple">Ver todos los puntos turísticos</a>
     {% else %}
       <p>No hay paradas visibles actualmente.</p>
     {% endif %}
@@ -45,7 +46,7 @@
             {% endfor %}
         </div>
         <br>
-        <a href="{% url 'recorridos_activos' %}">Ver todos los recorridos</a>
+        <a href="{% url 'recorridos_activos' %}" class="btn-detalle-simple">Ver todos los recorridos</a>
     {% else %}
         <p>No hay recorridos para mostrar.</p>
     {% endif %}
