@@ -18,26 +18,49 @@ h1{
 }
 
 
-span, h1.titulo{
-    color: rgb(255, 255, 255) !important; /* Cambia 'blue' por el color que desees */
+
+span,h1.titulo{
+    color: rgb(0, 0, 0) !important;
     display: inline-block;
     padding: 12px 16px;
 }
-button.sesion{
-    background-color: #ffa600;
-    color: rgb(0, 0, 0);
-    display: inline;
-    border: none;
-    padding: 14px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-button:hover {
-    background-color: #000000;
-    color:white;
 
+.encabezado{
+     display: flex;
+    align-items: center;
+    gap: 15px;               /* Espacio entre el botón y el texto */
+    padding: 10px;
 }
+
+.encabezado button,.encabezado a{
+    display: inline-block;
+    padding: 12px 24px;
+    background: #000000;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.encabezado button:hover,.encabezado a:hover{
+    background:  #f63e02;
+    transform: translateY(-2px);
+    color: #000000;}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Contenedor grid para las tarjetas de paradas */
@@ -46,10 +69,9 @@ button:hover {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
 }
-
 /* Estilos para cada tarjeta individual de parada */
 .card-parada {
-    display: block;
+    display:grid;
     text-decoration: none;
     background: white;
     border-radius: 12px;
@@ -58,26 +80,23 @@ button:hover {
     transition: all 0.3s ease;
     border: 1px solid #e0e0e0;
 }
-
 /* Efectos cuando el usuario pasa el mouse sobre la tarjeta */
 .card-parada:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     text-decoration: none;
 }
-
 /* Contenedor de la imagen de la parada */
 .parada-imagen {
     width: 100%;
+    height: 150px;
 }
-
 /* Estilos para la imagen dentro de la tarjeta */
 .parada-imagen img {
     width: 100%;
     object-fit: cover;
     display: block;
 }
-
 /* Estilos para el nombre de la parada debajo de la imagen */
 .card-parada h3 {
     margin: 0;
@@ -88,7 +107,6 @@ button:hover {
     color: #ffffff;
     background: #f63e02;
 }
-
 /* Estilos para las tarjetas de recorridos (sin imagen) */
 .card-recorrido {
     display: flex;
@@ -106,7 +124,6 @@ button:hover {
     text-align: center;
     min-height: 150px;
 }
-
 .card-recorrido:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
@@ -125,7 +142,6 @@ button:hover {
 .detalle-parada-contenedor, .detalle-recorrido-contenedor {
     padding: 20px;
 }
-
 .tarjeta-detalle {
     background: #fff;
     border-radius: 12px;
@@ -134,7 +150,6 @@ button:hover {
     max-width: 900px;
     margin: 0 auto;
 }
-
 .detalle-img {
     width: 100%;
     height: 300px;
@@ -142,13 +157,11 @@ button:hover {
     border-radius: 8px;
     margin-bottom: 20px;
 }
-
 .detalle-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
 .titulo-parada, .titulo-recorrido {
     text-align: center;
     font-size: 2.5rem;
@@ -156,7 +169,6 @@ button:hover {
     color: #333;
     margin-bottom: 20px;
 }
-
 .detalle-info {
     font-size: 1.1rem;
     line-height: 1.6;
@@ -164,11 +176,9 @@ button:hover {
     text-align: center;
     margin-bottom: 30px;
 }
-
 .seccion-paradas, .seccion-itinerarios {
     margin-top: 40px;
 }
-
 .seccion-paradas h3, .seccion-itinerarios h3 {
     border-bottom: 2px solid #ffa600;
     padding-bottom: 10px;
@@ -176,12 +186,10 @@ button:hover {
     font-size: 1.5rem;
     color: #333;
 }
-
 .lista-paradas-recorrido {
     list-style: none;
     padding: 0;
 }
-
 .lista-paradas-recorrido li {
     background: #f9f9f9;
     padding: 10px 15px;
@@ -192,11 +200,9 @@ button:hover {
     align-items: center;
     transition: background-color 0.3s;
 }
-
 .lista-paradas-recorrido li:hover {
     background-color: #f1f1f1;
 }
-
 .btn-detalle-simple {
     background-color: #ffa600;
     color: white;
@@ -206,11 +212,9 @@ button:hover {
     font-size: 0.9rem;
     transition: background-color 0.3s;
 }
-
 .btn-detalle-simple:hover {
     background-color: #e59400;
 }
-
 
 .tabla-itinerarios {
     width: 100%;

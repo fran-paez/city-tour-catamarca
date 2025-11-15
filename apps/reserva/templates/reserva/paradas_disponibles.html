@@ -8,7 +8,7 @@
       {% for parada in paradas %}
         <a href="{% url 'parada_detalles' parada.id %}" class="card-parada">
           <div class="parada-imagen">
-            <img src="{{ parada.imagen.url }}" alt="{{ parada.nombre }}" style="width: 100px;height: 100px;">
+            <img src="{{ parada.imagen.url }}" alt="{{ parada.nombre }}" >
           </div>
           <h3>{{ parada.nombre }}</h3>
         </a>

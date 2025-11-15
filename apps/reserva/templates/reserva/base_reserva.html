@@ -8,20 +8,20 @@
 
 
 {% block global_content %}
+    <div class="encabezado">
+        <h1 class="titulo">CITY TOUR CATAMARCA</h1>
 
-    <h1 class="titulo">CITY TOUR CATAMARCA</h1>
-
-    {% if request.user.is_authenticated %}
-        <span>Bienvenido, <strong>@{{ request.user.username }}</strong>(Rol: {{ request.user.rol.nombre }})</span>
-        <form action="{% url 'logout' %}" method="POST">
-            {% csrf_token %}
-            <button class="sesion" type="submit">Cerrar Sesión</button>
-        </form>
-    {% else %}
-        <a class="sesion btn-sesion" href="{% url 'login' %}">Iniciar Sesión</a>
-        <a class="sesion btn-registrarse" href="{% url 'crear_usuario' %}">Registrarse</a>
+        {% if request.user.is_authenticated %}
+            <span>Bienvenido, <strong>@{{ request.user.username }}</strong>(Rol: {{ request.user.rol.nombre }})</span>
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button class="sesion" type="submit">Cerrar Sesión</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Iniciar Sesión</a>
+            <a href="{% url 'crear_usuario' %}">Registrarse</a>
     {% endif %}
-
+    </div>
     <nav>
         <ul>
             <li><a href="{% url 'index' %}">Inicio</a></li>
