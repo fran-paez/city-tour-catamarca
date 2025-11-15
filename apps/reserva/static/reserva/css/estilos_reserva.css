@@ -9,7 +9,7 @@ h1{
 
 }
 .contenedor_reserva {
-    max-width: 1200px;            /* ancho máximo */
+    max-width: 1150px;            /* ancho máximo */
     margin: 0 auto;            /* centrado horizontal */
     padding: 20px;
     background-color: #ffffff;    /* fondo blanco */
@@ -32,7 +32,7 @@ span,h1.titulo{
     padding: 10px;
 }
 
-.encabezado button,.encabezado a{
+.encabezado button,.encabezado a,.btn-reservar,.botones-detalle, .btn-registrarse,.btn-sesion,.btn-confirmar,.btn-cancelar-confirm,form a,form button {
     display: inline-block;
     padding: 12px 24px;
     background: #000000;
@@ -44,22 +44,24 @@ span,h1.titulo{
     transition: 0.3s ease-in-out;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
-.encabezado button:hover,.encabezado a:hover{
+.encabezado button:hover,.encabezado a:hover,form a:hover,form button:hover{
     background:  #f63e02;
     transform: translateY(-2px);
     color: #000000;}
 
 
 
-
-
-
-
-
-
-
-
-
+.btn-reservar:hover {
+    background-color: #218838;
+}
+.btn-volver{
+    background-color: black;
+    color: #f63e02;
+    padding: 3px 3px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
 
 
 
@@ -139,17 +141,7 @@ span,h1.titulo{
 
 
 /*-------------------------------------PARADA DETALLES Y RECORRIDO DETALLES---------------------------------- */
-.detalle-parada-contenedor, .detalle-recorrido-contenedor {
-    padding: 20px;
-}
-.tarjeta-detalle {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    padding: 30px;
-    max-width: 900px;
-    margin: 0 auto;
-}
+
 .detalle-img {
     width: 100%;
     height: 300px;
@@ -180,7 +172,7 @@ span,h1.titulo{
     margin-top: 40px;
 }
 .seccion-paradas h3, .seccion-itinerarios h3 {
-    border-bottom: 2px solid #ffa600;
+    border-bottom: 2px solid #f63e02;
     padding-bottom: 10px;
     margin-bottom: 20px;
     font-size: 1.5rem;
@@ -216,82 +208,18 @@ span,h1.titulo{
     background-color: #e59400;
 }
 
-.tabla-itinerarios {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
 
-.tabla-itinerarios th, .tabla-itinerarios td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
 
-.tabla-itinerarios th {
-    background-color: #343a40;
-    color: white;
-}
 
-.btn-reservar {
-    background-color: #28a745;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.btn-reservar:hover {
-    background-color: #218838;
-}
-
-.botones-detalle {
-    text-align: center;
-    margin-top: 40px;
-}
-
-.btn-volver, .btn-registrarse {
-    background-color: #6c757d;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.btn-sesion {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-volver:hover {
-    background-color: #5a6268;
-}
 
 
 /* Estilos para la tabla en parada_detalles */
-.tabla-recorridos {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.tabla-recorridos th, .tabla-recorridos td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-
-.tabla-recorridos th {
-    background-color: #343a40;
-    color: white;
-}
+table { width:100%; border-collapse: collapse; }
+table th, table td { border: 1px solid  #000000; padding: 8px; }
+table th { background: #f63e02;; text-align: left; color:white;}
+table tr:nth-child(even) { background: #eeecec;}
+table tr:nth-child(odd) { background: #ffffff;}
+table caption{ caption-side: top; font-weight: bold; margin-bottom: 8px; } 
 
 .sin-recorridos {
     text-align: center;
@@ -301,7 +229,22 @@ span,h1.titulo{
     border: 2px dashed #dee2e6;
     color: #6c757d;
     margin: 30px 0;
+} 
+
+table tbody td a{
+    color:#ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    background: #000000;
+    padding: 1%;
+    transition: 0.2s ease-in-out;
 }
+table tbody td a:hover{
+    color:#ffffff;
+    background: #f63e02;
+
+}
+
 
 .notificacion-bar {
     background-color: #FFF8E1; /* Cream color */
@@ -358,23 +301,6 @@ span,h1.titulo{
     flex-grow: 1; /* El contenido ocupa el resto del espacio */
 }
 
-.tabla-mis-reservas {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.tabla-mis-reservas th, .tabla-mis-reservas td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-
-.tabla-mis-reservas th {
-    background-color: #343a40;
-    color: white;
-}
-
 .form-container, .detalle-container, .cancelar-container {
     background-color: #fff;
     padding: 25px;
@@ -382,23 +308,6 @@ span,h1.titulo{
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.btn-confirmar {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-cancelar-confirm {
-    background-color: #dc3545;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
 .messages .success {
     color: #155724;
@@ -447,3 +356,106 @@ span,h1.titulo{
         flex-direction: column;
     }
 }
+
+/* 
+.tabla-itinerarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-itinerarios th, .tabla-itinerarios td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-itinerarios th {
+    background-color: #343a40;
+    color: white;
+} */
+
+/* .tabla-recorridos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-recorridos th, .tabla-recorridos td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-recorridos th {
+    background-color: #343a40;
+    color: white;
+}
+*/
+
+/* .tabla-mis-reservas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-mis-reservas th, .tabla-mis-reservas td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-mis-reservas th {
+    background-color: #343a40;
+    color: white;
+} */
+
+/* .btn-confirmar {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cancelar-confirm {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ */
+
+ 
+
+
+/* .botones-detalle {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-volver, .btn-registrarse {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-sesion,.btn-confirmar,.btn-cancelar-confirm {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-volver:hover,.btn-confirmar:hover,.btn-cancelar-confirm :hover {
+    background-color: #5a6268;
+} */

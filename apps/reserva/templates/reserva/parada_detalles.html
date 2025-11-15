@@ -1,7 +1,6 @@
 {% extends 'reserva/base_reserva.html' %}
 
 {% block reserva_content %}
-<div class="detalle-parada-contenedor">
     <div class="tarjeta-detalle">
         
 
@@ -46,7 +45,7 @@
                         <td>{{ recorrido.duracion }} min</td>
                         <td>${{ recorrido.precio }}</td>
                         <td>
-                            <a href="{% url 'recorrido_detalles' recorrido.id %}" class="btn-detalle-simple">Ver Detalles</a>
+                            <a href="{% url 'recorrido_detalles' recorrido.id %}">Ver Detalles</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -64,6 +63,5 @@
         <div class="botones-detalle">
             <a href="{% url 'paradas_disponibles' %}" class="btn-volver">Volver a puntos turisticos</a>
         </div>
-    </div>
 </div>
 {% endblock %}
