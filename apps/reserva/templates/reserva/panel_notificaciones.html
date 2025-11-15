@@ -1,13 +1,23 @@
 {% extends 'base_global.html' %}
+{% load static %}
 
 {% block title %}Panel de Notificaciones{% endblock %}
 
+{% block styles_head %}
+    <link rel="stylesheet" href="{% static 'reserva/css/estilos_notificaciones.css' %}">
+{% endblock %}
+
 {% block global_content %}
+<div class="content-container">
     <h1>Panel de Notificaciones</h1>
-    <a href="{% url 'crear_notificacion' %}">Crear Nueva Notificación</a>
+    <div>
+        <a href="{% url 'crear_notificacion' %}" class="btn-accion">Crear Nueva Notificación</a>
+        <a href="{% url 'lista_itinerarios' %}" class="btn-accion">Volver al Panel de Gestión</a>
+    </div>
+    <hr>
 
     {% if notificaciones %}
-        <table class="tabla-gestion">
+        <table class="tabla-notificaciones">
             <thead>
                 <tr>
                     <th>Título</th>
@@ -25,8 +35,8 @@
                         <td>{{ notificacion.fecha_hora|date:"d/m/Y H:i" }}</td>
                         <td>{{ notificacion.itinerario_afectado|default:"N/A" }}</td>
                         <td>
-                            <a href="{% url 'editar_notificacion' notificacion.pk %}">Editar</a>
-                            <a href="{% url 'eliminar_notificacion' notificacion.pk %}">Eliminar</a>
+                            <a href="{% url 'editar_notificacion' notificacion.pk %}" class="btn-accion">Editar</a>
+                            <a href="{% url 'eliminar_notificacion' notificacion.pk %}" class="btn-accion">Eliminar</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -35,9 +45,5 @@
     {% else %}
         <p>No hay notificaciones creadas.</p>
     {% endif %}
-
-    <hr>
-    <a href="{% url 'index' %}">Volver al Inicio</a>
-    <hr>
-
+</div>
 {% endblock %}

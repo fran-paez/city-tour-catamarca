@@ -1,14 +1,20 @@
 {% extends 'base_global.html' %}
+{% load static %}
 
-{% block title %}Formulario de Notificación{% endblock %}
+{% block title %}{{ titulo_pagina|default:"Formulario de Notificación" }}{% endblock %}
+
+{% block styles_head %}
+    <link rel="stylesheet" href="{% static 'reserva/css/estilos_notificaciones.css' %}">
+{% endblock %}
 
 {% block global_content %}
-    <h1>Formulario de Notificación</h1>
+<div class="content-container">
+    <h1>{{ titulo_pagina|default:"Formulario de Notificación" }}</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Guardar Notificación</button>
-        <a href="{% url 'listar_notificaciones' %}">Cancelar</a>
+        <button type="submit" class="btn-accion">Guardar Notificación</button>
+        <a href="{% url 'listar_notificaciones' %}" class="btn-accion">Cancelar</a>
     </form>
-
+</div>
 {% endblock %}
