@@ -3,7 +3,6 @@
 {% block title %}Detalles del Recorrido{% endblock %}
 
 {% block reserva_content %}
-<div class="detalle-recorrido-contenedor">
     <div class="tarjeta-detalle">
         <h1 class="titulo-recorrido">{{ recorrido.nombre_recorrido }}</h1>
 
@@ -63,10 +62,10 @@
                 <p>No hay itinerarios futuros para este recorrido.</p>
             {% endif %}
         </div>
+        <br><br>
 
         <div class="botones-detalle">
             <a href="{% url 'recorridos_activos' %}" class="btn-volver">Volver a Recorridos</a>
         </div>
     </div>
-</div>
 {% endblock %}
