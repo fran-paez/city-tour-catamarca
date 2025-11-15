@@ -1,17 +1,13 @@
-body {
-    font-family: 'Montserrat', sans-serif;
-}
 
 header {
-    background-color: #f4f4f4;
+    background-color: #f63e02;
     padding: 1rem;
     text-align: center;
 }
 
-nav {
+/* nav {
     padding: 1rem;
-    text-align: center;
-}
+    text-align: center;}
 
 nav ul {
     list-style: none;
@@ -30,30 +26,64 @@ a {
 
 a:hover {
     text-decoration: underline;
+} */
+
+.messages .error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.encabezado{
+     display: flex;
+    align-items: center;
+    gap: 15px;               /* Espacio entre el botón y el texto */
+    padding: 10px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Montserrat', sans-serif;
+.encabezado a,form button{
+    display: inline-block;
+    padding: 12px 24px;
+    background: #000000;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.encabezado a:hover,form button:hover{
+    background:  #f63e02;
+    transform: translateY(-2px);
+    color: #000000;}
+
+
+fieldset{
+    border-radius: 7px;
+
 }
 
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+fieldset button{
+    padding: 5px 10px !important;
+    color: white;
 }
 
-table th {
-    background: #f4f4f4;
-    text-align: left;
+/* .inf_1, .inf_3,.inf_2,.inf_4{
+    background-color: #f63e02;
+} */
+ 
+
+fieldset legend{
+    padding: 12px 24px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    background-color: #f63e02;
+    border-radius: 8px;
+    margin: 5px;
 }
 
-table tr:nth-child(even) {
-    background: #fafafa;
-}
-
-table caption {
-    caption-side: top;
-    font-weight: bold;
-    margin-bottom: 8px;
+.subtitulo{
+    text-align: center;
 }
