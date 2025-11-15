@@ -9,7 +9,7 @@ h1{
 
 }
 .contenedor_reserva {
-    max-width: 1200px;            /* ancho máximo */
+    max-width: 1150px;            /* ancho máximo */
     margin: 0 auto;            /* centrado horizontal */
     padding: 20px;
     background-color: #ffffff;    /* fondo blanco */
@@ -18,26 +18,51 @@ h1{
 }
 
 
-span, h1.titulo{
-    color: rgb(255, 255, 255) !important; /* Cambia 'blue' por el color que desees */
+
+span,h1.titulo{
+    color: rgb(0, 0, 0) !important;
     display: inline-block;
     padding: 12px 16px;
 }
-button.sesion{
-    background-color: #ffa600;
-    color: rgb(0, 0, 0);
-    display: inline;
-    border: none;
-    padding: 14px 20px;
+
+.encabezado{
+     display: flex;
+    align-items: center;
+    gap: 15px;               /* Espacio entre el botón y el texto */
+    padding: 10px;
+}
+
+.encabezado button,.encabezado a,.btn-reservar,.botones-detalle, .btn-registrarse,.btn-sesion,.btn-confirmar,.btn-cancelar-confirm,form a,form button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #000000;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.encabezado button:hover,.encabezado a:hover,form a:hover,form button:hover{
+    background:  #f63e02;
+    transform: translateY(-2px);
+    color: #000000;}
+
+
+
+.btn-reservar:hover {
+    background-color: #218838;
+}
+.btn-volver{
+    background-color: black;
+    color: #f63e02;
+    padding: 3px 3px;
     border-radius: 5px;
-    cursor: pointer;
+    text-decoration: none;
     transition: background-color 0.3s;
 }
-button:hover {
-    background-color: #000000;
-    color:white;
 
-}
 
 
 /* Contenedor grid para las tarjetas de paradas */
@@ -46,10 +71,9 @@ button:hover {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
 }
-
 /* Estilos para cada tarjeta individual de parada */
 .card-parada {
-    display: block;
+    display:grid;
     text-decoration: none;
     background: white;
     border-radius: 12px;
@@ -58,26 +82,23 @@ button:hover {
     transition: all 0.3s ease;
     border: 1px solid #e0e0e0;
 }
-
 /* Efectos cuando el usuario pasa el mouse sobre la tarjeta */
 .card-parada:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     text-decoration: none;
 }
-
 /* Contenedor de la imagen de la parada */
 .parada-imagen {
     width: 100%;
+    height: 150px;
 }
-
 /* Estilos para la imagen dentro de la tarjeta */
 .parada-imagen img {
     width: 100%;
     object-fit: cover;
     display: block;
 }
-
 /* Estilos para el nombre de la parada debajo de la imagen */
 .card-parada h3 {
     margin: 0;
@@ -88,7 +109,6 @@ button:hover {
     color: #ffffff;
     background: #f63e02;
 }
-
 /* Estilos para las tarjetas de recorridos (sin imagen) */
 .card-recorrido {
     display: flex;
@@ -106,7 +126,6 @@ button:hover {
     text-align: center;
     min-height: 150px;
 }
-
 .card-recorrido:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
@@ -122,18 +141,6 @@ button:hover {
 
 
 /*-------------------------------------PARADA DETALLES Y RECORRIDO DETALLES---------------------------------- */
-.detalle-parada-contenedor, .detalle-recorrido-contenedor {
-    padding: 20px;
-}
-
-.tarjeta-detalle {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    padding: 30px;
-    max-width: 900px;
-    margin: 0 auto;
-}
 
 .detalle-img {
     width: 100%;
@@ -142,13 +149,11 @@ button:hover {
     border-radius: 8px;
     margin-bottom: 20px;
 }
-
 .detalle-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
 .titulo-parada, .titulo-recorrido {
     text-align: center;
     font-size: 2.5rem;
@@ -156,7 +161,6 @@ button:hover {
     color: #333;
     margin-bottom: 20px;
 }
-
 .detalle-info {
     font-size: 1.1rem;
     line-height: 1.6;
@@ -164,24 +168,20 @@ button:hover {
     text-align: center;
     margin-bottom: 30px;
 }
-
 .seccion-paradas, .seccion-itinerarios {
     margin-top: 40px;
 }
-
 .seccion-paradas h3, .seccion-itinerarios h3 {
-    border-bottom: 2px solid #ffa600;
+    border-bottom: 2px solid #f63e02;
     padding-bottom: 10px;
     margin-bottom: 20px;
     font-size: 1.5rem;
     color: #333;
 }
-
 .lista-paradas-recorrido {
     list-style: none;
     padding: 0;
 }
-
 .lista-paradas-recorrido li {
     background: #f9f9f9;
     padding: 10px 15px;
@@ -192,11 +192,9 @@ button:hover {
     align-items: center;
     transition: background-color 0.3s;
 }
-
 .lista-paradas-recorrido li:hover {
     background-color: #f1f1f1;
 }
-
 .btn-detalle-simple {
     background-color: #ffa600;
     color: white;
@@ -206,88 +204,22 @@ button:hover {
     font-size: 0.9rem;
     transition: background-color 0.3s;
 }
-
 .btn-detalle-simple:hover {
     background-color: #e59400;
 }
 
 
-.tabla-itinerarios {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
 
-.tabla-itinerarios th, .tabla-itinerarios td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
 
-.tabla-itinerarios th {
-    background-color: #343a40;
-    color: white;
-}
-
-.btn-reservar {
-    background-color: #28a745;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.btn-reservar:hover {
-    background-color: #218838;
-}
-
-.botones-detalle {
-    text-align: center;
-    margin-top: 40px;
-}
-
-.btn-volver, .btn-registrarse {
-    background-color: #6c757d;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.btn-sesion {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-volver:hover {
-    background-color: #5a6268;
-}
 
 
 /* Estilos para la tabla en parada_detalles */
-.tabla-recorridos {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.tabla-recorridos th, .tabla-recorridos td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-
-.tabla-recorridos th {
-    background-color: #343a40;
-    color: white;
-}
+table { width:100%; border-collapse: collapse; }
+table th, table td { border: 1px solid  #000000; padding: 8px; }
+table th { background: #f63e02;; text-align: left; color:white;}
+table tr:nth-child(even) { background: #eeecec;}
+table tr:nth-child(odd) { background: #ffffff;}
+table caption{ caption-side: top; font-weight: bold; margin-bottom: 8px; } 
 
 .sin-recorridos {
     text-align: center;
@@ -297,7 +229,22 @@ button:hover {
     border: 2px dashed #dee2e6;
     color: #6c757d;
     margin: 30px 0;
+} 
+
+table tbody td a{
+    color:#ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    background: #000000;
+    padding: 1%;
+    transition: 0.2s ease-in-out;
 }
+table tbody td a:hover{
+    color:#ffffff;
+    background: #f63e02;
+
+}
+
 
 .notificacion-bar {
     background-color: #FFF8E1; /* Cream color */
@@ -354,23 +301,6 @@ button:hover {
     flex-grow: 1; /* El contenido ocupa el resto del espacio */
 }
 
-.tabla-mis-reservas {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.tabla-mis-reservas th, .tabla-mis-reservas td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-
-.tabla-mis-reservas th {
-    background-color: #343a40;
-    color: white;
-}
-
 .form-container, .detalle-container, .cancelar-container {
     background-color: #fff;
     padding: 25px;
@@ -378,23 +308,6 @@ button:hover {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.btn-confirmar {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-cancelar-confirm {
-    background-color: #dc3545;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
 .messages .success {
     color: #155724;
@@ -443,3 +356,106 @@ button:hover {
         flex-direction: column;
     }
 }
+
+/* 
+.tabla-itinerarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-itinerarios th, .tabla-itinerarios td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-itinerarios th {
+    background-color: #343a40;
+    color: white;
+} */
+
+/* .tabla-recorridos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-recorridos th, .tabla-recorridos td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-recorridos th {
+    background-color: #343a40;
+    color: white;
+}
+*/
+
+/* .tabla-mis-reservas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-mis-reservas th, .tabla-mis-reservas td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-mis-reservas th {
+    background-color: #343a40;
+    color: white;
+} */
+
+/* .btn-confirmar {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cancelar-confirm {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ */
+
+ 
+
+
+/* .botones-detalle {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-volver, .btn-registrarse {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-sesion,.btn-confirmar,.btn-cancelar-confirm {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-volver:hover,.btn-confirmar:hover,.btn-cancelar-confirm :hover {
+    background-color: #5a6268;
+} */

@@ -16,7 +16,12 @@ def listar_roles(request):
     """
 
     if request.user.rol.nombre != 'ADMINISTRADOR':
-        return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para acceder a esta sección.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
     roles = Rol.objects.all()
 
@@ -33,7 +38,12 @@ def crear_rol(request):
     """
 
     if request.user.rol.nombre != 'ADMINISTRADOR':
-        return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para acceder a esta sección.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
     if request.method == 'POST':
         form = RolForm(request.POST)
@@ -57,13 +67,17 @@ def editar_rol(request, rol_id):
     """
     # 1. Seguridad de Acceso: Solo Admins pueden editar roles.
     if request.user.rol.nombre != 'ADMINISTRADOR':
-        return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para acceder a esta sección.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
     rol_a_editar = get_object_or_404(Rol, id=rol_id)
 
     # 2. Seguridad de Regla de Negocio: No se puede editar el rol ADMIN.
     if rol_a_editar.nombre == 'ADMINISTRADOR':
-        # (Opcional: puedes añadir un mensaje de error)
         return redirect('listar_roles')
 
     if request.method == 'POST':
@@ -90,7 +104,12 @@ def eliminar_rol(request, rol_id):
     """
     # 1. Seguridad de Acceso: Solo Admins.
     if request.user.rol.nombre != 'ADMINISTRADOR':
-        return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para acceder a esta sección.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
     rol_a_eliminar = get_object_or_404(Rol, id=rol_id)
 
@@ -110,11 +129,19 @@ def eliminar_rol(request, rol_id):
     return render(request, 'usuario/eliminar_rol.html', contexto)
 
 # --- VISTAS PARA USUARIO ---
-
+@login_required
 def listar_usuarios(request):
     """
     Vista para listar todos los usuarios del sistema.
     """
+    if request.user.rol.nombre != 'ADMINISTRADOR':
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para acceder a esta sección.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
+
     usuarios = Usuario.objects.all()
     contexto = {
         'usuarios': usuarios
@@ -155,7 +182,12 @@ def editar_usuario(request, usuario_id):
 
     if not (es_admin or es_el_mismo_usuario):
         # Si no es admin Y no es él mismo, le negamos el acceso.
-        return HttpResponseForbidden("No tienes permiso para editar este usuario.")
+        contexto_error = {
+            'error_titulo': 'Accion Denegada',
+            'error_mensaje': 'No tienes permisos para acceder a esta sección o no puedes realizar esta accion con tu propio usuario.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
     if request.method == 'POST':
         form = UsuarioChangeForm(request.POST, instance=usuario_a_editar, request=request)
@@ -184,7 +216,12 @@ def eliminar_usuario(request, usuario_id):
 
     if not es_admin:
         # Solo los administradores pueden eliminar usuarios.
-        return HttpResponseForbidden("No tienes permiso para eliminar usuarios.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para acceder a esta sección.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
     # Evita que un admin se elimine a sí mismo
     if request.user.id == usuario_a_eliminar.id:

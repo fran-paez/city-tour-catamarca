@@ -1,28 +1,56 @@
 
 
-/* NOTA: Se que puedo generalizarlor con la etiqueta table, NO CAMBIAR */
-.paradas-table { width:100%; border-collapse: collapse; font-family: Arial, sans-serif; }
-.paradas-table th, .paradas-table td { border: 1px solid #ddd; padding: 8px; }
-.paradas-table th { background: #f4f4f4; text-align: left; }
-.paradas-table tr:nth-child(even) { background: #fafafa; }
-.paradas-table caption { caption-side: top; font-weight: bold; margin-bottom: 8px; }
-
-/* PRUEBA DE ESTILO */
-.recorridos-table,.unidades-table { width:100%; border-collapse: collapse; font-family:'Montserrat', sans-serif; }
-.recorridos-table th, .recorridos-table td, .unidades-table th, .unidades-table td { border: 1px solid  #ddd; padding: 8px; }
-.recorridos-table th, .unidades-table th { background: #f4f4f4; text-align: left; }
-.recorridos-table tr:nth-child(even), .unidades-table tr:nth-child(even) { background: #fafafa; } 
-.recorridos-table caption, .unidades-table caption { caption-side: top; font-weight: bold; margin-bottom: 8px; }
 
 
-table { width:100%; border-collapse: collapse; font-family:'Montserrat', sans-serif; }
-table th, table td { border: 1px solid  #ddd; padding: 8px; }
-table th { background: #f4f4f4; text-align: left; }
-table tr:nth-child(even) { background: #fafafa; }
-table caption{ caption-side: top; font-weight: bold; margin-bottom: 8px; }
+table { width:100%; border-collapse: collapse; }
+table th, table td { border: 1px solid  #000000; padding: 8px; }
+table th { background: #f63e02;; text-align: left; color:white;}
+table tr:nth-child(even) { background: #eeecec;}
+table tr:nth-child(odd) { background: #ffffff;}
+table caption{ caption-side: top; font-weight: bold; margin-bottom: 8px; } 
 
-
-
-a{
-    color:black;
+a.inicio,form button, form a{
+    display: inline-block;
+    padding: 12px 24px;
+    background: #000000;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
+
+/* Efecto hover */
+a.inicio:hover,form button:hover, form a:hover{
+    background:  #f63e02;
+    transform: translateY(-2px);
+    color: #000000;
+}
+
+.encabezado{
+     display: flex;
+    align-items: center;
+    gap: 15px;               /* Espacio entre el botón y el texto */
+    padding: 10px;
+}
+
+body{
+    background-color: #FFF3D6;
+}
+
+
+form {
+    max-width: 700px;            /* ancho máximo */
+    margin: 0 auto;            /* centrado horizontal */
+    padding: 20px;
+    background-color: #ffffff;    /* fondo blanco */
+    border-radius: 12px;          /* bordes redondeados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* sombra suave */
+    text-align: center;
+}
+form h1{    
+    text-align: center;
+}
+

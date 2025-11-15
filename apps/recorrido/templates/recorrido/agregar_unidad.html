@@ -3,10 +3,9 @@
 {% block title %}Cargar Unidad{% endblock %}
 
 {% block content %}
-    <title>Cargar Unidad</title>
 
-    <h1>Cargar Unidad</h1>
     <form method="POST">
+        <h1>Cargar Unidad</h1>
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Guardar Unidad</button>

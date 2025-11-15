@@ -11,7 +11,7 @@ footer {
 
 body {
 font-family: 'Montserrat', sans-serif;
-background-color: white;
+    background-color: #FFF3D6 !important;
 }
 
 nav {
@@ -41,7 +41,7 @@ nav ul li a {
     transition: background-color 0.3s;
 }
 
-table {
+/* table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -56,4 +56,4 @@ table th, table td {
 table th {
     background-color: #343a40;
     color: white;
-}
+} */

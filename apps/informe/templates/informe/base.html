@@ -8,16 +8,13 @@
 {% endblock %}
 
 {% block global_content %}
-    <header>
+    <header class="encabezado">
+        <a href="{% url 'index' %}">Inicio</a>
+        <a href="{% url 'lista_itinerarios' %}">Panel de Gestión</a>
         <h1>Panel de Informes</h1>
+ 
     </header>
-    <a href="{% url 'index' %}">Inicio</a>
 
-    <nav>
-        <ul>
-            <li><a href="{% url 'lista_itinerarios' %}">Volver a Panel de Gestión</a></li>
-        </ul>
-    </nav>
 
     <main>
         {% block content %}{% endblock %}

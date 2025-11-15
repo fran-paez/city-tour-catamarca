@@ -10,10 +10,11 @@
 
     {% block global_content %}
 
-    <header>
+    <header class="encabezado">
+        <a href="{% url 'index' %}" class="inicio">Inicio</a>
         <h1>Panel de Gestión</h1>
     </header>
-    <a href="{% url 'index' %}">Inicio</a>
+
 
  <!-- Hice dos navbar para que no se vea sobrecargada una -->
     <nav>

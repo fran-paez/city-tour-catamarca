@@ -41,21 +41,36 @@ def recorrido_detalles(request, recorrido_id):
 @login_required
 def mis_reservas(request):
     if request.user.rol.nombre != 'TURISTA':
-        return HttpResponseForbidden("Acceso denegado.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'Solo turistas pueden visitar esta seccion.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
     reservas = Reserva.objects.filter(turista=request.user).filter(Q(estado='P') | Q(estado='C')).order_by('-fecha_reserva')
     return render(request, 'reserva/mis_reservas.html', {'reservas': reservas})
 
 @login_required
 def reservas_canceladas(request):
     if request.user.rol.nombre != 'TURISTA':
-        return HttpResponseForbidden("Acceso denegado.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'Solo turistas pueden visitar esta seccion.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
     reservas = Reserva.objects.filter(turista=request.user, estado='A').order_by('-fecha_reserva')
     return render(request, 'reserva/reservas_canceladas.html', {'reservas': reservas})
 
 @login_required
 def crear_reserva(request):
     if request.user.rol.nombre != 'TURISTA':
-        return HttpResponseForbidden("Solo los turistas pueden crear reservas.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'Solo turistas pueden visitar esta seccion.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
     
     itinerario_id_inicial = request.GET.get('itinerario_id', None)
 
@@ -86,7 +101,12 @@ def confirmar_reserva(request, pk):
     reserva = get_object_or_404(Reserva, pk=pk)
 
     if reserva.turista != request.user or reserva.estado != 'P':
-        return HttpResponseForbidden("Acción no permitida.")
+        contexto_error = {
+            'error_titulo': 'Accion no permitida',
+            'error_mensaje': 'No tienes permisos para realizar esta accion en este usuario.'
+        }
+
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
     itinerario = reserva.itinerario
     if itinerario.cupos < reserva.cantidad_asientos:
@@ -106,7 +126,12 @@ def confirmar_reserva(request, pk):
 def detalle_reserva(request, pk):
     reserva = get_object_or_404(Reserva, pk=pk)
     if reserva.turista != request.user:
-        return HttpResponseForbidden("No puedes ver una reserva que no es tuya.")
+        contexto_error = {
+            'error_titulo': 'Accion Denegada',
+            'error_mensaje': 'No puedes realizar esta accion sobre este usuario.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
     return render(request, 'reserva/detalle_reserva.html', {'reserva': reserva})
 
 @login_required
@@ -115,7 +140,12 @@ def cancelar_reserva(request, pk):
     reserva = get_object_or_404(Reserva, pk=pk)
 
     if reserva.turista != request.user or reserva.estado not in ['P', 'C']:
-        return HttpResponseForbidden("No puedes cancelar esta reserva.")
+        contexto_error = {
+            'error_titulo': 'Accion Denegada',
+            'error_mensaje': 'No puedes realizar esta accion sobre este usuario.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
 
     if request.method == 'POST':
         if reserva.estado == 'C':
@@ -141,14 +171,24 @@ def cancelar_reserva(request, pk):
 @login_required
 def listar_notificaciones(request):
     if request.user.rol.nombre not in ['ADMINISTRADOR', 'OPERADOR']:
-        return HttpResponseForbidden("No tienes permiso.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para visitar esta seccion.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
     notificaciones = Notificacion.objects.all()
     return render(request, 'reserva/panel_notificaciones.html', {'notificaciones': notificaciones})
 
 @login_required
 def crear_notificacion(request):
     if request.user.rol.nombre not in ['ADMINISTRADOR', 'OPERADOR']:
-        return HttpResponseForbidden("No tienes permiso.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para visitar esta seccion.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
     if request.method == 'POST':
         form = NotificacionForm(request.POST)
         if form.is_valid():
@@ -163,7 +203,12 @@ def crear_notificacion(request):
 @login_required
 def editar_notificacion(request, pk):
     if request.user.rol.nombre not in ['ADMINISTRADOR', 'OPERADOR']:
-        return HttpResponseForbidden("No tienes permiso.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para visitar esta seccion.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
     notificacion = get_object_or_404(Notificacion, pk=pk)
     if request.method == 'POST':
         form = NotificacionForm(request.POST, instance=notificacion)
@@ -177,7 +222,12 @@ def editar_notificacion(request, pk):
 @login_required
 def eliminar_notificacion(request, pk):
     if request.user.rol.nombre not in ['ADMINISTRADOR', 'OPERADOR']:
-        return HttpResponseForbidden("No tienes permiso.")
+        contexto_error = {
+            'error_titulo': 'Acceso Denegado',
+            'error_mensaje': 'No tienes permisos para visitar esta seccion.'
+        }
+        # Renderizamos el template y pasamos el código 403
+        return render(request, 'reserva/error_permiso.html', contexto_error, status=403)
     notificacion = get_object_or_404(Notificacion, pk=pk)
     if request.method == 'POST':
         notificacion.delete()

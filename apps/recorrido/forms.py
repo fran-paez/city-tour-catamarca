@@ -14,7 +14,9 @@ class RecorridoForm(forms.ModelForm):
         model = Recorrido
         fields = ['nombre_recorrido', 'descripcion_recorrido', 'paradas', 'duracion', 'precio', 'estado']
         widgets = {
+            'descripcion_recorrido': forms.Textarea(attrs={'rows': 2, 'cols': 35}),
             'paradas': forms.CheckboxSelectMultiple(),
+
         }
 
 class UnidadForm(forms.ModelForm):

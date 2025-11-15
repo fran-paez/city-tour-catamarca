@@ -4,8 +4,9 @@
 
 {% block content %}
 
-    <h1>Crear Itinerario</h1>
+
     <form method="POST">
+        <h1>Crear Itinerario</h1>
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Guardar Itinerario</button>
